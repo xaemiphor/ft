@@ -55,4 +55,28 @@ jobs:
           function freqtrade {
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
+          echo "::group::Backtest"
           freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012 --export signals
+          echo "::endgroup::"
+          echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
+
+
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const rawData = fs.readFileSync('./user_data/backtest_results/${{ steps.backtest.outputs.results_json }}', 'utf8');
+            const jsonData = JSON.parse(rawData);
+            function objectsToMarkdownTable(objects) {
+              if (objects.length === 0) return '';
+
+              const header = Object.keys(objects[0]).join(' | ');
+              const separator = Object.keys(objects[0]).map(() => '---').join(' | ');
+              const rows = objects.map(obj => Object.values(obj).join(' | '));
+
+              return [header, separator, ...rows].join('\n');
+            }
+            const markdownTable = objectsToMarkdownTable(jsonData["strategy_comparison"]);
+            core.summary.addRaw(markdownTable, true)
+            core.summary.write()
