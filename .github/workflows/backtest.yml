@@ -33,8 +33,8 @@ jobs:
           strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/* | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           strategy_count=$(echo "${strategies}" | jq -c --raw-output '.|length')
           exchange_count=$(echo "${exchanges}" | jq -c --raw-output '.|length')
-          #max_batch_count=$(( 256 / ${exchange_count} ))
-          max_batch_count=$(( 60 / ${exchange_count} ))
+          max_batch_count=$(( 256 / ${exchange_count} ))
+          #max_batch_count=$(( 60 / ${exchange_count} ))
           strategy_batch_size=$(( (${strategy_count}+${max_batch_count}-1) / ${max_batch_count} ))
           strategy_batch=$(echo "${strategies}" | jq -c --raw-output --arg batch_size "${strategy_batch_size}" '_nwise($batch_size|tonumber)|tojson' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           echo "exchanges=${exchanges}" | tee -a ${GITHUB_OUTPUT}
@@ -72,6 +72,7 @@ jobs:
           echo "::group::Preload docker image"
           docker pull freqtradeorg/freqtrade:stable
           echo "::endgroup::"
+          strategy_key=$(echo '${{ matrix.strategy }}' | md5sum | cut -d ' ' -f1)
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
@@ -83,12 +84,19 @@ jobs:
           #freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012 --export signals
           # Strategy batches
           STRATEGIES=( $(echo '${{ matrix.strategies }}' | jq -c --raw-output '.[]') )
-          freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012 --export signals
+          freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012 --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
           echo "::endgroup::"
           echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
+          echo "strategy_key=${strategy_key}" | tee -a ${GITHUB_OUTPUT}
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.exchange }}-${{ matrix.strategies }}
+          path: "${{ github.workspace }}/user_data/backtest_results/${{ steps.backtest.outputs.results_json }}"
+          retention-days: 1
 
       - uses: actions/github-script@v7
+        if: false
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -105,5 +113,45 @@ jobs:
               return [header, separator, ...rows].join('\n');
             }
             const markdownTable = objectsToMarkdownTable(jsonData["strategy_comparison"]);
+            core.summary.addRaw(markdownTable, true)
+            core.summary.write()
+
+  summary:
+    runs-on: ubuntu-latest
+    needs: backtest
+    if: always()
+    strategy:
+      fail-fast: false
+      matrix:
+        exchange: ${{ fromJSON(needs.info.outputs.exchanges) }}
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: results
+          pattern: ${{ matrix.exchange }}-*
+          merge-multiple: true
+
+      - shell: bash
+        run: |
+          jq -s '[.[] | .strategy_comparison[]]' results/*.json > comparison.json
+
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const rawData = fs.readFileSync('./comparison.json', 'utf8');
+            const jsonData = JSON.parse(rawData);
+            function objectsToMarkdownTable(objects) {
+              if (objects.length === 0) return '';
+
+              const header = Object.keys(objects[0]).join(' | ');
+              const separator = Object.keys(objects[0]).map(() => '---').join(' | ');
+              const rows = objects.map(obj => Object.values(obj).join(' | '));
+
+              return [header, separator, ...rows].join('\n');
+            }
+            const markdownTable = objectsToMarkdownTable(jsonData);
             core.summary.addRaw(markdownTable, true)
             core.summary.write()
