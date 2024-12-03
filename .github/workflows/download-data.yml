@@ -48,16 +48,16 @@ jobs:
         if: ${{ steps.info.outputs.last-exists == 'true' }}
         with:
           fetch-depth: 1
-          ref: "data/${{ matrix.exchange }}/${{ needs.info.outputs.lastmonth }}"
-          path: user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.lastmonth }}
+          ref: "data/${{ matrix.exchange }}/${{ steps.info.outputs.lastmonth }}"
+          path: user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}
 
       - name: Git checkout
         uses: actions/checkout@main
         if: ${{ steps.info.outputs.this-exists == 'true' }}
         with:
           fetch-depth: 1
-          ref: "data/${{ matrix.exchange }}/${{ needs.info.outputs.thismonth }}"
-          path: user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.thismonth }}
+          ref: "data/${{ matrix.exchange }}/${{ steps.info.outputs.thismonth }}"
+          path: user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}
 
       - id: get-data
         shell: bash
@@ -66,10 +66,10 @@ jobs:
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
           echo "::group::Download last month"
-          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.lastmonth }}01-${{ steps.info.outputs.thismonth }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.lastmonth }}
+          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.lastmonth }}01-${{ steps.info.outputs.thismonth }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}
           echo "::endgroup::"
           echo "::group::Download this month"
-          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.thismonth }}01- --datadir user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.thismonth }}
+          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.thismonth }}01- --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}
           echo "::endgroup::"
 
       - name: Push lastmonth
@@ -77,7 +77,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: "data/${{ matrix.exchange }}/${{ steps.info.outputs.lastmonth }}"
-          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.lastmonth }}
+          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}
           force_orphan: true
 
       - name: Push thismonth
@@ -85,5 +85,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: "data/${{ matrix.exchange }}/${{ steps.info.outputs.thismonth }}"
-          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.thismonth }}
+          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}
           force_orphan: false
