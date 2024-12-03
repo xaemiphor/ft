@@ -18,29 +18,46 @@ jobs:
         include:
           - exchange: binanceus
             pairs: ".*/USDT"
+            timeframes: '1m 3m 5m 15m 30m 1h 2h 4h 6h 8h 12h 1d 3d 1w 1M'
     steps:
       - id: info
         shell: bash
         run: |
-          START=$(date -u +'%Y%m' -d '-1 month')
-          END=$(date -u +'%Y%m')
-          echo "timerange=${START}01-${END}01" | tee -a ${GITHUB_OUTPUT}
-          echo "lastmonth=${START}" | tee -a ${GITHUB_OUTPUT}
+          LASTMONTH=$(date -u +'%Y%m' -d '-1 month')
+          THISMONTH=$(date -u +'%Y%m')
+          NEXTMONTH=$(date -u +'%Y%m' -d '+1 month')
+          echo "lastmonth=${LASTMONTH}" | tee -a ${GITHUB_OUTPUT}
+          echo "thismonth=${THISMONTH}" | tee -a ${GITHUB_OUTPUT}
+          echo "nextmonth=${NEXTMONTH}" | tee -a ${GITHUB_OUTPUT}
           mkdir -p user_data/data
-          if git ls-remote --exit-code --heads origin "data/${{ matrix.exchange }}/${START}" &> /dev/null; then
-            echo "data-exists=true" | tee -a ${GITHUB_OUTPUT}
+          if git ls-remote --exit-code --heads origin "data/${{ matrix.exchange }}/${LASTMONTH}" &> /dev/null; then
+            echo "last-exists=true" | tee -a ${GITHUB_OUTPUT}
           else
-            echo "data-exists=false" | tee -a ${GITHUB_OUTPUT}
-            mkdir "user_data/data/${{ matrix.exchange }}"
+            echo "last-exists=false" | tee -a ${GITHUB_OUTPUT}
+            mkdir "user_data/data/${{ matrix.exchange }}-${LASTMONTH}"
+          fi
+          if git ls-remote --exit-code --heads origin "data/${{ matrix.exchange }}/${THISMONTH}" &> /dev/null; then
+            echo "this-exists=true" | tee -a ${GITHUB_OUTPUT}
+          else
+            echo "this-exists=false" | tee -a ${GITHUB_OUTPUT}
+            mkdir "user_data/data/${{ matrix.exchange }}-${THISMONTH}"
           fi
 
       - name: Git checkout
         uses: actions/checkout@main
-        if: ${{ steps.info.outputs.data-exists == 'true' }}
+        if: ${{ steps.info.outputs.last-exists == 'true' }}
         with:
           fetch-depth: 1
           ref: "data/${{ matrix.exchange }}/${{ needs.info.outputs.lastmonth }}"
-          path: user_data/data/${{ matrix.exchange }}
+          path: user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.lastmonth }}
+
+      - name: Git checkout
+        uses: actions/checkout@main
+        if: ${{ steps.info.outputs.this-exists == 'true' }}
+        with:
+          fetch-depth: 1
+          ref: "data/${{ matrix.exchange }}/${{ needs.info.outputs.thismonth }}"
+          path: user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.thismonth }}
 
       - id: get-data
         shell: bash
@@ -48,13 +65,25 @@ jobs:
           function freqtrade {
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
-          TIMEFRAMES=( $(freqtrade list-timeframes --exchange ${{ matrix.exchange }} -1) )
-          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${TIMEFRAMES[@]} --timerange ${{ steps.info.outputs.timerange }}
+          echo "::group::Download last month"
+          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.lastmonth }}01-${{ steps.info.outputs.thismonth }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.lastmonth }}
+          echo "::endgroup::"
+          echo "::group::Download this month"
+          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.thismonth }}01- --datadir user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.thismonth }}
+          echo "::endgroup::"
 
-      - name: Push data
+      - name: Push lastmonth
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: "data/${{ matrix.exchange }}/${{ steps.info.outputs.lastmonth }}"
-          publish_dir: ./user_data/data/${{ matrix.exchange }}
+          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.lastmonth }}
           force_orphan: true
+
+      - name: Push thismonth
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: "data/${{ matrix.exchange }}/${{ steps.info.outputs.thismonth }}"
+          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ needs.info.outputs.thismonth }}
+          force_orphan: false
