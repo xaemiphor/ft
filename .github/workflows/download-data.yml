@@ -30,13 +30,13 @@ jobs:
           echo "thismonth=${THISMONTH}" | tee -a ${GITHUB_OUTPUT}
           echo "nextmonth=${NEXTMONTH}" | tee -a ${GITHUB_OUTPUT}
           mkdir -p user_data/data
-          if git ls-remote --exit-code --heads origin "data/${{ matrix.exchange }}/${LASTMONTH}" &> /dev/null; then
+          if git ls-remote --exit-code --heads ${{ github.repositoryUrl }} "data/${{ matrix.exchange }}/${LASTMONTH}" &> /dev/null; then
             echo "last-exists=true" | tee -a ${GITHUB_OUTPUT}
           else
             echo "last-exists=false" | tee -a ${GITHUB_OUTPUT}
             mkdir "user_data/data/${{ matrix.exchange }}-${LASTMONTH}"
           fi
-          if git ls-remote --exit-code --heads origin "data/${{ matrix.exchange }}/${THISMONTH}" &> /dev/null; then
+          if git ls-remote --exit-code --heads ${{ github.repositoryUrl }} "data/${{ matrix.exchange }}/${THISMONTH}" &> /dev/null; then
             echo "this-exists=true" | tee -a ${GITHUB_OUTPUT}
           else
             echo "this-exists=false" | tee -a ${GITHUB_OUTPUT}
