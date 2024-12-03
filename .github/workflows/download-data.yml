@@ -1,10 +1,19 @@
 on:
   workflow_dispatch:
+    inputs:
+      target_date:
+        description: '[yyyy-mm-dd] Used to identify the month to compile data about'
+        required: false
+        default: '2024-12-01'
+  repository_dispatch:
+    type:
+      - last_month
+
   push:
     paths:
       - .github/workflows/download-data.yml
-  #schedule:
-  #  - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
 
 permissions:
   contents: write
@@ -41,57 +50,79 @@ jobs:
       - id: info
         shell: bash
         run: |
-          LASTMONTH=$(date -u +'%Y%m' -d '-1 month')
-          THISMONTH=$(date -u +'%Y%m')
-          NEXTMONTH=$(date -u +'%Y%m' -d '+1 month')
-          echo "lastmonth=${LASTMONTH}" | tee -a ${GITHUB_OUTPUT}
-          echo "thismonth=${THISMONTH}" | tee -a ${GITHUB_OUTPUT}
-          echo "nextmonth=${NEXTMONTH}" | tee -a ${GITHUB_OUTPUT}
+          TARGET_DATE=$(date -u +'%F' -d "${{ github.event.client_payload.target_date || github.event.inputs.target_date || 'now' }}")
+          TARGET_MONTH=$(date -u +'%Y%m' -d "${TARGET_DATE}")
+          END_MONTH=$(date -u +'%Y%m' -d "${TARGET_DATE} + 1 month")
+          echo "target=${TARGET_MONTH}" | tee -a ${GITHUB_OUTPUT}
+          echo "end=${END_MONTH}" | tee -a ${GITHUB_OUTPUT}
           mkdir -p user_data/data
 
       - name: Git checkout
         uses: actions/checkout@main
-        continue-on-error: true
         with:
           fetch-depth: 1
-          ref: "data/${{ matrix.exchange }}/${{ steps.info.outputs.lastmonth }}"
-          path: user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}
+          path: user_data
 
       - name: Git checkout
         uses: actions/checkout@main
         continue-on-error: true
         with:
           fetch-depth: 1
-          ref: "data/${{ matrix.exchange }}/${{ steps.info.outputs.thismonth }}"
-          path: user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}
+          ref: "data/${{ matrix.exchange }}/${{ steps.info.outputs.target }}"
+          path: user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }}
 
       - id: get-data
         shell: bash
         run: |
+          echo "::group::Preload docker image"
+          docker pull freqtradeorg/freqtrade:stable
+          echo "::endgroup::"
           function freqtrade {
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
-          [ ! -d "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}" ] && mkdir -p "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}"
-          [ ! -d "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}" ] && mkdir -p "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}"
-          echo "::group::Download last month"
-          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.lastmonth }}01-${{ steps.info.outputs.thismonth }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }} ${{ matrix.extra || '' }}
-          echo "::endgroup::"
-          echo "::group::Download this month"
-          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.thismonth }}01- --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }} ${{ matrix.extra || '' }}
+          echo "::group::Download target month"
+          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.target }}01-${{ steps.info.outputs.end }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }} -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json ${{ matrix.extra || '' }}
           echo "::endgroup::"
 
-      - name: Push lastmonth
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Push changes
+        shell: bash
+        run: |
+          OPWD=$(pwd)
+          set -x
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          for batch in '${{ steps.info.outputs.target }}'; do
+            sudo chown -R $(id -u):$(id -g) user_data/data/${{ matrix.exchange }}-${batch}
+            cd user_data/data/${{ matrix.exchange }}-${batch}
+            if [[ $(git status --porcelain . | wc -l) -gt 0 ]]; then
+              git add .
+              git commit -m "ci: Autoupdate $(date -u +'%F %T')"
+              git push -u origin "$(git branch --show-current):data/${{ matrix.exchange }}/${batch}"
+            fi
+            cd ${OPWD}
+          done
+  dispatch:
+    runs-on: ubuntu-latest
+    needs: [download-data]
+    if: github.event.schedule == '0 0 * * *'
+    steps:
+      - id: info
+        shell: bash
+        run: |
+          TODAY_MONTH=$(date -u +'%Y-%m')
+          YESTERDAY_MONTH=$(date -u +'%Y-%m' -d '-5 days')
+          if [[ "${TODAY_MONTH}" != "${YESTERDAY_MONTH}" ]]; then
+            echo "eom=true" | tee -a ${GITHUB_OUTPUT}
+          else
+            echo "eom=false" | tee -a ${GITHUB_OUTPUT}
+          fi
+          echo "target=${YESTERDAY_MONTH}" | tee -a ${GITHUB_OUTPUT}
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@main
+        if: steps.info.outputs.oem == 'true'
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: "data/${{ matrix.exchange }}/${{ steps.info.outputs.lastmonth }}"
-          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}
-          force_orphan: true
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          event-type: last_month
+          client-payload: '{"target_date": "${{ steps.info.outputs.target }}-01"}'
 
-      - name: Push thismonth
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: "data/${{ matrix.exchange }}/${{ steps.info.outputs.thismonth }}"
-          publish_dir: ./user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}
-          force_orphan: false

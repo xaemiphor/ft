@@ -1,0 +1,17 @@
+{
+  "exchange": {
+    "name": "coinbase",
+    "key": "",
+    "secret": "",
+    "ccxt_config": {"enableRateLimit": true},
+    "ccxt_async_config": {
+        "enableRateLimit": true,
+        "rateLimit": 400
+    },
+    "pair_whitelist": [
+      ".*/USD"
+    ],
+    "pair_blacklist": [
+    ]
+  }
+}
