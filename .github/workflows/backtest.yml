@@ -31,9 +31,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: info
     strategy:
+      fail-fast: false
       matrix:
         exchange:
           - binanceus
+          - kraken
         strategy: ${{ fromJSON(needs.info.outputs.strategies) }}
     steps:
       - name: Git checkout
