@@ -19,13 +19,12 @@ permissions:
   contents: write
   repository-projects: read
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: false
-
 jobs:
   download-data:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.exchange }}-${{ github.event.client_payload.target_date || github.event.inputs.target_date || 'now' }}
+      cancel-in-progress: false
     strategy:
       fail-fast: false
       matrix:
