@@ -91,7 +91,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.exchange }}-${{ matrix.strategies }}
+          name: ${{ matrix.exchange }}-${{ steps.backtest.outputs.strategy_key }}
           path: "${{ github.workspace }}/user_data/backtest_results/${{ steps.backtest.outputs.results_json }}"
           retention-days: 1
 
