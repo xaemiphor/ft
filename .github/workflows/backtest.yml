@@ -29,12 +29,12 @@ jobs:
       - id: info
         shell: bash
         run: |
-          exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
-          strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/* | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | head -n 1 | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/*.py | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           strategy_count=$(echo "${strategies}" | jq -c --raw-output '.|length')
           exchange_count=$(echo "${exchanges}" | jq -c --raw-output '.|length')
           max_batch_count=$(( 256 / ${exchange_count} ))
-          #max_batch_count=$(( 60 / ${exchange_count} ))
+          #max_batch_count=$(( 128 / ${exchange_count} ))
           strategy_batch_size=$(( (${strategy_count}+${max_batch_count}-1) / ${max_batch_count} ))
           strategy_batch=$(echo "${strategies}" | jq -c --raw-output --arg batch_size "${strategy_batch_size}" '_nwise($batch_size|tonumber)|tojson' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           echo "exchanges=${exchanges}" | tee -a ${GITHUB_OUTPUT}
@@ -119,7 +119,9 @@ jobs:
 
   summary:
     runs-on: ubuntu-latest
-    needs: backtest
+    needs:
+      - info
+      - backtest
     if: always()
     strategy:
       fail-fast: false
