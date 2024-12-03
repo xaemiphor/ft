@@ -30,22 +30,10 @@ jobs:
           echo "thismonth=${THISMONTH}" | tee -a ${GITHUB_OUTPUT}
           echo "nextmonth=${NEXTMONTH}" | tee -a ${GITHUB_OUTPUT}
           mkdir -p user_data/data
-          if git ls-remote --exit-code --heads ${{ github.repositoryUrl }} "data/${{ matrix.exchange }}/${LASTMONTH}" &> /dev/null; then
-            echo "last-exists=true" | tee -a ${GITHUB_OUTPUT}
-          else
-            echo "last-exists=false" | tee -a ${GITHUB_OUTPUT}
-            mkdir "user_data/data/${{ matrix.exchange }}-${LASTMONTH}"
-          fi
-          if git ls-remote --exit-code --heads ${{ github.repositoryUrl }} "data/${{ matrix.exchange }}/${THISMONTH}" &> /dev/null; then
-            echo "this-exists=true" | tee -a ${GITHUB_OUTPUT}
-          else
-            echo "this-exists=false" | tee -a ${GITHUB_OUTPUT}
-            mkdir "user_data/data/${{ matrix.exchange }}-${THISMONTH}"
-          fi
 
       - name: Git checkout
         uses: actions/checkout@main
-        if: ${{ steps.info.outputs.last-exists == 'true' }}
+        continue-on-error: true
         with:
           fetch-depth: 1
           ref: "data/${{ matrix.exchange }}/${{ steps.info.outputs.lastmonth }}"
@@ -53,7 +41,7 @@ jobs:
 
       - name: Git checkout
         uses: actions/checkout@main
-        if: ${{ steps.info.outputs.this-exists == 'true' }}
+        continue-on-error: true
         with:
           fetch-depth: 1
           ref: "data/${{ matrix.exchange }}/${{ steps.info.outputs.thismonth }}"
@@ -65,6 +53,8 @@ jobs:
           function freqtrade {
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
+          [ ! -d "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}" ] && mkdir -p "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}"
+          [ ! -d "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}" ] && mkdir -p "user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.thismonth }}"
           echo "::group::Download last month"
           freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.lastmonth }}01-${{ steps.info.outputs.thismonth }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.lastmonth }}
           echo "::endgroup::"
