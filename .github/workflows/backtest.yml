@@ -55,4 +55,4 @@ jobs:
           function freqtrade {
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
-          freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json
+          freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012
