@@ -15,6 +15,7 @@ jobs:
   info:
     runs-on: ubuntu-latest
     outputs:
+      exchanges: "${{ steps.info.outputs.exchanges }}"
       strategies: "${{ steps.info.outputs.strategies }}"
       lastmonth: "${{ steps.info.outputs.lastmonth }}"
     steps:
@@ -26,7 +27,9 @@ jobs:
       - id: info
         shell: bash
         run: |
-          strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/* | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/* | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          echo "exchanges=${exchanges}" | tee -a ${GITHUB_OUTPUT}
           echo "strategies=${strategies}" | tee -a ${GITHUB_OUTPUT}
           echo "thismonth=$(date -u +'%Y%m')" | tee -a ${GITHUB_OUTPUT}
           echo "lastmonth=$(date -u +'%Y%m' -d '-1 month')" | tee -a ${GITHUB_OUTPUT}
@@ -37,10 +40,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        exchange:
-          - binanceus
-          - kraken
-        strategy: ${{ fromJSON(needs.info.outputs.strategies) }}
+        exchange: ${{ fromJSON(needs.info.outputs.exchanges) }}
+        #strategy: ${{ fromJSON(needs.info.outputs.strategies) }}
     steps:
       - name: Git checkout
         uses: actions/checkout@main
@@ -62,7 +63,9 @@ jobs:
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
           echo "::group::Backtest"
-          freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012 --export signals
+          #freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012 --export signals
+          STRATEGIES=( $(awk -F '[ (]' '/\(IStrategy\):/{print $2}' user_data/strategies/* | sort) )
+          freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/common.json --fee 0.012 --export signals
           echo "::endgroup::"
           echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
 
