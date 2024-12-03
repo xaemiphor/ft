@@ -72,7 +72,7 @@ jobs:
           echo "::group::Preload docker image"
           docker pull freqtradeorg/freqtrade:stable
           echo "::endgroup::"
-          strategy_key=$(echo '${{ matrix.strategy }}' | md5sum | cut -d ' ' -f1)
+          strategy_key=$(echo '${{ matrix.strategies }}' | md5sum | cut -d ' ' -f1)
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
@@ -91,7 +91,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.exchange }}-${{ steps.backtest.outputs.strategy_key }}
+          name: ${{ github.run_number }}-${{ github.run_attempt }}-${{ matrix.exchange }}-${{ steps.backtest.outputs.strategy_key }}
           path: "${{ github.workspace }}/user_data/backtest_results/${{ steps.backtest.outputs.results_json }}"
           retention-days: 1
 
@@ -129,7 +129,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: results
-          pattern: ${{ matrix.exchange }}-*
+          pattern: ${{ github.run_number }}-${{ github.run_attempt }}-${{ matrix.exchange }}-*
           merge-multiple: true
 
       - shell: bash
