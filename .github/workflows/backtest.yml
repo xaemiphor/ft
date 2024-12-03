@@ -68,6 +68,7 @@ jobs:
 
       - id: backtest
         shell: bash
+        timeout-minutes: 15
         run: |
           echo "::group::Preload docker image"
           docker pull freqtradeorg/freqtrade:stable
