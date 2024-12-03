@@ -1,0 +1,60 @@
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/download-data.yml
+  #schedule:
+  #  - cron: '0 0 * * *'
+
+permissions:
+  contents: write
+  repository-projects: read
+
+jobs:
+  download-data:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - exchange: binanceus
+            pairs: ".*/USDT"
+    steps:
+      - id: info
+        shell: bash
+        run: |
+          START=$(date -u +'%Y%m' -d '-1 month')
+          END=$(date -u +'%Y%m')
+          echo "timerange=${START}01-${END}01" | tee -a ${GITHUB_OUTPUT}
+          echo "lastmonth=${START}" | tee -a ${GITHUB_OUTPUT}
+          mkdir -p user_data/data
+          if git ls-remote --exit-code --heads origin "data/${{ matrix.exchange }}/${START}" &> /dev/null; then
+            echo "data-exists=true" | tee -a ${GITHUB_OUTPUT}
+          else
+            echo "data-exists=false" | tee -a ${GITHUB_OUTPUT}
+            mkdir "user_data/data/${{ matrix.exchange }}"
+          fi
+
+      - name: Git checkout
+        uses: actions/checkout@main
+        if: ${{ steps.info.outputs.data-exists == 'true' }}
+        with:
+          fetch-depth: 1
+          ref: "data/${{ matrix.exchange }}/${{ needs.info.outputs.lastmonth }}"
+          path: user_data/data/${{ matrix.exchange }}
+
+      - id: get-data
+        shell: bash
+        run: |
+          function freqtrade {
+            docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
+          }
+          TIMEFRAMES=( $(freqtrade list-timeframes --exchange ${{ matrix.exchange }} -1) )
+          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${TIMEFRAMES[@]} --timerange ${{ steps.info.outputs.timerange }}
+
+      - name: Push data
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: "data/${{ matrix.exchange }}/${{ steps.info.outputs.lastmonth }}"
+          publish_dir: ./user_data/data/${{ matrix.exchange }}
+          force_orphan: true

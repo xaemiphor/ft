@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - .github/workflows/backtest.yml
+      - strategies/*
 
 jobs:
   info:
@@ -21,8 +24,8 @@ jobs:
         run: |
           strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/* | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           echo "strategies=${strategies}" | tee -a ${GITHUB_OUTPUT}
-          echo "thismonth=$(date -u +%'%Y%m')" | tee -a ${GITHUB_OUTPUT}
-          echo "lastmonth=$(date -u +%'%Y%m' -d '-1 month')" | tee -a ${GITHUB_OUTPUT}
+          echo "thismonth=$(date -u +'%Y%m')" | tee -a ${GITHUB_OUTPUT}
+          echo "lastmonth=$(date -u +'%Y%m' -d '-1 month')" | tee -a ${GITHUB_OUTPUT}
 
   backtest:
     runs-on: ubuntu-latest
