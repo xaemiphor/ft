@@ -116,8 +116,8 @@ class EmaStrategy(IStrategy):
         "main_plot": {
             "tema": {},
             "sar": {"color": "white"},
-            "ema5": {}
-            "ema10": {}
+            "ema5": {},
+            "ema10": {},
         },
         "subplots": {
             "RSI": {

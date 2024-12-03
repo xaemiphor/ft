@@ -116,8 +116,8 @@ class SmaStrategy(IStrategy):
         "main_plot": {
             "tema": {},
             "sar": {"color": "white"},
-            "sma5": {}
-            "sma10": {}
+            "sma5": {},
+            "sma10": {},
         },
         "subplots": {
             "RSI": {
