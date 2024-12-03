@@ -19,6 +19,7 @@ jobs:
       strategies: "${{ steps.info.outputs.strategies }}"
       strategy_batch: "${{ steps.info.outputs.strategy_batch }}"
       lastmonth: "${{ steps.info.outputs.lastmonth }}"
+      thismonth: "${{ steps.info.outputs.thismonth }}"
     steps:
       - name: Git checkout
         uses: actions/checkout@main
@@ -68,6 +69,9 @@ jobs:
       - id: backtest
         shell: bash
         run: |
+          echo "::group::Preload docker image"
+          docker pull freqtradeorg/freqtrade:stable
+          echo "::endgroup::"
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
