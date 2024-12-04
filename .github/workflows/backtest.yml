@@ -45,7 +45,7 @@ jobs:
           strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/*.py | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           timedata=$(date -u +'%Y%m' -d '-1 month' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.exchange }}" ] && exchanges=$(echo '${{ github.event.inputs.exchange }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
-          [ -n "${{ github.event.inputs.strategy }}" ] && strategies=$(echo '${{ github.event.inputs.strategies }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          [ -n "${{ github.event.inputs.strategy }}" ] && strategies=$(echo '${{ github.event.inputs.strategy }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.timedata }}" ] && timedata=$(echo '${{ github.event.inputs.timedata }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           strategy_count=$(echo "${strategies}" | jq -c --raw-output '.|length')
           exchange_count=$(echo "${exchanges}" | jq -c --raw-output '.|length')
@@ -65,7 +65,6 @@ jobs:
       fail-fast: false
       matrix:
         exchange: ${{ fromJSON(needs.info.outputs.exchanges) }}
-        #strategy: ${{ fromJSON(needs.info.outputs.strategies) }}
         strategies: ${{ fromJSON(needs.info.outputs.strategy_batch) }}
         timedata: ${{ fromJSON(needs.info.outputs.timedata) }}
     steps:
@@ -89,7 +88,7 @@ jobs:
           echo "::group::Preload docker image"
           docker pull freqtradeorg/freqtrade:stable
           echo "::endgroup::"
-          strategy_key=$(echo '${{ matrix.strategies }}{{ matrix.timedata }}' | md5sum | cut -d ' ' -f1)
+          strategy_key=$(echo '${{ matrix.strategies }}${{ matrix.timedata }}' | md5sum | cut -d ' ' -f1)
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
