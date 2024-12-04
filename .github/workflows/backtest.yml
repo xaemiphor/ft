@@ -146,6 +146,7 @@ jobs:
             const fs = require('fs');
             const rawData = fs.readFileSync('./comparison.json', 'utf8');
             const jsonData = JSON.parse(rawData);
+            jsonData.sort((a,b)=> a.key.charCodeAt(0) - b.key.charCodeAt(0));
             function objectsToMarkdownTable(objects) {
               if (objects.length === 0) return '';
 
