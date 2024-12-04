@@ -1,5 +1,18 @@
 on:
   workflow_dispatch:
+    inputs:
+      exchange:
+        description: 'Specify one or more specific exchanges to test. csv'
+        required: false
+        default: 'binanceus'
+      strategy:
+        description: 'Specify one or more specific strategies to test. csv'
+        required: false
+        default: 'SampleStrategy'
+      timedata:
+        description: 'Specify one or more timeranges to test. csv'
+        required: false
+        default: '202412'
   push:
     branches:
       - main
@@ -18,8 +31,7 @@ jobs:
       exchanges: "${{ steps.info.outputs.exchanges }}"
       strategies: "${{ steps.info.outputs.strategies }}"
       strategy_batch: "${{ steps.info.outputs.strategy_batch }}"
-      lastmonth: "${{ steps.info.outputs.lastmonth }}"
-      thismonth: "${{ steps.info.outputs.thismonth }}"
+      timedata: "${{ steps.info.outputs.timedata }}"
     steps:
       - name: Git checkout
         uses: actions/checkout@main
@@ -29,19 +41,22 @@ jobs:
       - id: info
         shell: bash
         run: |
-          exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | head -n 1 | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/*.py | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          timedata=$(date -u +'%Y%m' -d '-1 month' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          [ -n "${{ github.event.inputs.exchange }}" ] && exchanges=$(echo '${{ github.event.inputs.exchange }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          [ -n "${{ github.event.inputs.strategy }}" ] && strategies=$(echo '${{ github.event.inputs.strategies }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          [ -n "${{ github.event.inputs.timedata }}" ] && timedata=$(echo '${{ github.event.inputs.timedata }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           strategy_count=$(echo "${strategies}" | jq -c --raw-output '.|length')
           exchange_count=$(echo "${exchanges}" | jq -c --raw-output '.|length')
-          max_batch_count=$(( 256 / ${exchange_count} ))
-          #max_batch_count=$(( 128 / ${exchange_count} ))
+          timedata_count=$(echo "${timedata}" | jq -c --raw-output '.|length')
+          max_batch_count=$(( 256 / (${exchange_count} * ${timedata_count}) ))
           strategy_batch_size=$(( (${strategy_count}+${max_batch_count}-1) / ${max_batch_count} ))
           strategy_batch=$(echo "${strategies}" | jq -c --raw-output --arg batch_size "${strategy_batch_size}" '_nwise($batch_size|tonumber)|tojson' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           echo "exchanges=${exchanges}" | tee -a ${GITHUB_OUTPUT}
           echo "strategies=${strategies}" | tee -a ${GITHUB_OUTPUT}
           echo "strategy_batch=${strategy_batch}" | tee -a ${GITHUB_OUTPUT}
-          echo "thismonth=$(date -u +'%Y%m')" | tee -a ${GITHUB_OUTPUT}
-          echo "lastmonth=$(date -u +'%Y%m' -d '-1 month')" | tee -a ${GITHUB_OUTPUT}
+          echo "timedata=${timedata}" | tee -a ${GITHUB_OUTPUT}
 
   backtest:
     runs-on: ubuntu-latest
@@ -52,6 +67,7 @@ jobs:
         exchange: ${{ fromJSON(needs.info.outputs.exchanges) }}
         #strategy: ${{ fromJSON(needs.info.outputs.strategies) }}
         strategies: ${{ fromJSON(needs.info.outputs.strategy_batch) }}
+        timedata: ${{ fromJSON(needs.info.outputs.timedata) }}
     steps:
       - name: Git checkout
         uses: actions/checkout@main
@@ -63,7 +79,7 @@ jobs:
         uses: actions/checkout@main
         with:
           fetch-depth: 1
-          ref: "data/${{ matrix.exchange }}/${{ needs.info.outputs.lastmonth }}"
+          ref: "data/${{ matrix.exchange }}/${{ matrix.timedata }}"
           path: user_data/data/${{ matrix.exchange }}
 
       - id: backtest
@@ -73,7 +89,7 @@ jobs:
           echo "::group::Preload docker image"
           docker pull freqtradeorg/freqtrade:stable
           echo "::endgroup::"
-          strategy_key=$(echo '${{ matrix.strategies }}' | md5sum | cut -d ' ' -f1)
+          strategy_key=$(echo '${{ matrix.strategies }}{{ matrix.timedata }}' | md5sum | cut -d ' ' -f1)
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
           }
