@@ -1,0 +1,62 @@
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    outputs:
+      branches: "${{ steps.info.outputs.branches }}"
+    steps:
+      - id: info
+        shell: bash
+        run: |
+          branches=$(git ls-remote --heads https://github.com/${{ github.repository }} data/* | awk -F '/' '{print $(NF)"/"$(NF-1)}' | sort -nr | head -n 256 | awk -F '/' '{print $2"/"$1}' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          echo "branches=${branches}" | tee -a ${GITHUB_OUTPUT}
+  checkout:
+    runs-on: ubuntu-latest
+    needs: info
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{ fromJSON(needs.info.outputs.branches) }}
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          ref: "data/${{ matrix.branch }}"
+          path: data
+      - shell: bash
+        env:
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          mkdir meta
+          bytes=$(du -b --exclude .git -d 1 data | awk '{print $1}')
+          echo "${{ matrix.branch }} ${bytes}" | tee meta/${BRANCH/\//-}.bytes
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.run_number }}-${{ github.run_attempt }}-${{ hashFiles('meta/*') }}
+          path: "${{ github.workspace }}/meta"
+          retention-days: 1
+
+  summary:
+    runs-on: ubuntu-latest
+    needs: checkout
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: results
+          pattern: ${{ github.run_number }}-${{ github.run_attempt }}-*
+          merge-multiple: true
+
+      - shell: bash
+        run: |
+          echo '```' | tee -a ${GITHUB_STEP_SUMMARY}
+          cat results/*bytes | sort | tee -a ${GITHUB_STEP_SUMMARY}
+          echo '```' | tee -a ${GITHUB_STEP_SUMMARY}
+
