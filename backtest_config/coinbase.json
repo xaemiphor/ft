@@ -1,4 +1,5 @@
 {
+  "stake_currency": "USD",
   "exchange": {
     "name": "coinbase",
     "key": "",
@@ -6,7 +7,7 @@
     "ccxt_config": {"enableRateLimit": true},
     "ccxt_async_config": {
         "enableRateLimit": true,
-        "rateLimit": 400
+        "rateLimit": 60
     },
     "pair_whitelist": [
       ".*/USD"

@@ -3,10 +3,9 @@
     "name": "binanceus",
     "key": "",
     "secret": "",
-    "ccxt_config": {"enableRateLimit": true},
+    "ccxt_config": {
+    },
     "ccxt_async_config": {
-        "enableRateLimit": true,
-        "rateLimit": 100
     },
     "pair_whitelist": [
       ".*/USDT"
