@@ -1,4 +1,5 @@
 {
+  "stake_currency": "USD",
   "exchange": {
     "name": "kraken",
     "key": "",
@@ -6,7 +7,8 @@
     "ccxt_config": {},
     "ccxt_async_config": {},
     "pair_whitelist": [
-      ".*/USDT"
+      ".*/USDT",
+      ".*/USD"
     ],
     "pair_blacklist": [
     ]
