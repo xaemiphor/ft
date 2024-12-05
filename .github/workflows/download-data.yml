@@ -55,7 +55,7 @@ jobs:
             timeframes: '1m 3m 5m 15m 30m 1h 2h 4h 6h 8h 12h 1d 1w 1M'
           - exchange: okx
             pairs: ".*/USDT"
-            timeframes: '5m 1h 8h 1d'
+            timeframes: '1m 3m 5m 15m 30m 1h 2h 4h 6h 12h 1d 1w 1M 3M'
     steps:
       - id: info
         if: github.event.inputs.exchange == '' || github.event.inputs.exchange == matrix.exchange
