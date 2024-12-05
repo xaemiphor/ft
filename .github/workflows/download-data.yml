@@ -16,6 +16,7 @@ on:
   push:
     paths:
       - .github/workflows/download-data.yml
+      - backtest_config/*
   schedule:
     - cron: '0 0 * * *'
 
