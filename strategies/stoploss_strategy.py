@@ -64,16 +64,11 @@ class StoplossStrategy(IStrategy):
 
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
-    minimal_roi = {
-        # "120": 0.0,  # exit after 120 minutes at break even
-        "60": 0.01,
-        "30": 0.02,
-        "0": 0.04,
-    }
+    minimal_roi = {}
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.10
+    stoploss = -0.05
     use_custom_stoploss = True
 
     # Trailing stoploss
@@ -89,7 +84,7 @@ class StoplossStrategy(IStrategy):
     process_only_new_candles = True
 
     # These values can be overridden in the config.
-    use_exit_signal = True
+    use_exit_signal = False
     exit_profit_only = False
     ignore_roi_if_entry_signal = False
 
@@ -125,6 +120,10 @@ class StoplossStrategy(IStrategy):
             },
             "RSI": {
                 "rsi": {"color": "red"},
+            },
+            "EMA": {
+                "ema5": {"color": "green"},
+                "ema10": {"color": "red"},
             },
         },
     }
@@ -251,25 +250,25 @@ class StoplossStrategy(IStrategy):
         ]
 
         # Bollinger Bands - Weighted (EMA based instead of SMA)
-        # weighted_bollinger = qtpylib.weighted_bollinger_bands(
-        #     qtpylib.typical_price(dataframe), window=20, stds=2
-        # )
-        # dataframe["wbb_upperband"] = weighted_bollinger["upper"]
-        # dataframe["wbb_lowerband"] = weighted_bollinger["lower"]
-        # dataframe["wbb_middleband"] = weighted_bollinger["mid"]
-        # dataframe["wbb_percent"] = (
-        #     (dataframe["close"] - dataframe["wbb_lowerband"]) /
-        #     (dataframe["wbb_upperband"] - dataframe["wbb_lowerband"])
-        # )
-        # dataframe["wbb_width"] = (
-        #     (dataframe["wbb_upperband"] - dataframe["wbb_lowerband"]) /
-        #     dataframe["wbb_middleband"]
-        # )
+        weighted_bollinger = qtpylib.weighted_bollinger_bands(
+            qtpylib.typical_price(dataframe), window=20, stds=2
+        )
+        dataframe["wbb_upperband"] = weighted_bollinger["upper"]
+        dataframe["wbb_lowerband"] = weighted_bollinger["lower"]
+        dataframe["wbb_middleband"] = weighted_bollinger["mid"]
+        dataframe["wbb_percent"] = (
+            (dataframe["close"] - dataframe["wbb_lowerband"]) /
+            (dataframe["wbb_upperband"] - dataframe["wbb_lowerband"])
+        )
+        dataframe["wbb_width"] = (
+            (dataframe["wbb_upperband"] - dataframe["wbb_lowerband"]) /
+            dataframe["wbb_middleband"]
+        )
 
         # # EMA - Exponential Moving Average
         # dataframe['ema3'] = ta.EMA(dataframe, timeperiod=3)
-        # dataframe['ema5'] = ta.EMA(dataframe, timeperiod=5)
-        # dataframe['ema10'] = ta.EMA(dataframe, timeperiod=10)
+        dataframe['ema5'] = ta.EMA(dataframe, timeperiod=5)
+        dataframe['ema10'] = ta.EMA(dataframe, timeperiod=10)
         # dataframe['ema21'] = ta.EMA(dataframe, timeperiod=21)
         # dataframe['ema50'] = ta.EMA(dataframe, timeperiod=50)
         # dataframe['ema100'] = ta.EMA(dataframe, timeperiod=100)
@@ -351,14 +350,16 @@ class StoplossStrategy(IStrategy):
 
         # Retrieve best bid and best ask from the orderbook
         # ------------------------------------
-        """
+        #"""
         # first check if dataprovider is available
         if self.dp:
             if self.dp.runmode.value in ('live', 'dry_run'):
                 ob = self.dp.orderbook(metadata['pair'], 1)
                 dataframe['best_bid'] = ob['bids'][0][0]
                 dataframe['best_ask'] = ob['asks'][0][0]
-        """
+        #"""
+
+        dataframe["stoploss_target"] = (dataframe["wbb_middleband"] + dataframe["wbb_lowerband"]) / 2
 
         return dataframe
 
@@ -371,10 +372,11 @@ class StoplossStrategy(IStrategy):
         """
         dataframe.loc[
             (
+                (qtpylib.crossed_above(dataframe["tema"],dataframe["sar"]))
                 # Signal: RSI crosses above 30
-                (qtpylib.crossed_above(dataframe["rsi"], self.buy_rsi.value))
-                & (dataframe["tema"] <= dataframe["bb_middleband"])  # Guard: tema below BB middle
-                & (dataframe["tema"] > dataframe["tema"].shift(1))  # Guard: tema is raising
+                #& (qtpylib.crossed_above(dataframe["rsi"], self.buy_rsi.value))
+                #& (dataframe["tema"] <= dataframe["bb_middleband"])  # Guard: tema below BB middle
+                #& (dataframe["tema"] > dataframe["tema"].shift(1))  # Guard: tema is raising
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
             "enter_long",
@@ -424,13 +426,22 @@ class StoplossStrategy(IStrategy):
         :param **kwargs: Ensure to keep this here so updates to this won't break your strategy.
         :return float: New stoploss value, relative to the current_rate
         """
+        dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
+        stoploss_default = stoploss_from_absolute(dataframe.iloc[-1]["stoploss_target"], current_rate, is_short=trade.is_short)
+        stoploss_open = stoploss_from_open(0.001, current_profit, is_short=trade.is_short, leverage=trade.leverage)
+        
         # evaluate highest to lowest, so that highest possible stop is used
-        if current_profit > 0.40:
-            return stoploss_from_open(0.25, current_profit, is_short=trade.is_short, leverage=trade.leverage)
-        elif current_profit > 0.25:
-            return stoploss_from_open(0.15, current_profit, is_short=trade.is_short, leverage=trade.leverage)
-        elif current_profit > 0.20:
-            return stoploss_from_open(0.07, current_profit, is_short=trade.is_short, leverage=trade.leverage)
+        #if current_profit > 0.40:
+        #    return stoploss_from_open(0.25, current_profit, is_short=trade.is_short, leverage=trade.leverage)
+        #elif current_profit > 0.25:
+        #    return stoploss_from_open(0.15, current_profit, is_short=trade.is_short, leverage=trade.leverage)
+        #elif current_profit > 0.20:
+        #    return stoploss_from_open(0.07, current_profit, is_short=trade.is_short, leverage=trade.leverage)
+        #elif current_profit > 0.10:
+        #    return stoploss_from_open(0.03, current_profit, is_short=trade.is_short, leverage=trade.leverage)
+        print(f"current_profit - {current_profit} stoploss_open - {stoploss_open} stoploss_default - {stoploss_default}")
+        if current_profit > 0.01:
+            return stoploss_open
 
         # return maximum stoploss value, keeping current stoploss price unchanged
-        return None
+        return stoploss_default
