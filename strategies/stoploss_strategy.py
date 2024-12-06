@@ -428,7 +428,6 @@ class StoplossStrategy(IStrategy):
         """
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
         stoploss_default = stoploss_from_absolute(dataframe.iloc[-1]["stoploss_target"], current_rate, is_short=trade.is_short)
-        stoploss_open = stoploss_from_open(0.001, current_profit, is_short=trade.is_short, leverage=trade.leverage)
         
         # evaluate highest to lowest, so that highest possible stop is used
         #if current_profit > 0.40:
@@ -439,9 +438,6 @@ class StoplossStrategy(IStrategy):
         #    return stoploss_from_open(0.07, current_profit, is_short=trade.is_short, leverage=trade.leverage)
         #elif current_profit > 0.10:
         #    return stoploss_from_open(0.03, current_profit, is_short=trade.is_short, leverage=trade.leverage)
-        print(f"current_profit - {current_profit} stoploss_open - {stoploss_open} stoploss_default - {stoploss_default}")
-        if current_profit > 0.01:
-            return stoploss_open
 
         # return maximum stoploss value, keeping current stoploss price unchanged
         return stoploss_default
