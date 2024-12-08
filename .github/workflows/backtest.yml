@@ -164,7 +164,7 @@ jobs:
             const rawData = fs.readFileSync('./comparison.json', 'utf8');
             const jsonData = JSON.parse(rawData);
             //jsonData.sort((a,b)=> a.key.charCodeAt(0) - b.key.charCodeAt(0));
-            jsonData.sort((a,b)=> a.profit_total_abs - b.profit_total_abs);
+            jsonData.sort((a,b)=> b.profit_total_abs - a.profit_total_abs);
             function objectsToMarkdownTable(objects) {
               if (objects.length === 0) return '';
 
