@@ -65,8 +65,8 @@ class Play2Strategy(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-            "60": 0.02,
-            "30": 0.04,
+            "60": 0.03,
+            "30": 0.05,
             "0": 0.10,
             }
 
