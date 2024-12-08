@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   info:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       exchanges: "${{ steps.info.outputs.exchanges }}"
       strategies: "${{ steps.info.outputs.strategies }}"
@@ -60,7 +60,7 @@ jobs:
           echo "timedata=${timedata}" | tee -a ${GITHUB_OUTPUT}
 
   backtest:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: info
     strategy:
       fail-fast: false
@@ -95,13 +95,13 @@ jobs:
           }
           echo "::group::Backtest"
           # 1 strategy
-          #freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals
+          #freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals
           # All strategies
           #STRATEGIES=( $(awk -F '[ (]' '/\(IStrategy\):/{print $2}' user_data/strategies/* | sort) )
-          #freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals
+          #freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals
           # Strategy batches
           STRATEGIES=( $(echo '${{ matrix.strategies }}' | jq -c --raw-output '.[]') )
-          freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 10000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
+          freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
           echo "::endgroup::"
           echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
           echo "strategy_key=${strategy_key}" | tee -a ${GITHUB_OUTPUT}
@@ -134,7 +134,7 @@ jobs:
             core.summary.write()
 
   summary:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       - info
       - backtest
@@ -162,7 +162,8 @@ jobs:
             const fs = require('fs');
             const rawData = fs.readFileSync('./comparison.json', 'utf8');
             const jsonData = JSON.parse(rawData);
-            jsonData.sort((a,b)=> a.key.charCodeAt(0) - b.key.charCodeAt(0));
+            //jsonData.sort((a,b)=> a.key.charCodeAt(0) - b.key.charCodeAt(0));
+            jsonData.sort((a,b)=> a.profit_total_abs - b.profit_total_abs);
             function objectsToMarkdownTable(objects) {
               if (objects.length === 0) return '';
 
