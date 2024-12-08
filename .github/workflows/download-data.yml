@@ -95,6 +95,7 @@ jobs:
           echo "::endgroup::"
           function freqtrade {
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
+            sudo chown -R $(id -u):$(id -g) ./user_data
           }
           echo "::group::Download target month"
           freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.target }}01-${{ steps.info.outputs.end }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }} -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json ${{ matrix.extra || '' }}

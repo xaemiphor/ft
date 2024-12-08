@@ -92,6 +92,7 @@ jobs:
           strategy_key=$(echo '${{ matrix.strategies }}${{ matrix.timedata }}' | md5sum | cut -d ' ' -f1)
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
+            sudo chown -R $(id -u):$(id -g) ./user_data
           }
           echo "::group::Backtest"
           # 1 strategy
