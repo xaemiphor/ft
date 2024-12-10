@@ -99,7 +99,7 @@ jobs:
             sudo chown -R $(id -u):$(id -g) ./user_data
           }
           echo "::group::Hyperopt"
-          freqtrade hyperopt -s ${{ matrix.strategy }} --hyperopt-loss ${{ github.event.inputs.hyperoptloss || 'OnlyProfitHyperOptLoss' }} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
+          freqtrade hyperopt -s ${{ matrix.strategy }} --hyperopt-loss ${{ github.event.inputs.hyperoptloss || 'OnlyProfitHyperOptLoss' }} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json
           echo "::endgroup::"
           echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
           echo "strategy_key=${strategy_key}" | tee -a ${GITHUB_OUTPUT}
