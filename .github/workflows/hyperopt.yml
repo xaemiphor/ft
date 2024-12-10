@@ -13,11 +13,15 @@ on:
         description: 'Specify one or more timeranges to test. csv'
         required: false
         default: '202412'
+      hyperoptloss:
+        description: 'Hyperopt-loss argument'
+        required: false
+        default: ''
   push:
     branches:
       - main
     paths:
-      - .github/workflows/backtest.yml
+      - .github/workflows/hyperopt.yml
       - strategies/*
 
 concurrency:
@@ -59,14 +63,14 @@ jobs:
           echo "strategy_batch=${strategy_batch}" | tee -a ${GITHUB_OUTPUT}
           echo "timedata=${timedata}" | tee -a ${GITHUB_OUTPUT}
 
-  backtest:
+  hyperopt:
     runs-on: ubuntu-24.04
     needs: info
     strategy:
       fail-fast: false
       matrix:
         exchange: ${{ fromJSON(needs.info.outputs.exchanges) }}
-        strategies: ${{ fromJSON(needs.info.outputs.strategy_batch) }}
+        strategy: ${{ fromJSON(needs.info.outputs.strategies) }}
         timedata: ${{ fromJSON(needs.info.outputs.timedata) }}
     steps:
       - name: Git checkout
@@ -82,7 +86,7 @@ jobs:
           ref: "data/${{ matrix.exchange }}/${{ matrix.timedata }}"
           path: user_data/data/${{ matrix.exchange }}
 
-      - id: backtest
+      - id: hyperopt
         shell: bash
         timeout-minutes: 15
         run: |
@@ -94,15 +98,8 @@ jobs:
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
             sudo chown -R $(id -u):$(id -g) ./user_data
           }
-          echo "::group::Backtest"
-          # 1 strategy
-          #freqtrade backtesting --strategy ${{ matrix.strategy }} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals
-          # All strategies
-          #STRATEGIES=( $(awk -F '[ (]' '/\(IStrategy\):/{print $2}' user_data/strategies/* | sort) )
-          #freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --fee 0.004 --export signals
-          # Strategy batches
-          STRATEGIES=( $(echo '${{ matrix.strategies }}' | jq -c --raw-output '.[]') )
-          freqtrade backtesting --strategy-list ${STRATEGIES[@]} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
+          echo "::group::Hyperopt"
+          freqtrade hyperopt -s ${{ matrix.strategy }} --hyperopt-loss ${{ github.event.inputs.hyperoptloss || 'OnlyProfitHyperOptLoss' }} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
           echo "::endgroup::"
           echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
           echo "strategy_key=${strategy_key}" | tee -a ${GITHUB_OUTPUT}
@@ -113,67 +110,3 @@ jobs:
           path: "${{ github.workspace }}/user_data/backtest_results/${{ steps.backtest.outputs.results_json }}"
           retention-days: 1
 
-      - uses: actions/github-script@v7
-        if: false
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require('fs');
-            const rawData = fs.readFileSync('./user_data/backtest_results/${{ steps.backtest.outputs.results_json }}', 'utf8');
-            const jsonData = JSON.parse(rawData);
-            function objectsToMarkdownTable(objects) {
-              if (objects.length === 0) return '';
-
-              const header = Object.keys(objects[0]).join(' | ');
-              const separator = Object.keys(objects[0]).map(() => '---').join(' | ');
-              const rows = objects.map(obj => Object.values(obj).join(' | '));
-
-              return [header, separator, ...rows].join('\n');
-            }
-            const markdownTable = objectsToMarkdownTable(jsonData["strategy_comparison"]);
-            core.summary.addRaw(markdownTable, true)
-            core.summary.write()
-
-  summary:
-    runs-on: ubuntu-24.04
-    needs:
-      - info
-      - backtest
-    if: always()
-    strategy:
-      fail-fast: false
-      matrix:
-        exchange: ${{ fromJSON(needs.info.outputs.exchanges) }}
-    steps:
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: results
-          pattern: ${{ github.run_number }}-${{ github.run_attempt }}-${{ matrix.exchange }}-*
-          merge-multiple: true
-
-      - shell: bash
-        run: |
-          jq -s '[.[] | .strategy_comparison[]]' results/*.json > comparison.json
-
-      - uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require('fs');
-            const rawData = fs.readFileSync('./comparison.json', 'utf8');
-            const jsonData = JSON.parse(rawData);
-            //jsonData.sort((a,b)=> a.key.charCodeAt(0) - b.key.charCodeAt(0));
-            jsonData.sort((a,b)=> b.profit_total_abs - a.profit_total_abs);
-            function objectsToMarkdownTable(objects) {
-              if (objects.length === 0) return '';
-
-              const header = Object.keys(objects[0]).join(' | ');
-              const separator = Object.keys(objects[0]).map(() => '---').join(' | ');
-              const rows = objects.map(obj => Object.values(obj).join(' | '));
-
-              return [header, separator, ...rows].join('\n');
-            }
-            const markdownTable = objectsToMarkdownTable(jsonData);
-            core.summary.addRaw(markdownTable, true)
-            core.summary.write()
