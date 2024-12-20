@@ -61,9 +61,11 @@ jobs:
         if: github.event.inputs.exchange == '' || github.event.inputs.exchange == matrix.exchange
         shell: bash
         run: |
+          THIS_MONTH=$(date -u +'%Y%m')
           TARGET_DATE=$(date -u +'%F' -d "${{ github.event.client_payload.target_date || github.event.inputs.target_date || 'now' }}")
           TARGET_MONTH=$(date -u +'%Y%m' -d "${TARGET_DATE}")
           END_MONTH=$(date -u +'%Y%m' -d "${TARGET_DATE} + 1 month")
+          echo "current=${THIS_MONTH}" | tee -a ${GITHUB_OUTPUT}
           echo "target=${TARGET_MONTH}" | tee -a ${GITHUB_OUTPUT}
           echo "end=${END_MONTH}" | tee -a ${GITHUB_OUTPUT}
           mkdir -p user_data/data
@@ -98,7 +100,11 @@ jobs:
             sudo chown -R $(id -u):$(id -g) ./user_data
           }
           echo "::group::Download target month"
-          freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.target }}01-${{ steps.info.outputs.end }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }} -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json ${{ matrix.extra || '' }}
+          if [[ "${{ steps.info.outputs.target }}" != "${{ steps.info.outputs.current }}" ]]; then
+            freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.target }}01-${{ steps.info.outputs.end }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }} -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json ${{ matrix.extra || '' }}
+          else
+            freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.target }}01- --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }} -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json ${{ matrix.extra || '' }}
+          fi
           echo "::endgroup::"
 
       - name: Push changes
