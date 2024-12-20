@@ -412,7 +412,7 @@ class Play1Strategy(IStrategy):
         dataframe.loc[
             (
                 (dataframe["volume"] > 0)  # Make sure Volume is not 0
-                & ((dataframe["rsi"] > self.sell_rsi.value) | (dataframe["tema"] > dataframe["wbb_upperband"]))
+                & (dataframe["rsi"] > self.sell_rsi.value)
                 #& (qtpylib.crossed_above(dataframe["rsi"], self.sell_rsi.value))
                 & (dataframe["low"] > dataframe["wbb_middleband"])
                 #& (dataframe["tema"] < dataframe["tema"].shift(1))  # Guard: tema is falling

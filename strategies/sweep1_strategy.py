@@ -37,7 +37,7 @@ from technical import qtpylib
 
 
 # This class is a sample. Feel free to customize it.
-class Play1Strategy(IStrategy):
+class Sweep1Strategy(IStrategy):
     """
     This is a sample strategy to inspire you.
     More information in https://www.freqtrade.io/en/latest/strategy-customization/
@@ -71,8 +71,13 @@ class Play1Strategy(IStrategy):
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.05
+    stoploss = -0.25
     use_custom_stoploss = True
+
+    # Example specific variables
+    max_entry_position_adjustment = 10
+    # This number is explained a bit further down
+    max_dca_multiplier = 5.5
 
     # Trailing stoploss
     trailing_stop = False
@@ -464,5 +469,86 @@ class Play1Strategy(IStrategy):
         #    #return stoploss_from_absolute(dataframe["wbb_lowerband"], current_rate, is_short=trade.is_short)
         #    #return stoploss_from_absolute(dataframe["wbb_lowerband"] * self.stoploss_buffer.value, current_rate, is_short=trade.is_short)
         #    return stoploss_from_absolute(dataframe["wbb_lowerband"] - (dataframe["wbb_upperband"] - dataframe["wbb_lowerband"]), current_rate, is_short=trade.is_short)
+
+        return None
+
+    # This is called when placing the initial order (opening trade)
+    def custom_stake_amount(self, pair: str, current_time: datetime, current_rate: float,
+                            proposed_stake: float, min_stake: float | None, max_stake: float,
+                            leverage: float, entry_tag: str | None, side: str,
+                            **kwargs) -> float:
+
+        # We need to leave most of the funds for possible further DCA orders
+        # This also applies to fixed stakes
+        return proposed_stake / self.max_dca_multiplier
+
+    def adjust_trade_position(self, trade: Trade, current_time: datetime,
+                              current_rate: float, current_profit: float,
+                              min_stake: float | None, max_stake: float,
+                              current_entry_rate: float, current_exit_rate: float,
+                              current_entry_profit: float, current_exit_profit: float,
+                              **kwargs
+                              ) -> float | None | tuple[float | None, str | None]:
+        """
+        Custom trade adjustment logic, returning the stake amount that a trade should be
+        increased or decreased.
+        This means extra entry or exit orders with additional fees.
+        Only called when `position_adjustment_enable` is set to True.
+
+        For full documentation please go to https://www.freqtrade.io/en/latest/strategy-advanced/
+
+        When not implemented by a strategy, returns None
+
+        :param trade: trade object.
+        :param current_time: datetime object, containing the current datetime
+        :param current_rate: Current entry rate (same as current_entry_profit)
+        :param current_profit: Current profit (as ratio), calculated based on current_rate
+                               (same as current_entry_profit).
+        :param min_stake: Minimal stake size allowed by exchange (for both entries and exits)
+        :param max_stake: Maximum stake allowed (either through balance, or by exchange limits).
+        :param current_entry_rate: Current rate using entry pricing.
+        :param current_exit_rate: Current rate using exit pricing.
+        :param current_entry_profit: Current profit using entry pricing.
+        :param current_exit_profit: Current profit using exit pricing.
+        :param **kwargs: Ensure to keep this here so updates to this won't break your strategy.
+        :return float: Stake amount to adjust your trade,
+                       Positive values to increase position, Negative values to decrease position.
+                       Return None for no action.
+                       Optionally, return a tuple with a 2nd element with an order reason
+        """
+
+        if current_profit > 0.05 and trade.nr_of_successful_exits == 0:
+            # Take half of the profit at +5%
+            return -(trade.stake_amount / 2), "half_profit_5%"
+
+        if current_profit > -0.05:
+            return None
+
+        # Obtain pair dataframe (just to show how to access it)
+        dataframe, _ = self.dp.get_analyzed_dataframe(trade.pair, self.timeframe)
+        # Only buy when not actively falling price.
+        last_candle = dataframe.iloc[-1].squeeze()
+        previous_candle = dataframe.iloc[-2].squeeze()
+        if last_candle["close"] < previous_candle["close"]:
+            return None
+
+        filled_entries = trade.select_filled_orders(trade.entry_side)
+        count_of_entries = trade.nr_of_successful_entries
+        # Allow up to 3 additional increasingly larger buys (4 in total)
+        # Initial buy is 1x
+        # If that falls to -5% profit, we buy 1.25x more, average profit should increase to roughly -2.2%
+        # If that falls down to -5% again, we buy 1.5x more
+        # If that falls once again down to -5%, we buy 1.75x more
+        # Total stake for this trade would be 1 + 1.25 + 1.5 + 1.75 = 5.5x of the initial allowed stake.
+        # That is why max_dca_multiplier is 5.5
+        # Hope you have a deep wallet!
+        try:
+            # This returns first order stake size
+            stake_amount = filled_entries[0].stake_amount_filled
+            # This then calculates current safety order size
+            stake_amount = stake_amount * (1 + (count_of_entries * 0.25))
+            return stake_amount, "1/3rd_increase"
+        except Exception as exception:
+            return None
 
         return None

@@ -19,7 +19,7 @@ class Trader_4_1726727454_3078(IStrategy):
         "0": 1
     }
     timeframe = '5m'
-    process_only_new_candles = True
+    process_only_new_candles = False
     startup_candle_count = 240
     order_types = {
         'entry': 'limit',
@@ -39,6 +39,18 @@ class Trader_4_1726727454_3078(IStrategy):
     trailing_stop_positive_offset = 0.03
     trailing_only_offset_is_reached = True
 
+    plot_config = {
+        "main_plot": {
+            "sma_15": {},
+        },
+        "subplots": {
+            "RSI": {
+                "rsi": {"color": "red"},
+                "rsi_fast": {},
+                "rsi_slow": {},
+            },
+        },
+    }
 
     buy_rsi_fast_32 = IntParameter(20, 70, default=66, space='buy', optimize=True)
     buy_rsi_32 = IntParameter(15, 50, default=17, space='buy', optimize=True)
