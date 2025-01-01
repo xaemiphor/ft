@@ -47,8 +47,8 @@ jobs:
         run: |
           #exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           exchanges='["binanceus"]'
-          hyper=$(grep -l '=.*Parameter' strategies/*.py)
-          strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' ${hyper[@]} | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          hyper=$(grep -l '=.*Parameter' strategies/*/*.py)
+          strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' ${hyper[@]} | sort -u | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           timedata=$(date -u +'%Y%m' -d '-1 month' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.exchange }}" ] && exchanges=$(echo '${{ github.event.inputs.exchange }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.strategy }}" ] && strategies=$(echo '${{ github.event.inputs.strategy }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
@@ -100,7 +100,7 @@ jobs:
             sudo chown -R $(id -u):$(id -g) ./user_data
           }
           echo "::group::Hyperopt"
-          freqtrade hyperopt -s ${{ matrix.strategy }} --hyperopt-loss ${{ github.event.inputs.hyperoptloss || 'MultiMetricHyperOptLoss' }} --starting-balance 1000 -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json
+          freqtrade hyperopt --recursive-strategy-search -s ${{ matrix.strategy }} --hyperopt-loss ${{ github.event.inputs.hyperoptloss || 'MultiMetricHyperOptLoss' }} --starting-balance 1000 -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json
           echo "::endgroup::"
           echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
           echo "strategy_key=${strategy_key}" | tee -a ${GITHUB_OUTPUT}
