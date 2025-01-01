@@ -143,7 +143,7 @@ jobs:
           echo "target=${YESTERDAY_MONTH}" | tee -a ${GITHUB_OUTPUT}
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@main
-        if: steps.info.outputs.oem == 'true'
+        if: steps.info.outputs.eom == 'true'
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
