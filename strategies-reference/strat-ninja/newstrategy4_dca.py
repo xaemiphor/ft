@@ -208,8 +208,8 @@ class newstrategy4(IStrategy):
     startup_candle_count = 168
 
     order_types = {
-        'entry': 'market',
-        'exit': 'market',
+        'entry': 'limit',
+        'exit': 'limit',
         'emergencyexit': 'market',
         'forceentry': "market",
         'forceexit': 'market',

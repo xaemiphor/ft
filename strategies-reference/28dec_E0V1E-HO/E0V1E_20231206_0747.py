@@ -21,8 +21,8 @@ class E0V1E_20231206_0747(IStrategy):
     startup_candle_count = 120
 
     order_types = {
-        'entry': 'market',
-        'exit': 'market',
+        'entry': 'limit',
+        'exit': 'limit',
         'emergency_exit': 'market',
         'force_entry': 'market',
         'force_exit': "market",

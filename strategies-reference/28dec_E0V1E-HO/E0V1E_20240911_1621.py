@@ -19,8 +19,8 @@ class E0V1E_20240911_1621(IStrategy):
     process_only_new_candles = True
     startup_candle_count = 240
     order_types = {
-        'entry': 'market',
-        'exit': 'market',
+        'entry': 'limit',
+        'exit': 'limit',
         'emergency_exit': 'market',
         'force_entry': 'market',
         'force_exit': "market",

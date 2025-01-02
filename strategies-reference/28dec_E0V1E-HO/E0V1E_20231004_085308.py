@@ -21,8 +21,8 @@ class E0V1E_20231004_085308(IStrategy):
     position_adjustment_enable = True
 
     order_types = {
-        'entry': 'market',
-        'exit': 'market',
+        'entry': 'limit',
+        'exit': 'limit',
         'emergency_exit': 'market',
         'force_entry': 'market',
         'force_exit': "market",
