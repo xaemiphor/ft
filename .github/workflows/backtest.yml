@@ -93,6 +93,8 @@ jobs:
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
             sudo chown -R $(id -u):$(id -g) ./user_data
+            sudo chown -R $(id -u):$(id -g) ./user_data/.git/config
+            sudo chown -R $(id -u):$(id -g) ./user_data/data/${{ matrix.exchange }}/.git/config
           }
           STRATEGIES=( $(echo '${{ matrix.strategies }}' | jq -c --raw-output '.[]') )
           #echo "::group::Scrub unrelated strategies"
