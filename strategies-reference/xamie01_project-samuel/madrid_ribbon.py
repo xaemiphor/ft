@@ -29,7 +29,7 @@ class madrid_ribbon(IStrategy):
         "20":  0.04,
         "0":  0.05
     }
-    can_short = True
+    can_short = False
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
     stoploss = -0.10

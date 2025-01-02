@@ -32,7 +32,7 @@ class FAdxSmaStrategy(IStrategy):
     # minimal_roi = {"0": 1}
 
     stoploss = -0.05
-    can_short = True
+    can_short = False
 
     # Trailing stoploss
     trailing_stop = False

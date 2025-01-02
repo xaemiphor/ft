@@ -23,7 +23,7 @@ class AdxSmasS_v7(IStrategy):
 
     INTERFACE_VERSION: int = 3
     # Can this strategy go short?
-    can_short: bool = True
+    can_short: bool = False
     # Minimal ROI designed for the strategy.
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"

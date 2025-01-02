@@ -14,7 +14,7 @@ class roger(IStrategy):
     INTERFACE_VERSION = 3
 
     # Short / Long
-    can_short = True
+    can_short = False
 
     # ROI table (config.json can't have this value as it will override): 
     minimal_roi = {
