@@ -95,13 +95,13 @@ jobs:
             sudo chown -R $(id -u):$(id -g) ./user_data
           }
           STRATEGIES=( $(echo '${{ matrix.strategies }}' | jq -c --raw-output '.[]') )
-          echo "::group::Scrub unrelated strategies"
-          GREP_ARGS=()
-          for x in ${STRATEGIES[@]}; do
-            GREP_ARGS+=( '-e' "${x}" )
-          done
-          find user_data/strategies/ -type f -print0 | xargs --null grep -Z -L "${GREP_ARGS[@]}" | xargs --null rm
-          echo "::endgroup::"
+          #echo "::group::Scrub unrelated strategies"
+          #GREP_ARGS=()
+          #for x in ${STRATEGIES[@]}; do
+          #  GREP_ARGS+=( '-e' "${x}" )
+          #done
+          #find user_data/strategies/ -type f -print0 | xargs --null grep -Z -L "${GREP_ARGS[@]}" | xargs --null rm
+          #echo "::endgroup::"
           echo "::group::list-data --show-timerange"
           freqtrade list-data --show-timerange -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json
           echo "::endgroup::"
