@@ -99,12 +99,18 @@ jobs:
             docker run --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
             sudo chown -R $(id -u):$(id -g) ./user_data
           }
+          echo "::group::(before)list-data --show-timerange"
+          freqtrade list-data --show-timerange --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }}
+          echo "::endgroup::"
           echo "::group::Download target month"
           if [[ "${{ steps.info.outputs.target }}" != "${{ steps.info.outputs.current }}" ]]; then
             freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.target }}01-${{ steps.info.outputs.end }}01 --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }} -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json ${{ matrix.extra || '' }}
           else
             freqtrade download-data --exchange ${{ matrix.exchange }} --pairs ${{ matrix.pairs }} --timeframes ${{ matrix.timeframes }} --timerange ${{ steps.info.outputs.target }}01- --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }} -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json ${{ matrix.extra || '' }}
           fi
+          echo "::endgroup::"
+          echo "::group::(after)list-data --show-timerange"
+          freqtrade list-data --show-timerange --datadir user_data/data/${{ matrix.exchange }}-${{ steps.info.outputs.target }}
           echo "::endgroup::"
 
       - name: Push changes
