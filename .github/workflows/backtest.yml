@@ -18,7 +18,7 @@ on:
       - main
     paths:
       - .github/workflows/backtest.yml
-      - strategies/*
+      - strategies/**
 
 concurrency:
   group: ${{ github.workflow }}
