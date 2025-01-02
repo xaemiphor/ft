@@ -101,12 +101,14 @@ jobs:
             GREP_ARGS+=( '-e' "${x}" )
           done
           find user_data/strategies-reference/ -type f -print0 | xargs --null grep -Z -L "${GREP_ARGS[@]}" | xargs --null rm
+          rm -r user_data/strategies
+          mv user_data/strategies-reference/ user_data/strategies
           echo "::endgroup::"
           echo "::group::list-data --show-timerange"
           freqtrade list-data --show-timerange -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json
           echo "::endgroup::"
           echo "::group::Backtest"
-          freqtrade backtesting --strategy-path /freqtrade/user_data/strategies-reference/ --recursive-strategy-search --strategy-list ${STRATEGIES[@]} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
+          freqtrade backtesting --recursive-strategy-search --strategy-list ${STRATEGIES[@]} --starting-balance 1000 --timeframe 5m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy_key}.json
           echo "::endgroup::"
           echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
           echo "strategy_key=${strategy_key}" | tee -a ${GITHUB_OUTPUT}
