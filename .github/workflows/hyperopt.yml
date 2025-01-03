@@ -47,7 +47,7 @@ jobs:
         run: |
           #exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           exchanges='["binanceus"]'
-          hyper=$(grep -l '=.*Parameter' strategies/*/*.py)
+          hyper=$(grep -l '=.*Parameter' strategies/*.py)
           strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' ${hyper[@]} | sort -u | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           timedata=$(date -u +'%Y%m' -d '-1 month' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.exchange }}" ] && exchanges=$(echo '${{ github.event.inputs.exchange }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
