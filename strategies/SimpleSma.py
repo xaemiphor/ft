@@ -96,23 +96,23 @@ class SimpleSma(IStrategy):
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[
-            (
-                (qtpylib.crossed_below(dataframe["sma5"], dataframe["sma21"]))
-                & (dataframe["volume"] > 0)  # Make sure Volume is not 0
-            ),
-            "enter_long",
-        ] = 1
+        conditions = []
+        conditions.append(dataframe["volume"] > 0)
+        conditions.append(qtpylib.crossed_below(dataframe["sma5"], dataframe["sma21"]))
 
+        if conditions:
+            dataframe.loc[
+                reduce(lambda x, y: x & y, conditions),
+                'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[
-            (
-                (qtpylib.crossed_above(dataframe["sma5"], dataframe["sma21"]))
-                & (dataframe["volume"] > 0)  # Make sure Volume is not 0
-            ),
-            "exit_long",
-        ] = 1
+        conditions = []
+        conditions.append(dataframe["volume"] > 0)
+        conditions.append(qtpylib.crossed_above(dataframe["sma5"], dataframe["sma21"]))
 
+        if conditions:
+            dataframe.loc[
+                reduce(lambda x, y: x & y, conditions),
+                'exit_long'] = 1
         return dataframe
