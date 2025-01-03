@@ -89,11 +89,9 @@ class SimpleEma(IStrategy):
         return []
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
         dataframe['ema5'] = ta.EMA(dataframe, timeperiod=5)
         dataframe['ema21'] = ta.EMA(dataframe, timeperiod=21)
-
-        # TEMA - Triple Exponential Moving Average
-        dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
 
         return dataframe
 

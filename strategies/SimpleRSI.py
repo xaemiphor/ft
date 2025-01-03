@@ -36,7 +36,7 @@ import talib.abstract as ta
 from technical import qtpylib
 
 
-class SimpleSma(IStrategy):
+class SimpleRSI(IStrategy):
 
     INTERFACE_VERSION = 3
 
@@ -61,6 +61,10 @@ class SimpleSma(IStrategy):
     exit_profit_only = False
     ignore_roi_if_entry_signal = False
 
+    # Hyperoptable parameters
+    buy_rsi = IntParameter(low=1, high=50, default=30, space="buy", optimize=True, load=True)
+    sell_rsi = IntParameter(low=50, high=100, default=70, space="sell", optimize=True, load=True)
+
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
 
@@ -78,10 +82,13 @@ class SimpleSma(IStrategy):
     plot_config = {
         "main_plot": {
             "tema": {"color":"white"},
-            "sma5": {"color":"green"},
-            "sma21": {"color":"blue"},
         },
         "subplots": {
+            "RSI": {
+                "rsi": {"color": "white"},
+                "rsi_buy": {"color": "red"},
+                "rsi_sell": {"color": "green"},
+            },
         },
     }
 
@@ -90,15 +97,16 @@ class SimpleSma(IStrategy):
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
-        dataframe['sma5'] = ta.SMA(dataframe, timeperiod=5)
-        dataframe['sma21'] = ta.SMA(dataframe, timeperiod=21)
+        dataframe["rsi"] = ta.RSI(dataframe)
+        dataframe["rsi_buy"] = self.buy_rsi.value
+        dataframe["rsi_sell"] = self.sell_rsi.value
 
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
-                (qtpylib.crossed_below(dataframe["sma5"], dataframe["sma21"]))
+                (qtpylib.crossed_above(dataframe["rsi"], self.buy_rsi.value))
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
             "enter_long",
@@ -109,7 +117,7 @@ class SimpleSma(IStrategy):
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
-                (qtpylib.crossed_above(dataframe["sma5"], dataframe["sma21"]))
+                (qtpylib.crossed_above(dataframe["rsi"], self.sell_rsi.value))
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
             "exit_long",
