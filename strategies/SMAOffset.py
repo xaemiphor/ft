@@ -69,8 +69,8 @@ class SMAOffset(IStrategy):
     # Hyperoptable parameters
     base_nb_candles_buy = IntParameter(5, 80, default=30, space='buy')
     base_nb_candles_sell = IntParameter(5, 80, default=30, space='sell')
-    low_offset = DecimalParameter(0.8, 0.99, default=0.958, space='buy')
-    high_offset = DecimalParameter(0.8, 1.1, default=1.012, space='sell')
+    low_offset = DecimalParameter(0.8, 0.99, default=0.950, space='buy')
+    high_offset = DecimalParameter(0.8, 1.1, default=1.010, space='sell')
     buy_trigger = CategoricalParameter(ma_types.keys(), default='SMA', space='buy')
     sell_trigger = CategoricalParameter(ma_types.keys(), default='EMA', space='sell')
 
