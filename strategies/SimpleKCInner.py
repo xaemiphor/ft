@@ -44,9 +44,9 @@ class SimpleKCInner(IStrategy):
 
     minimal_roi = {
         # "120": 0.0,  # exit after 120 minutes at break even
-        "60": 0.01,
-        "30": 0.02,
-        "0": 0.04,
+        # "60": 0.01,
+        # "30": 0.02,
+        # "0": 0.04,
     }
 
     stoploss = -0.10
