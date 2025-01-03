@@ -8,7 +8,7 @@ on:
       strategy:
         description: 'Specify one or more specific strategies to test. csv'
         required: false
-        default: 'Play1Strategy'
+        default: ''
       timedata:
         description: 'Specify one or more timeranges to test. csv'
         required: false
