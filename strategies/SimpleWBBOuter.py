@@ -36,7 +36,7 @@ import talib.abstract as ta
 from technical import qtpylib
 from functools import reduce
 
-class SimpleKCInner(IStrategy):
+class SimpleWBBOuter(IStrategy):
 
     INTERFACE_VERSION = 3
 
@@ -78,9 +78,9 @@ class SimpleKCInner(IStrategy):
     plot_config = {
         "main_plot": {
             "tema": {"color":"white"},
-            "kc_upperband": {"color": "#9f9c03","type": "line","fill_to": "kc_lowerband"},
-            "kc_lowerband": {"color": "#9f9c03","type": "line"},
-            "kc_middleband": {"color": "#9f9c03","type": "line"},
+            "wbb_upperband": {"color": "#9f9c03","type": "line","fill_to": "wbb_lowerband"},
+            "wbb_lowerband": {"color": "#9f9c03","type": "line"},
+            "wbb_middleband": {"color": "#9f9c03","type": "line"},
         },
         "subplots": {
         },
@@ -91,22 +91,24 @@ class SimpleKCInner(IStrategy):
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
-        keltner = qtpylib.keltner_channel(dataframe)
-        dataframe["kc_lowerband"] = keltner["lower"]
-        dataframe["kc_middleband"] = keltner["mid"] 
-        dataframe["kc_upperband"] = keltner["upper"]
-        dataframe["kc_percent"] = (
-            (dataframe["close"] - dataframe["kc_lowerband"]) /
-            (dataframe["kc_upperband"] - dataframe["kc_lowerband"])
-        ) 
-        dataframe["kc_width"] = ((dataframe["kc_upperband"] - dataframe["kc_lowerband"]) / dataframe["kc_middleband"])
+        weighted_bollinger = qtpylib.weighted_bollinger_bands(
+            qtpylib.typical_price(dataframe), window=20, stds=2
+        )
+        dataframe["wbb_upperband"] = weighted_bollinger["upper"]
+        dataframe["wbb_lowerband"] = weighted_bollinger["lower"]
+        dataframe["wbb_middleband"] = weighted_bollinger["mid"]
+        dataframe["wbb_percent"] = (
+            (dataframe["close"] - dataframe["wbb_lowerband"]) /
+            (dataframe["wbb_upperband"] - dataframe["wbb_lowerband"])
+        )
+        dataframe["wbb_width"] = ((dataframe["wbb_upperband"] - dataframe["wbb_lowerband"]) /dataframe["wbb_middleband"])
 
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         conditions.append(dataframe["volume"] > 0)
-        conditions.append(qtpylib.crossed_above(dataframe["tema"], dataframe["kc_lowerband"]))
+        conditions.append(qtpylib.crossed_below(dataframe["tema"], dataframe["wbb_lowerband"]))
 
         if conditions:
             dataframe.loc[
@@ -117,7 +119,7 @@ class SimpleKCInner(IStrategy):
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         conditions.append(dataframe["volume"] > 0)
-        conditions.append(qtpylib.crossed_below(dataframe["tema"], dataframe["kc_upperband"]))
+        conditions.append(qtpylib.crossed_above(dataframe["tema"], dataframe["wbb_upperband"]))
 
         if conditions:
             dataframe.loc[

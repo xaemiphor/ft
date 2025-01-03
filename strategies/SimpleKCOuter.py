@@ -95,14 +95,11 @@ class SimpleKCOuter(IStrategy):
         dataframe["kc_lowerband"] = keltner["lower"]
         dataframe["kc_middleband"] = keltner["mid"] 
         dataframe["kc_upperband"] = keltner["upper"]
-        dataframe["kc_stoploss"] = dataframe["kc_lowerband"] - ((dataframe["kc_upperband"] - dataframe["kc_lowerband"]) / 2)  
         dataframe["kc_percent"] = (
             (dataframe["close"] - dataframe["kc_lowerband"]) /
             (dataframe["kc_upperband"] - dataframe["kc_lowerband"])
         ) 
-        dataframe["kc_width"] = (
-            (dataframe["kc_upperband"] - dataframe["kc_lowerband"]) / dataframe["kc_middleband"]
-        )
+        dataframe["kc_width"] = ((dataframe["kc_upperband"] - dataframe["kc_lowerband"]) / dataframe["kc_middleband"])
 
         return dataframe
 
