@@ -44,7 +44,7 @@ jobs:
           #exchanges=$(ls -1 backtest_config | awk -F '.' '!/^common/{print $1}' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           exchanges='["binanceus"]'
           strategies=$(awk -F '[ (]' '/\(IStrategy\):/{print $2}' strategies/*.py | sort -u | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
-          timedata=$(date -u +'%Y%m' -d '-1 month' | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
+          timedata=$((date -u +'%Y%m' -d '-1 month' ; date -u +'%Y%m' -d '2022-06-01'; date -u +'%Y%m' -d '2024-11-01') | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.exchange }}" ] && exchanges=$(echo '${{ github.event.inputs.exchange }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.strategy }}" ] && strategies=$(echo '${{ github.event.inputs.strategy }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
           [ -n "${{ github.event.inputs.timedata }}" ] && timedata=$(echo '${{ github.event.inputs.timedata }}' | tr ',' '\n' | sort | jq -c --raw-input -s '[split("\n")[]|select(length>0)]')
