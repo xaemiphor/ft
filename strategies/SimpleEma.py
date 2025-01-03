@@ -34,7 +34,7 @@ from freqtrade.strategy import (
 # Add your lib to import here
 import talib.abstract as ta
 from technical import qtpylib
-
+from functools import reduce
 
 class SimpleEma(IStrategy):
 
