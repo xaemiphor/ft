@@ -207,7 +207,7 @@ class IchiSMA(IStrategy):
         for x in range(self.buy_fan_magnitude_shift_value.value):
             ichi.append(dataframe['fan_magnitude'].shift(x+1) < dataframe['fan_magnitude'])
 
-        if conditions:
+        if sma or ichi:
             dataframe.loc[
                 reduce(lambda x, y: x & y, sma) | reduce(lambda x, y: x & y, ichi),
                 'enter_long'] = 1
@@ -225,7 +225,7 @@ class IchiSMA(IStrategy):
         # ichi
         ichi.append(qtpylib.crossed_below(dataframe['trend_close_1'], dataframe[f'trend_close_{self.sell_trend_indicator.value}']))
 
-        if conditions:
+        if sma or ichi:
             dataframe.loc[
                 reduce(lambda x, y: x & y, sma) | reduce(lambda x, y: x & y, ichi),
                 'exit_long'] = 1
