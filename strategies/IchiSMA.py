@@ -115,7 +115,7 @@ class IchiSMA(IStrategy):
             'trend_close_24': {'color': '#E3FF33'},
             'trend_close_48': {'color': '#C4FF33'},
             'trend_close_72': {'color': '#61FF33'},
-            'trend_close_96': {'color': '#33FF7D'}
+            'trend_close_96': {'color': '#33FF7D'},
             "ma_offset_buy": {"color":"red"},
             "ma_offset_sell": {"color":"green"},
         },
