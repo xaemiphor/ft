@@ -38,6 +38,10 @@ from functools import reduce
 import technical.indicators as ftt
 
 timeperiods = [1,3,6,12,24,48,72,96]
+ma_types = {
+    'SMA': ta.SMA,
+    'EMA': ta.EMA,
+}
 
 class IchiSMA(IStrategy):
 
