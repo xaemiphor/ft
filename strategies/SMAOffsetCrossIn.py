@@ -112,7 +112,6 @@ class SMAOffsetCrossIn(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         conditions.append(dataframe["volume"] > 0)
-        conditions.append(dataframe['close'] < dataframe['ma_offset_buy'])
         conditions.append(qtpylib.crossed_above(dataframe['close'],dataframe['ma_offset_buy']))
 
         if conditions:
@@ -124,7 +123,6 @@ class SMAOffsetCrossIn(IStrategy):
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         conditions.append(dataframe["volume"] > 0)
-        conditions.append(dataframe['close'] > dataframe['ma_offset_sell'])
         conditions.append(qtpylib.crossed_below(dataframe['close'],dataframe['ma_offset_sell']))
 
         if conditions:
