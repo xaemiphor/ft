@@ -178,51 +178,55 @@ class IchiSMA(IStrategy):
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        conditions = []
+        sma = []
+        ichi = []
 
         for x in range(10):
-            conditions.append(dataframe["volume"].shift(x) > 0)
+            sma.append(dataframe["volume"].shift(x) > 0)
+            ichi.append(dataframe["volume"].shift(x) > 0)
 
         # smaoffset
-        conditions.append(dataframe['close'] < dataframe['ma_offset_buy'])
+        sma.append(dataframe['close'] < dataframe['ma_offset_buy'])
 
         # ichi
         # Trending market
         for idx, timeperiod in enumerate(timeperiods):
             if self.buy_trend_above_senkou_level.value >= idx:
-                conditions.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_a'])
-                conditions.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_b'])
+                ichi.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_a'])
+                ichi.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_b'])
 
         # Trends bullish
         for idx, timeperiod in enumerate(timeperiods):
             if self.buy_trend_bullish_level.value >= idx:
-                conditions.append(dataframe[f'trend_close_{timeperiod}'] > dataframe[f'trend_open_{timeperiod}'])
+                ichi.append(dataframe[f'trend_close_{timeperiod}'] > dataframe[f'trend_open_{timeperiod}'])
 
         # Trends magnitude
-        conditions.append(dataframe['fan_magnitude_gain'] >= self.buy_min_fan_magnitude_gain.value)
-        conditions.append(dataframe['fan_magnitude'] > 1)
+        ichi.append(dataframe['fan_magnitude_gain'] >= self.buy_min_fan_magnitude_gain.value)
+        ichi.append(dataframe['fan_magnitude'] > 1)
 
         for x in range(self.buy_fan_magnitude_shift_value.value):
-            conditions.append(dataframe['fan_magnitude'].shift(x+1) < dataframe['fan_magnitude'])
+            ichi.append(dataframe['fan_magnitude'].shift(x+1) < dataframe['fan_magnitude'])
 
         if conditions:
             dataframe.loc[
-                reduce(lambda x, y: x & y, conditions),
+                reduce(lambda x, y: x & y, sma) | reduce(lambda x, y: x & y, ichi),
                 'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        conditions = []
+        sma = []
+        ichi = []
         for x in range(10):
-            conditions.append(dataframe["volume"].shift(x) > 0)
+            sma.append(dataframe["volume"].shift(x) > 0)
+            ichi.append(dataframe["volume"].shift(x) > 0)
         # smaoffset
-        conditions.append(dataframe['close'] > dataframe['ma_offset_sell'])
+        sma.append(dataframe['close'] > dataframe['ma_offset_sell'])
 
         # ichi
-        conditions.append(qtpylib.crossed_below(dataframe['trend_close_1'], dataframe[f'trend_close_{self.sell_trend_indicator.value}']))
+        ichi.append(qtpylib.crossed_below(dataframe['trend_close_1'], dataframe[f'trend_close_{self.sell_trend_indicator.value}']))
 
         if conditions:
             dataframe.loc[
-                reduce(lambda x, y: x & y, conditions),
+                reduce(lambda x, y: x & y, sma) | reduce(lambda x, y: x & y, ichi),
                 'exit_long'] = 1
         return dataframe
