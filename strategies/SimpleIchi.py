@@ -123,6 +123,9 @@ class SimpleIchi(IStrategy):
         return []
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        market = self.dp.market(metadata['pair'])
+        dataframe["close_fee"] = (dataframe["close"] * market['maker'])
+
         heikinashi = qtpylib.heikinashi(dataframe)
         dataframe['open'] = heikinashi['open']
         #dataframe['close'] = heikinashi['close']
@@ -158,7 +161,9 @@ class SimpleIchi(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
 
         # Trending market
         for idx, timeperiod in enumerate(timeperiods):
@@ -186,7 +191,8 @@ class SimpleIchi(IStrategy):
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(qtpylib.crossed_below(dataframe['trend_close_1'], dataframe[f'trend_close_{self.sell_trend_indicator.value}']))
 
         if conditions:

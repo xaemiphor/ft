@@ -97,6 +97,8 @@ class SimpleStochasticFast(IStrategy):
         return []
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        market = self.dp.market(metadata['pair'])
+        dataframe["close_fee"] = (dataframe["close"] * market['maker'])
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
         stoch_fast = ta.STOCHF(dataframe)
         dataframe["fastd"] = stoch_fast["fastd"]
@@ -108,7 +110,8 @@ class SimpleStochasticFast(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(dataframe["fastk"] < self.buy_stoch.value)
         conditions.append(dataframe["fastd"] < self.buy_stoch.value)
         conditions.append(qtpylib.crossed_above(dataframe["fastk"], dataframe["fastd"]))
@@ -121,7 +124,8 @@ class SimpleStochasticFast(IStrategy):
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(dataframe["fastk"] > self.sell_stoch.value)
         conditions.append(dataframe["fastd"] > self.sell_stoch.value)
         conditions.append(qtpylib.crossed_below(dataframe["fastk"], dataframe["fastd"]))

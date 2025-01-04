@@ -96,6 +96,8 @@ class SimpleCCI(IStrategy):
         return []
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        market = self.dp.market(metadata['pair'])
+        dataframe["close_fee"] = (dataframe["close"] * market['maker'])
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
         dataframe["cci"] = ta.CCI(dataframe)
         dataframe["cci_buy"] = self.buy_cci.value
@@ -105,7 +107,8 @@ class SimpleCCI(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(qtpylib.crossed_below(dataframe["cci"], self.buy_cci.value))
 
         if conditions:
@@ -116,7 +119,8 @@ class SimpleCCI(IStrategy):
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(qtpylib.crossed_above(dataframe["cci"], self.sell_cci.value))
 
         if conditions:
