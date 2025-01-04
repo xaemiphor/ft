@@ -111,7 +111,8 @@ class SMAOffsetCrossOut(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(qtpylib.crossed_below(dataframe['close'],dataframe['ma_offset_buy']))
 
         if conditions:
@@ -122,7 +123,8 @@ class SMAOffsetCrossOut(IStrategy):
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        conditions.append(dataframe["volume"] > 0)
+        for x in range(10):
+            conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(qtpylib.crossed_above(dataframe['close'],dataframe['ma_offset_sell']))
 
         if conditions:
