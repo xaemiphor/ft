@@ -172,7 +172,7 @@ class SimpleIchi(IStrategy):
                 conditions.append(dataframe[f'trend_close_{timeperiod}'] > dataframe[f'trend_open_{timeperiod}'])
 
         # Trends magnitude
-        conditions.append(dataframe['fan_magnitude_gain'] >= self.buy_params['buy_min_fan_magnitude_gain'])
+        conditions.append(dataframe['fan_magnitude_gain'] >= self.buy_min_fan_magnitude_gain.value)
         conditions.append(dataframe['fan_magnitude'] > 1)
 
         for x in range(self.buy_fan_magnitude_shift_value.value):
