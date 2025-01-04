@@ -35,9 +35,9 @@ from freqtrade.strategy import (
 import talib.abstract as ta
 from technical import qtpylib
 from functools import reduce
+import technical.indicators as ftt
 
 timeperiods = [1,3,6,12,24,48,72,96]
-
 
 class SimpleIchi(IStrategy):
 
