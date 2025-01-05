@@ -36,7 +36,7 @@ import talib.abstract as ta
 from technical import qtpylib
 from functools import reduce
 
-class SimpleKCInner(IStrategy):
+class SimpleAroon(IStrategy):
 
     INTERFACE_VERSION = 3
 
@@ -53,7 +53,8 @@ class SimpleKCInner(IStrategy):
 
     trailing_stop = False
 
-    timeframe = "5m"
+    timeframe = "1m" # price movement timeframe
+    informative_timeframe = '5m' # Signal timeframe
 
     process_only_new_candles = False
 
@@ -78,30 +79,48 @@ class SimpleKCInner(IStrategy):
     plot_config = {
         "main_plot": {
             "tema": {"color":"white"},
-            "kc_upperband": {"color": "#9f9c03","type": "line","fill_to": "kc_lowerband"},
-            "kc_lowerband": {"color": "#9f9c03","type": "line"},
-            "kc_middleband": {"color": "#9f9c03","type": "line"},
         },
         "subplots": {
+            "aroon": {
+                "aroonup": {"color":"green"},
+                "aroondown": {"color":"red"},
+            }
         },
     }
 
     def informative_pairs(self):
-        return []
+        pairs = self.dp.current_whitelist()
+        informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
+        return informative_pairs
 
-    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def do_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         market = self.dp.market(metadata['pair'])
         dataframe["close_fee"] = (dataframe["close"] * market['maker'])
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
-        keltner = qtpylib.keltner_channel(dataframe)
-        dataframe["kc_lowerband"] = keltner["lower"]
-        dataframe["kc_middleband"] = keltner["mid"] 
-        dataframe["kc_upperband"] = keltner["upper"]
-        dataframe["kc_percent"] = (
-            (dataframe["close"] - dataframe["kc_lowerband"]) /
-            (dataframe["kc_upperband"] - dataframe["kc_lowerband"])
-        ) 
-        dataframe["kc_width"] = ((dataframe["kc_upperband"] - dataframe["kc_lowerband"]) / dataframe["kc_middleband"])
+        aroon = ta.AROON(dataframe)
+        dataframe['aroonup'] = aroon['aroonup']
+        dataframe['aroondown'] = aroon['aroondown']
+        dataframe['aroonosc'] = ta.AROONOSC(dataframe)
+
+        return dataframe
+
+    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        if self.config['runmode'].value in ('backtest', 'hyperopt'):
+            assert (timeframe_to_minutes(self.timeframe) <= 5), "Backtest this strategy in 5m or 1m timeframe."
+
+        if self.timeframe == self.informative_timeframe:
+            dataframe = self.do_indicators(dataframe, metadata)
+        else:
+            if not self.dp:
+                return dataframe
+
+            informative = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.informative_timeframe)
+
+            informative = self.do_indicators(informative.copy(), metadata)
+
+            dataframe = merge_informative_pair(dataframe, informative, self.timeframe, self.informative_timeframe, ffill=True)
+            skip_columns = [(s + "_" + self.informative_timeframe) for s in ['date', 'open', 'high', 'low', 'close', 'volume']]
+            dataframe.rename(columns=lambda s: s.replace("_{}".format(self.informative_timeframe), "") if (not s in skip_columns) else s, inplace=True)
 
         return dataframe
 
@@ -109,7 +128,7 @@ class SimpleKCInner(IStrategy):
         conditions = []
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
-        conditions.append(qtpylib.crossed_above(dataframe["tema"], dataframe["kc_lowerband"]))
+        conditions.append(qtpylib.crossed_above(dataframe["aroonup"], dataframe["aroondown"]))
 
         if conditions:
             dataframe.loc[
@@ -121,7 +140,7 @@ class SimpleKCInner(IStrategy):
         conditions = []
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
-        conditions.append(qtpylib.crossed_below(dataframe["tema"], dataframe["kc_upperband"]))
+        conditions.append(qtpylib.crossed_below(dataframe["aroonup"], dataframe["aroondown"]))
 
         if conditions:
             dataframe.loc[

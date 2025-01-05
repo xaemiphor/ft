@@ -58,7 +58,8 @@ class SMAOffset(IStrategy):
 
     trailing_stop = False
 
-    timeframe = "5m"
+    timeframe = "1m" # price movement timeframe
+    informative_timeframe = '5m' # Signal timeframe
 
     process_only_new_candles = False
 
@@ -100,12 +101,34 @@ class SMAOffset(IStrategy):
     }
 
     def informative_pairs(self):
-        return []
+        pairs = self.dp.current_whitelist()
+        informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
+        return informative_pairs
 
-    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def do_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
         dataframe['ma_offset_buy'] = ma_types[self.buy_trigger.value](dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
         dataframe['ma_offset_sell'] = ma_types[self.sell_trigger.value](dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
+
+        return dataframe
+
+    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        if self.config['runmode'].value in ('backtest', 'hyperopt'):
+            assert (timeframe_to_minutes(self.timeframe) <= 5), "Backtest this strategy in 5m or 1m timeframe."
+
+        if self.timeframe == self.informative_timeframe:
+            dataframe = self.do_indicators(dataframe, metadata)
+        else:
+            if not self.dp:
+                return dataframe
+
+            informative = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.informative_timeframe)
+
+            informative = self.do_indicators(informative.copy(), metadata)
+
+            dataframe = merge_informative_pair(dataframe, informative, self.timeframe, self.informative_timeframe, ffill=True)
+            skip_columns = [(s + "_" + self.informative_timeframe) for s in ['date', 'open', 'high', 'low', 'close', 'volume']]
+            dataframe.rename(columns=lambda s: s.replace("_{}".format(self.informative_timeframe), "") if (not s in skip_columns) else s, inplace=True)
 
         return dataframe
 

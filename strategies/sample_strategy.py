@@ -82,7 +82,8 @@ class SampleStrategy(IStrategy):
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
 
     # Optimal timeframe for the strategy.
-    timeframe = "5m"
+    timeframe = "1m" # price movement timeframe
+    informative_timeframe = '5m' # Signal timeframe
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
@@ -139,9 +140,11 @@ class SampleStrategy(IStrategy):
                             ("BTC/USDT", "15m"),
                             ]
         """
-        return []
+        pairs = self.dp.current_whitelist()
+        informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
+        return informative_pairs
 
-    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def do_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Adds several different TA indicators to the given DataFrame
 
@@ -358,6 +361,26 @@ class SampleStrategy(IStrategy):
                 dataframe['best_bid'] = ob['bids'][0][0]
                 dataframe['best_ask'] = ob['asks'][0][0]
         """
+
+        return dataframe
+
+    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        if self.config['runmode'].value in ('backtest', 'hyperopt'):
+            assert (timeframe_to_minutes(self.timeframe) <= 5), "Backtest this strategy in 5m or 1m timeframe."
+
+        if self.timeframe == self.informative_timeframe:
+            dataframe = self.do_indicators(dataframe, metadata)
+        else:
+            if not self.dp:
+                return dataframe
+
+            informative = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.informative_timeframe)
+
+            informative = self.do_indicators(informative.copy(), metadata)
+
+            dataframe = merge_informative_pair(dataframe, informative, self.timeframe, self.informative_timeframe, ffill=True)
+            skip_columns = [(s + "_" + self.informative_timeframe) for s in ['date', 'open', 'high', 'low', 'close', 'volume']]
+            dataframe.rename(columns=lambda s: s.replace("_{}".format(self.informative_timeframe), "") if (not s in skip_columns) else s, inplace=True)
 
         return dataframe
 
