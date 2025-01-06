@@ -171,7 +171,7 @@ class IndicatorsOr(IStrategy):
                 conditions[key].append(dataframe["volume"].shift(x) > 0)
 
         dataframe.loc[
-            reduce(lambda x, y: x | y, (reduce(lambda a, b: a & b, conditions[key]) for key in conditions))
+            reduce(lambda x, y: x | y, (reduce(lambda a, b: a & b, conditions[key]) for key in conditions)),
             'enter_long'] = 1
         return dataframe
 
@@ -192,6 +192,6 @@ class IndicatorsOr(IStrategy):
                 conditions[key].append(dataframe["volume"].shift(x) > 0)
 
         dataframe.loc[
-            reduce(lambda x, y: x | y, (reduce(lambda a, b: a & b, conditions[key]) for key in conditions))
+            reduce(lambda x, y: x | y, (reduce(lambda a, b: a & b, conditions[key]) for key in conditions)),
             'exit_long'] = 1
         return dataframe
