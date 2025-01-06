@@ -36,7 +36,7 @@ import talib.abstract as ta
 from technical import qtpylib
 from functools import reduce
 
-class IndicatorsOverlap(IStrategy):
+class IndicatorsAnd(IStrategy):
 
     INTERFACE_VERSION = 3
 
