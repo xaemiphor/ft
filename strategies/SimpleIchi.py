@@ -37,9 +37,8 @@ from technical import qtpylib
 from functools import reduce
 import technical.indicators as ftt
 
-timeperiods = [1,3,6,12,24,48,72,96]
-
 class SimpleIchi(IStrategy):
+    timeperiods = [1,3,6,12,24,48,72,96]
 
     INTERFACE_VERSION = 3
 
@@ -71,7 +70,7 @@ class SimpleIchi(IStrategy):
     buy_fan_magnitude_shift_value = IntParameter(low=1, high=10, default=3, space="buy", optimize=True, load=True)
     buy_min_fan_magnitude_gain = DecimalParameter(low=1.000, high=1.010, decimals=3, default=1.002, space="buy", optimize=True, load=True)
     sell_trend_indicator = CategoricalParameter(
-            timeperiods,
+            self.timeperiods,
             default="24",
             space="sell",
             optimize=True,
@@ -136,7 +135,7 @@ class SimpleIchi(IStrategy):
         dataframe['low'] = heikinashi['low']
 
 
-        for timeperiod in timeperiods:
+        for timeperiod in self.timeperiods:
             if timeperiod == 1:
                 dataframe[f'trend_close_{timeperiod}'] = dataframe['close']
                 dataframe[f'trend_open_{timeperiod}'] = dataframe['open']
@@ -189,13 +188,13 @@ class SimpleIchi(IStrategy):
             conditions.append(dataframe["volume"].shift(x) > 0)
 
         # Trending market
-        for idx, timeperiod in enumerate(timeperiods):
+        for idx, timeperiod in enumerate(self.timeperiods):
             if self.buy_trend_above_senkou_level.value >= idx:
                 conditions.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_a'])
                 conditions.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_b'])
 
         # Trends bullish
-        for idx, timeperiod in enumerate(timeperiods):
+        for idx, timeperiod in enumerate(self.timeperiods):
             if self.buy_trend_bullish_level.value >= idx:
                 conditions.append(dataframe[f'trend_close_{timeperiod}'] > dataframe[f'trend_open_{timeperiod}'])
 

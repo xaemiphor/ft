@@ -37,13 +37,12 @@ from technical import qtpylib
 from functools import reduce
 import technical.indicators as ftt
 
-timeperiods = [1,3,6,12,24,48,72,96]
-ma_types = {
-    'SMA': ta.SMA,
-    'EMA': ta.EMA,
-}
-
 class IchiSMA(IStrategy):
+    timeperiods = [1,3,6,12,24,48,72,96]
+    ma_types = {
+        'SMA': ta.SMA,
+        'EMA': ta.EMA,
+    }
 
     INTERFACE_VERSION = 3
 
@@ -76,7 +75,7 @@ class IchiSMA(IStrategy):
     buy_fan_magnitude_shift_value = IntParameter(low=1, high=10, default=3, space="buy", optimize=True, load=True)
     buy_min_fan_magnitude_gain = DecimalParameter(low=1.000, high=1.010, decimals=3, default=1.002, space="buy", optimize=True, load=True)
     sell_trend_indicator = CategoricalParameter(
-            timeperiods,
+            self.timeperiods,
             default="24",
             space="sell",
             optimize=True,
@@ -87,8 +86,8 @@ class IchiSMA(IStrategy):
     base_nb_candles_sell = IntParameter(5, 80, default=30, space='sell')
     low_offset = DecimalParameter(0.8, 0.99, default=0.950, space='buy')
     high_offset = DecimalParameter(0.8, 1.1, default=1.010, space='sell')
-    buy_trigger = CategoricalParameter(ma_types.keys(), default='SMA', space='buy')
-    sell_trigger = CategoricalParameter(ma_types.keys(), default='EMA', space='sell')
+    buy_trigger = CategoricalParameter(self.ma_types.keys(), default='SMA', space='buy')
+    sell_trigger = CategoricalParameter(self.ma_types.keys(), default='EMA', space='sell')
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -150,7 +149,7 @@ class IchiSMA(IStrategy):
         dataframe['high'] = heikinashi['high']
         dataframe['low'] = heikinashi['low']
 
-        for timeperiod in timeperiods:
+        for timeperiod in self.timeperiods:
             if timeperiod == 1:
                 dataframe[f'trend_close_{timeperiod}'] = dataframe['close']
                 dataframe[f'trend_open_{timeperiod}'] = dataframe['open']
@@ -175,8 +174,8 @@ class IchiSMA(IStrategy):
         dataframe['atr'] = ta.ATR(dataframe)
 
         # smaoffset
-        dataframe['ma_offset_buy'] = ma_types[self.buy_trigger.value](dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
-        dataframe['ma_offset_sell'] = ma_types[self.sell_trigger.value](dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
+        dataframe['ma_offset_buy'] = self.ma_types[self.buy_trigger.value](dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
+        dataframe['ma_offset_sell'] = self.ma_types[self.sell_trigger.value](dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
 
         return dataframe
 
@@ -213,13 +212,13 @@ class IchiSMA(IStrategy):
 
         # ichi
         # Trending market
-        for idx, timeperiod in enumerate(timeperiods):
+        for idx, timeperiod in enumerate(self.timeperiods):
             if self.buy_trend_above_senkou_level.value >= idx:
                 ichi.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_a'])
                 ichi.append(dataframe[f'trend_close_{timeperiod}'] > dataframe['senkou_b'])
 
         # Trends bullish
-        for idx, timeperiod in enumerate(timeperiods):
+        for idx, timeperiod in enumerate(self.timeperiods):
             if self.buy_trend_bullish_level.value >= idx:
                 ichi.append(dataframe[f'trend_close_{timeperiod}'] > dataframe[f'trend_open_{timeperiod}'])
 
