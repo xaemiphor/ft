@@ -36,7 +36,7 @@ import talib.abstract as ta
 from technical import qtpylib
 from functools import reduce
 
-class SimpleIndicators(IStrategy):
+class IndicatorsOr(IStrategy):
 
     INTERFACE_VERSION = 3
 
