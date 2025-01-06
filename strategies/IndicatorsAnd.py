@@ -131,6 +131,11 @@ class IndicatorsAnd(IStrategy):
         dataframe["fastk"] = stoch_fast["fastk"]
         dataframe["stoch_buy"] = self.buy_stoch.value
         dataframe["stoch_sell"] = self.sell_stoch.value
+        # MACD
+        macd = ta.MACD(dataframe)
+        dataframe["macd"] = macd["macd"]
+        dataframe["macdsignal"] = macd["macdsignal"]
+        dataframe["macdhist"] = macd["macdhist"]
 
         return dataframe
 
@@ -159,12 +164,14 @@ class IndicatorsAnd(IStrategy):
             'rsi': [],
             'cci': [],
             'stochfast': [],
+            'macd': [],
         }
         conditions['rsi'].append(dataframe["rsi"] < self.buy_rsi.value)
         conditions['cci'].append(dataframe["cci"] < self.buy_cci.value)
         conditions['stochfast'].append(dataframe["fastk"] < self.buy_stoch.value)
         conditions['stochfast'].append(dataframe["fastd"] < self.buy_stoch.value)
         conditions['stochfast'].append(qtpylib.crossed_above(dataframe["fastk"], dataframe["fastd"]))
+        conditions['macd'].append(dataframe["macdhist"] <= 0)
 
         for key in conditions.keys():
             for x in range(10):
@@ -189,6 +196,7 @@ class IndicatorsAnd(IStrategy):
         conditions['stochfast'].append(dataframe["fastk"] > self.sell_stoch.value)
         conditions['stochfast'].append(dataframe["fastd"] > self.sell_stoch.value)
         conditions['stochfast'].append(qtpylib.crossed_below(dataframe["fastk"], dataframe["fastd"]))
+        conditions['macd'].append(dataframe["macdhist"] >= 0)
 
         for key in conditions.keys():
             for x in range(10):
