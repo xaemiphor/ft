@@ -166,7 +166,7 @@ class IndicatorsOverlap(IStrategy):
         conditions['stochfast'].append(dataframe["fastd"] < self.buy_stoch.value)
         conditions['stochfast'].append(qtpylib.crossed_above(dataframe["fastk"], dataframe["fastd"]))
 
-        for key, value in conditions:
+        for key in conditions.keys():
             for x in range(10):
                 conditions[key].append(dataframe["volume"].shift(x) > 0)
 
@@ -187,7 +187,7 @@ class IndicatorsOverlap(IStrategy):
         conditions['stochfast'].append(dataframe["fastd"] > self.sell_stoch.value)
         conditions['stochfast'].append(qtpylib.crossed_below(dataframe["fastk"], dataframe["fastd"]))
 
-        for key, value in conditions:
+        for key in conditions.keys():
             for x in range(10):
                 conditions[key].append(dataframe["volume"].shift(x) > 0)
 
