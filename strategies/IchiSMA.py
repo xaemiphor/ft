@@ -208,7 +208,10 @@ class IchiSMA(IStrategy):
             ichi.append(dataframe["volume"].shift(x) > 0)
 
         # smaoffset
-        sma.append(qtpylib.crossed_below(dataframe['close'],dataframe['ma_offset_buy']))
+        if self.config['runmode'].value in ('hyperopt'):
+            sma.append(dataframe['close'] < dataframe['ma_offset_buy'])
+        else:
+            sma.append(qtpylib.crossed_below(dataframe['close'],dataframe['ma_offset_buy']))
 
         # ichi
         # Trending market
@@ -242,7 +245,10 @@ class IchiSMA(IStrategy):
             sma.append(dataframe["volume"].shift(x) > 0)
             ichi.append(dataframe["volume"].shift(x) > 0)
         # smaoffset
-        sma.append(qtpylib.crossed_above(dataframe['close'],dataframe['ma_offset_sell']))
+        if self.config['runmode'].value in ('hyperopt'):
+            sma.append(dataframe['close'] > dataframe['ma_offset_sell'])
+        else:
+            sma.append(qtpylib.crossed_above(dataframe['close'],dataframe['ma_offset_sell']))
 
         # ichi
         ichi.append(qtpylib.crossed_below(dataframe['trend_close_1'], dataframe[f'trend_close_{self.sell_trend_indicator.value}']))

@@ -135,7 +135,10 @@ class SMAOffsetCrossIn(IStrategy):
         conditions = []
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
-        conditions.append(qtpylib.crossed_above(dataframe['close'],dataframe['ma_offset_buy']))
+        if self.config['runmode'].value in ('hyperopt'):
+            conditions.append(dataframe['close'] < dataframe['ma_offset_buy'])
+        else:
+            conditions.append(qtpylib.crossed_above(dataframe['close'],dataframe['ma_offset_buy']))
 
         if conditions:
             dataframe.loc[
@@ -147,7 +150,10 @@ class SMAOffsetCrossIn(IStrategy):
         conditions = []
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
-        conditions.append(qtpylib.crossed_below(dataframe['close'],dataframe['ma_offset_sell']))
+        if self.config['runmode'].value in ('hyperopt'):
+            conditions.append(dataframe['close'] > dataframe['ma_offset_sell'])
+        else:
+            conditions.append(qtpylib.crossed_below(dataframe['close'],dataframe['ma_offset_sell']))
 
         if conditions:
             dataframe.loc[
