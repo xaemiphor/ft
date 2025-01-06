@@ -155,39 +155,43 @@ class IndicatorsOverlap(IStrategy):
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        conditions = []
-        for x in range(10):
-            conditions.append(dataframe["volume"].shift(x) > 0)
-        # rsi
-        conditions.append(dataframe["rsi"] < self.buy_rsi.value)
-        # cci
-        conditions.append(dataframe["cci"] < self.buy_cci.value)
-        # stochastic
-        conditions.append(dataframe["fastk"] < self.buy_stoch.value)
-        conditions.append(dataframe["fastd"] < self.buy_stoch.value)
-        conditions.append(qtpylib.crossed_above(dataframe["fastk"], dataframe["fastd"]))
+        conditions = {
+            rsi = []
+            cci = []
+            stochfast = []
+        }
+        conditions['rsi'].append(qtpylib.crossed_below(dataframe["rsi"], self.buy_rsi.value))
+        conditions['cci'].append(qtpylib.crossed_below(dataframe["cci"], self.buy_cci.value))
+        conditions['stochfast'].append(dataframe["fastk"] < self.buy_stoch.value)
+        conditions['stochfast'].append(dataframe["fastd"] < self.buy_stoch.value)
+        conditions['stochfast'].append(qtpylib.crossed_above(dataframe["fastk"], dataframe["fastd"]))
 
-        if conditions:
-            dataframe.loc[
-                reduce(lambda x, y: x & y, conditions),
-                'enter_long'] = 1
+        for key, value in conditions:
+            for x in range(10):
+                conditions[key].append(dataframe["volume"].shift(x) > 0)
+
+        dataframe.loc[
+            reduce(lambda x, y: x & y, (reduce(lambda a, b: a & b, conditions[key]) for key in conditions))
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        conditions = []
-        for x in range(10):
-            conditions.append(dataframe["volume"].shift(x) > 0)
-        # rsi
-        conditions.append(dataframe["rsi"] > self.sell_rsi.value)
-        # cci
-        conditions.append(dataframe["cci"] > self.sell_cci.value)
-        # stochastic
-        conditions.append(dataframe["fastk"] > self.sell_stoch.value)
-        conditions.append(dataframe["fastd"] > self.sell_stoch.value)
-        conditions.append(qtpylib.crossed_below(dataframe["fastk"], dataframe["fastd"]))
+        conditions = {
+            rsi = []
+            cci = []
+            stochfast = []
+        }
+        conditions['rsi'].append(qtpylib.crossed_above(dataframe["rsi"], self.sell_rsi.value))
+        conditions['cci'].append(qtpylib.crossed_above(dataframe["cci"], self.sell_cci.value))
+        conditions['stochfast'].append(dataframe["fastk"] > self.sell_stoch.value)
+        conditions['stochfast'].append(dataframe["fastd"] > self.sell_stoch.value)
+        conditions['stochfast'].append(qtpylib.crossed_below(dataframe["fastk"], dataframe["fastd"]))
 
-        if conditions:
-            dataframe.loc[
-                reduce(lambda x, y: x & y, conditions),
-                'exit_long'] = 1
+        for key, value in conditions:
+            for x in range(10):
+                conditions[key].append(dataframe["volume"].shift(x) > 0)
+
+        dataframe.loc[
+            reduce(lambda x, y: x & y, (reduce(lambda a, b: a & b, conditions[key]) for key in conditions))
+            'exit_long'] = 1
         return dataframe
