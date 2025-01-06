@@ -106,7 +106,7 @@ class IndicatorsOr(IStrategy):
                 "stoch_sell": {"color": "green"},
             },
             "macd": {
-                "macdhist": {"color": "white"},
+                "macdhist": {"color": "yellow"},
                 "macdhist_bar": {"color": "white"},
             },
         },
