@@ -190,6 +190,7 @@ class IndicatorsAnd(IStrategy):
             'rsi': [],
             'cci': [],
             'stochfast': [],
+            'macd': [],
         }
         conditions['rsi'].append(dataframe["rsi"] > self.sell_rsi.value)
         conditions['cci'].append(dataframe["cci"] > self.sell_cci.value)

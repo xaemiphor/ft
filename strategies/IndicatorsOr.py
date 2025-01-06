@@ -164,6 +164,7 @@ class IndicatorsOr(IStrategy):
             'rsi': [],
             'cci': [],
             'stochfast': [],
+            'macd': [],
         }
         conditions['rsi'].append(qtpylib.crossed_below(dataframe["rsi"], self.buy_rsi.value))
         conditions['cci'].append(qtpylib.crossed_below(dataframe["cci"], self.buy_cci.value))
@@ -189,6 +190,7 @@ class IndicatorsOr(IStrategy):
             'rsi': [],
             'cci': [],
             'stochfast': [],
+            'macd': [],
         }
         conditions['rsi'].append(qtpylib.crossed_above(dataframe["rsi"], self.sell_rsi.value))
         conditions['cci'].append(qtpylib.crossed_above(dataframe["cci"], self.sell_cci.value))
