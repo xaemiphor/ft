@@ -105,6 +105,10 @@ class IndicatorsAnd(IStrategy):
                 "stoch_buy": {"color": "red"},
                 "stoch_sell": {"color": "green"},
             },
+            "macd": {
+                "macdhist": {"color": "white"},
+                "macdhist_bar": {"color": "white"},
+            },
         },
     }
 
@@ -136,6 +140,7 @@ class IndicatorsAnd(IStrategy):
         dataframe["macd"] = macd["macd"]
         dataframe["macdsignal"] = macd["macdsignal"]
         dataframe["macdhist"] = macd["macdhist"]
+        dataframe["macdhist_bar"] = 0
 
         return dataframe
 
