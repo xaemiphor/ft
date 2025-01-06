@@ -156,9 +156,9 @@ class IndicatorsOverlap(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = {
-            'rsi': []
-            'cci': []
-            'stochfast': []
+            'rsi': [],
+            'cci': [],
+            'stochfast': [],
         }
         conditions['rsi'].append(qtpylib.crossed_below(dataframe["rsi"], self.buy_rsi.value))
         conditions['cci'].append(qtpylib.crossed_below(dataframe["cci"], self.buy_cci.value))
@@ -177,9 +177,9 @@ class IndicatorsOverlap(IStrategy):
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = {
-            'rsi': []
-            'cci': []
-            'stochfast': []
+            'rsi': [],
+            'cci': [],
+            'stochfast': [],
         }
         conditions['rsi'].append(qtpylib.crossed_above(dataframe["rsi"], self.sell_rsi.value))
         conditions['cci'].append(qtpylib.crossed_above(dataframe["cci"], self.sell_cci.value))
