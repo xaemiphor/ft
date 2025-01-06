@@ -67,6 +67,8 @@ class IndicatorsOverlap(IStrategy):
     sell_rsi = IntParameter(low=50, high=100, default=70, space="sell", optimize=True, load=True)
     buy_cci = IntParameter(low=-120, high=-90, default=-100, space="buy", optimize=True, load=True)
     sell_cci = IntParameter(low=90, high=120, default=100, space="sell", optimize=True, load=True)
+    buy_stoch = IntParameter(low=1, high=50, default=20, space="buy", optimize=True, load=True)
+    sell_stoch = IntParameter(low=50, high=100, default=80, space="sell", optimize=True, load=True)
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -97,6 +99,12 @@ class IndicatorsOverlap(IStrategy):
                 "cci_buy": {"color": "red"},
                 "cci_sell": {"color": "green"},
             },
+            "stochastic": {
+                "fastd": {"color": "white"},
+                "fastk": {"color": "yellow"},
+                "stoch_buy": {"color": "red"},
+                "stoch_sell": {"color": "green"},
+            },
         },
     }
 
@@ -109,12 +117,20 @@ class IndicatorsOverlap(IStrategy):
         market = self.dp.market(metadata['pair'])
         dataframe["close_fee"] = (dataframe["close"] * market['maker'])
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
+        # rsi
         dataframe["rsi"] = ta.RSI(dataframe)
         dataframe["rsi_buy"] = self.buy_rsi.value
         dataframe["rsi_sell"] = self.sell_rsi.value
+        # cci
         dataframe["cci"] = ta.CCI(dataframe)
         dataframe["cci_buy"] = self.buy_cci.value
         dataframe["cci_sell"] = self.sell_cci.value
+        # stochasticfast
+        stoch_fast = ta.STOCHF(dataframe)
+        dataframe["fastd"] = stoch_fast["fastd"]
+        dataframe["fastk"] = stoch_fast["fastk"]
+        dataframe["stoch_buy"] = self.buy_stoch.value
+        dataframe["stoch_sell"] = self.sell_stoch.value
 
         return dataframe
 
@@ -142,8 +158,14 @@ class IndicatorsOverlap(IStrategy):
         conditions = []
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
+        # rsi
         conditions.append(dataframe["rsi"] < self.buy_rsi.value)
+        # cci
         conditions.append(dataframe["cci"] < self.buy_cci.value)
+        # stochastic
+        conditions.append(dataframe["fastk"] < self.buy_stoch.value)
+        conditions.append(dataframe["fastd"] < self.buy_stoch.value)
+        conditions.append(qtpylib.crossed_above(dataframe["fastk"], dataframe["fastd"]))
 
         if conditions:
             dataframe.loc[
@@ -155,8 +177,14 @@ class IndicatorsOverlap(IStrategy):
         conditions = []
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
+        # rsi
         conditions.append(dataframe["rsi"] > self.sell_rsi.value)
+        # cci
         conditions.append(dataframe["cci"] > self.sell_cci.value)
+        # stochastic
+        conditions.append(dataframe["fastk"] > self.sell_stoch.value)
+        conditions.append(dataframe["fastd"] > self.sell_stoch.value)
+        conditions.append(qtpylib.crossed_below(dataframe["fastk"], dataframe["fastd"]))
 
         if conditions:
             dataframe.loc[

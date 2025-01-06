@@ -67,6 +67,8 @@ class IndicatorsOr(IStrategy):
     sell_rsi = IntParameter(low=50, high=100, default=70, space="sell", optimize=True, load=True)
     buy_cci = IntParameter(low=-120, high=-90, default=-100, space="buy", optimize=True, load=True)
     sell_cci = IntParameter(low=90, high=120, default=100, space="sell", optimize=True, load=True)
+    buy_stoch = IntParameter(low=1, high=50, default=20, space="buy", optimize=True, load=True)
+    sell_stoch = IntParameter(low=50, high=100, default=80, space="sell", optimize=True, load=True)
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -97,6 +99,12 @@ class IndicatorsOr(IStrategy):
                 "cci_buy": {"color": "red"},
                 "cci_sell": {"color": "green"},
             },
+            "stochastic": {
+                "fastd": {"color": "white"},
+                "fastk": {"color": "yellow"},
+                "stoch_buy": {"color": "red"},
+                "stoch_sell": {"color": "green"},
+            },
         },
     }
 
@@ -109,12 +117,20 @@ class IndicatorsOr(IStrategy):
         market = self.dp.market(metadata['pair'])
         dataframe["close_fee"] = (dataframe["close"] * market['maker'])
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
+        # rsi
         dataframe["rsi"] = ta.RSI(dataframe)
         dataframe["rsi_buy"] = self.buy_rsi.value
         dataframe["rsi_sell"] = self.sell_rsi.value
+        # cci
         dataframe["cci"] = ta.CCI(dataframe)
         dataframe["cci_buy"] = self.buy_cci.value
         dataframe["cci_sell"] = self.sell_cci.value
+        # stochasticfast
+        stoch_fast = ta.STOCHF(dataframe)
+        dataframe["fastd"] = stoch_fast["fastd"]
+        dataframe["fastk"] = stoch_fast["fastk"]
+        dataframe["stoch_buy"] = self.buy_stoch.value
+        dataframe["stoch_sell"] = self.sell_stoch.value
 
         return dataframe
 
@@ -141,29 +157,40 @@ class IndicatorsOr(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         rsi = []
         cci = []
+        stochfast = []
         for x in range(10):
             rsi.append(dataframe["volume"].shift(x) > 0)
             cci.append(dataframe["volume"].shift(x) > 0)
+            stochfast.append(dataframe["volume"].shift(x) > 0)
         rsi.append(qtpylib.crossed_below(dataframe["rsi"], self.buy_rsi.value))
         cci.append(qtpylib.crossed_below(dataframe["cci"], self.buy_cci.value))
+        stochfast.append(dataframe["fastk"] < self.buy_stoch.value)
+        stochfast.append(dataframe["fastd"] < self.buy_stoch.value)
+        stochfast.append(qtpylib.crossed_above(dataframe["fastk"], dataframe["fastd"]))
 
-        if rsi or cci:
+
+        if rsi or cci or stochfast:
             dataframe.loc[
-                reduce(lambda x, y: x & y, rsi) | reduce(lambda x, y: x & y, cci),
+                reduce(lambda x, y: x & y, rsi) | reduce(lambda x, y: x & y, cci) | reduce(lambda x, y: x & y, stochfast),
                 'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         rsi = []
         cci = []
+        stochfast = []
         for x in range(10):
             rsi.append(dataframe["volume"].shift(x) > 0)
             cci.append(dataframe["volume"].shift(x) > 0)
+            stochfast.append(dataframe["volume"].shift(x) > 0)
         rsi.append(qtpylib.crossed_above(dataframe["rsi"], self.sell_rsi.value))
         cci.append(qtpylib.crossed_above(dataframe["cci"], self.sell_cci.value))
+        stochfast.append(dataframe["fastk"] > self.sell_stoch.value)
+        stochfast.append(dataframe["fastd"] > self.sell_stoch.value)
+        stochfast.append(qtpylib.crossed_below(dataframe["fastk"], dataframe["fastd"]))
 
-        if rsi or cci:
+        if rsi or cci or stochfast:
             dataframe.loc[
-                reduce(lambda x, y: x & y, rsi) | reduce(lambda x, y: x & y, cci),
+                reduce(lambda x, y: x & y, rsi) | reduce(lambda x, y: x & y, cci) | reduce(lambda x, y: x & y, stochfast),
                 'exit_long'] = 1
         return dataframe
