@@ -36,10 +36,7 @@ import talib.abstract as ta
 from technical import qtpylib
 from functools import reduce
 
-ma_types = {
-    'SMA': ta.SMA,
-    'EMA': ta.EMA,
-}
+ma_types = ['SMA','EMA']
 
 class SMAOffsetCrossIn(IStrategy):
 
@@ -72,8 +69,8 @@ class SMAOffsetCrossIn(IStrategy):
     base_nb_candles_sell = IntParameter(5, 80, default=30, space='sell')
     low_offset = DecimalParameter(0.8, 0.99, default=0.950, space='buy')
     high_offset = DecimalParameter(0.8, 1.1, default=1.010, space='sell')
-    buy_trigger = CategoricalParameter(ma_types.keys(), default='SMA', space='buy')
-    sell_trigger = CategoricalParameter(ma_types.keys(), default='EMA', space='sell')
+    buy_trigger = CategoricalParameter(ma_types, default='SMA', space='buy')
+    sell_trigger = CategoricalParameter(ma_types, default='EMA', space='sell')
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -107,8 +104,10 @@ class SMAOffsetCrossIn(IStrategy):
 
     def do_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["tema"] = ta.TEMA(dataframe, timeperiod=9)
-        dataframe['ma_offset_buy'] = ma_types[self.buy_trigger.value](dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
-        dataframe['ma_offset_sell'] = ma_types[self.sell_trigger.value](dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
+        buy_type = getattr(ta,self.buy_trigger.value)
+        sell_type = getattr(ta,self.sell_trigger.value)
+        dataframe['ma_offset_buy'] = buy_type(dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
+        dataframe['ma_offset_sell'] = sell_type(dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
 
         return dataframe
 
