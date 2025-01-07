@@ -134,7 +134,7 @@ jobs:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
         with:
-          path: results
+          path: artifacts
           pattern: ${{ github.run_number }}-${{ github.run_attempt }}-${{ matrix.exchange }}-*
           merge-multiple: true
 
@@ -143,25 +143,24 @@ jobs:
         continue-on-error: true
         with:
           fetch-depth: 1
-          ref: "gh-pages"
-          path: gh-pages
+          ref: "results/${{ matrix.exchange }}/backtest"
+          path: results
 
       - shell: bash
         run: |
           echo "::group::Artifacts"
-          find results -type f
+          find artifacts -type f
           echo "::endgroup::"
           echo "::group::Prep artifacts for storage"
-          [ ! -d gh-pages/backtest ] && mkdir gh-pages/backtest
-          rsync -av results/backtest/. gh-pages/backtest/.
+          rsync -av artifacts/backtest/. results/.
           echo "::endgroup::"
-          for folder in $(find gh-pages/backtest/ -mindepth 1 -maxdepth 1 -type d | grep ${{ matrix.exchange }}); do
+          for folder in $(find results/ -mindepth 1 -maxdepth 1 -type d | grep ${{ matrix.exchange }}); do
             echo "::group::Rebuild comparison ${folder}"
             jq -s '[.[] | .strategy_comparison[]] | sort_by(.key)' ${folder}/*.json > ${folder}.json
             echo "::endgroup::"
           done
-          jq -s '[.[] | .strategy_comparison[]] | sort_by(.key)' results/backtest/*/*.json > comparison.json
-          rm -rf results/
+          jq -s '[.[] | .strategy_comparison[]] | sort_by(.key)' artifacts/backtest/*/*.json > comparison.json
+          rm -rf artifacts/
 
       - name: Push changes
         shell: bash
@@ -170,12 +169,11 @@ jobs:
           set -x
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          cd gh-pages
+          cd results
           if [[ $(git status --porcelain . | wc -l) -gt 0 ]]; then
             git add .
             git commit -m "ci: ${{ github.sha }} $(date -u +'%F %T')"
-            git pull --rebase
-            git push -u origin "$(git branch --show-current):gh-pages"
+            git push -u origin "$(git branch --show-current):results/${{ matrix.exchange }}/backtest"
           fi
           cd ${OPWD}
 
