@@ -28,6 +28,9 @@ permissions:
   contents: write
   repository-projects: read
 
+env:
+  TIMEFRAME: 1m
+
 jobs:
   info:
     runs-on: ubuntu-24.04
@@ -93,7 +96,7 @@ jobs:
           echo "::group::Preload docker image"
           docker pull -q freqtradeorg/freqtrade:stable
           echo "::endgroup::"
-          mkdir -p artifacts/backtest/${{ matrix.timedata }}-${{ matrix.exchange }}
+          mkdir -p artifacts/backtest/${{ matrix.timedata }}
           strategy_key=$(echo '${{ matrix.strategies }}${{ matrix.timedata }}' | md5sum | cut -d ' ' -f1)
           function freqtrade {
             docker run --entrypoint "/freqtrade/user_data/docker/entrypoint.sh" --rm -v "./user_data:/freqtrade/user_data" freqtradeorg/freqtrade:stable $@
@@ -107,7 +110,7 @@ jobs:
           echo "::endgroup::"
           for strategy in ${STRATEGIES[@]}; do
             echo "::group::Backtest ${strategy}"
-            freqtrade backtesting --recursive-strategy-search --strategy-list ${strategy} --starting-balance 1000 --timeframe 1m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy}.json
+            freqtrade backtesting --recursive-strategy-search --strategy-list ${strategy} --starting-balance 1000 --timeframe ${{ env.TIMEFRAME }} -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy}.json
             jq 'del(.. | .backtest_run_start_ts?) | del(.. | .backtest_run_end_ts?)' ./user_data/backtest_results/$(jq -c -r '.latest_backtest' ./user_data/backtest_results/.last_result.json) > ./artifacts/backtest/${{ matrix.timedata }}/${strategy}.json
             echo "::endgroup::"
           done
@@ -143,7 +146,7 @@ jobs:
         continue-on-error: true
         with:
           fetch-depth: 1
-          ref: "results/${{ matrix.exchange }}/backtest"
+          ref: "results/${{ matrix.exchange }}/backtest-${{ env.TIMEFRAME }}"
           path: results
 
       - shell: bash
@@ -173,7 +176,7 @@ jobs:
           if [[ $(git status --porcelain . | wc -l) -gt 0 ]]; then
             git add .
             git commit -m "ci: ${{ github.sha }} $(date -u +'%F %T')"
-            git push -u origin "$(git branch --show-current):results/${{ matrix.exchange }}/backtest"
+            git push -u origin "$(git branch --show-current):results/${{ matrix.exchange }}/backtest-${{ env.TIMEFRAME }}"
           fi
           cd ${OPWD}
 
