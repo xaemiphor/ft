@@ -108,7 +108,7 @@ jobs:
           for strategy in ${STRATEGIES[@]}; do
             echo "::group::Backtest ${strategy}"
             freqtrade backtesting --recursive-strategy-search --strategy-list ${strategy} --starting-balance 1000 --timeframe 1m -c user_data/backtest_config/common.json -c user_data/backtest_config/${{ matrix.exchange }}.json -c user_data/backtest_config/backtest-pairlist.json --export signals --export-filename user_data/backtest_results/${{ matrix.exchange }}_${strategy}.json
-            jq '.' ./user_data/backtest_results/$(jq -c -r '.latest_backtest' ./user_data/backtest_results/.last_result.json) > ./artifacts/backtest/${{ matrix.timedata }}-${{ matrix.exchange }}/${strategy}.json
+            jq 'del(.. | .backtest_run_start_ts?) | del(.. | .backtest_run_end_ts?)' ./user_data/backtest_results/$(jq -c -r '.latest_backtest' ./user_data/backtest_results/.last_result.json) > ./artifacts/backtest/${{ matrix.timedata }}-${{ matrix.exchange }}/${strategy}.json
             echo "::endgroup::"
           done
           #echo "results_json=$(jq -c --raw-output '.latest_backtest' ./user_data/backtest_results/.last_result.json)" | tee -a ${GITHUB_OUTPUT}
@@ -173,6 +173,7 @@ jobs:
           if [[ $(git status --porcelain . | wc -l) -gt 0 ]]; then
             git add .
             git commit -m "ci: ${{ github.sha }} $(date -u +'%F %T')"
+            git pull --rebase
             git push -u origin "$(git branch --show-current):gh-pages"
           fi
           cd ${OPWD}
