@@ -131,6 +131,13 @@ jobs:
       matrix:
         exchange: ${{ fromJSON(needs.info.outputs.exchanges) }}
     steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: results
+          pattern: ${{ github.run_number }}-${{ github.run_attempt }}-${{ matrix.exchange }}-*
+          merge-multiple: true
+
       - name: Git checkout
         uses: actions/checkout@main
         continue-on-error: true
@@ -138,13 +145,6 @@ jobs:
           fetch-depth: 1
           ref: "gh-pages"
           path: gh-pages
-
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: results
-          pattern: ${{ github.run_number }}-${{ github.run_attempt }}-${{ matrix.exchange }}-*
-          merge-multiple: true
 
       - shell: bash
         run: |
@@ -161,6 +161,21 @@ jobs:
             echo "::endgroup::"
           done
           jq -s '[.[] | .strategy_comparison[]] | sort_by(.key)' results/backtest/*/*.json > comparison.json
+
+      - name: Push changes
+        shell: bash
+        run: |
+          OPWD=$(pwd)
+          set -x
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          cd gh-pages
+          if [[ $(git status --porcelain . | wc -l) -gt 0 ]]; then
+            git add .
+            git commit -m "ci: ${{ github.sha }} $(date -u +'%F %T')"
+            git push -u origin "$(git branch --show-current):gh-pages"
+          fi
+          cd ${OPWD}
 
       - uses: actions/github-script@v7
         with:
@@ -183,18 +198,3 @@ jobs:
             const markdownTable = objectsToMarkdownTable(jsonData);
             core.summary.addRaw(markdownTable, true)
             core.summary.write()
-
-      - name: Push changes
-        shell: bash
-        run: |
-          OPWD=$(pwd)
-          set -x
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          cd gh-pages
-          if [[ $(git status --porcelain . | wc -l) -gt 0 ]]; then
-            git add .
-            git commit -m "ci: ${{ github.sha }} $(date -u +'%F %T')"
-            git push -u origin "$(git branch --show-current):gh-pages"
-          fi
-          cd ${OPWD}
