@@ -139,6 +139,7 @@ class SimpleDMI(IStrategy):
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(dataframe["adx"] > 25)
+        conditions.append(dataframe["mom"] > 0)
         conditions.append(dataframe["plus_di"] > 25)
         conditions.append(dataframe["plus_di"] > dataframe["minus_di"])
 
@@ -153,6 +154,7 @@ class SimpleDMI(IStrategy):
         for x in range(10):
             conditions.append(dataframe["volume"].shift(x) > 0)
         conditions.append(dataframe["adx"] > 25)
+        conditions.append(dataframe["mom"] < 0)
         conditions.append(dataframe["minus_di"] > 25)
         conditions.append(dataframe["plus_di"] < dataframe["minus_di"])
 
