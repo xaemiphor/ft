@@ -155,12 +155,13 @@ jobs:
           [ ! -d gh-pages/backtest ] && mkdir gh-pages/backtest
           rsync -av results/backtest/. gh-pages/backtest/.
           echo "::endgroup::"
-          for folder in $(find gh-pages/backtest/ -mindepth 1 -maxdepth 1 -type d); do
+          for folder in $(find gh-pages/backtest/ -mindepth 1 -maxdepth 1 -type d | grep ${{ matrix.exchange }}); do
             echo "::group::Rebuild comparison ${folder}"
             jq -s '[.[] | .strategy_comparison[]] | sort_by(.key)' ${folder}/*.json > ${folder}.json
             echo "::endgroup::"
           done
           jq -s '[.[] | .strategy_comparison[]] | sort_by(.key)' results/backtest/*/*.json > comparison.json
+          rm -rf results/
 
       - name: Push changes
         shell: bash
