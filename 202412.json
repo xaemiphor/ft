@@ -54,6 +54,24 @@
     "max_drawdown_abs": "292.828"
   },
   {
+    "key": "PlotStrategy",
+    "trades": 0,
+    "profit_mean": 0.0,
+    "profit_mean_pct": 0.0,
+    "profit_sum": 0,
+    "profit_sum_pct": 0.0,
+    "profit_total_abs": 0,
+    "profit_total": 0.0,
+    "profit_total_pct": 0.0,
+    "duration_avg": "0:00",
+    "wins": 0,
+    "draws": 0,
+    "losses": 0,
+    "winrate": 0.0,
+    "max_drawdown_account": 0.0,
+    "max_drawdown_abs": "0"
+  },
+  {
     "key": "SMAOffset",
     "trades": 32,
     "profit_mean": -0.009224670718680555,
