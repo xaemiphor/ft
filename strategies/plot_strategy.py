@@ -34,6 +34,7 @@ from freqtrade.strategy import (
 # Add your lib to import here
 import talib.abstract as ta
 from technical import qtpylib
+from functools import reduce
 
 timeperiods = [1,3,6,12,24,48,72,96]
 
@@ -91,10 +92,6 @@ class PlotStrategy(IStrategy):
     ignore_roi_if_entry_signal = False
 
     # Hyperoptable parameters
-    buy_rsi = IntParameter(low=1, high=50, default=30, space="buy", optimize=True, load=True)
-    sell_rsi = IntParameter(low=50, high=100, default=70, space="sell", optimize=True, load=True)
-    short_rsi = IntParameter(low=51, high=100, default=70, space="sell", optimize=True, load=True)
-    exit_short_rsi = IntParameter(low=1, high=50, default=30, space="buy", optimize=True, load=True)
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
