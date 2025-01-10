@@ -112,7 +112,7 @@ class PlotStrategy(IStrategy):
 
     plot_config = {
         "main_plot": {
-            "tema": {},
+            "tema": {"color":"white"},
         },
         "subplots": {
             "RSI": {
