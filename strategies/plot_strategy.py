@@ -146,9 +146,10 @@ class PlotStrategy(IStrategy):
         dataframe["cci"] = ta.CCI(dataframe)
 
         for idx, timeperiod in enumerate(timeperiods):
-            dataframe[f'min_{timeperiod}'] = dataframe['close'].rolling(window=timeperiod).min()
-            dataframe[f'max_{timeperiod}'] = dataframe['close'].rolling(window=timeperiod).max()
-            dataframe[f'ema_{timeperiod}'] = ta.EMA(dataframe, timeperiod=timeperiod)
+            if timeperiod > 1:
+                dataframe[f'min_{timeperiod}'] = dataframe['close'].rolling(window=timeperiod).min()
+                dataframe[f'max_{timeperiod}'] = dataframe['close'].rolling(window=timeperiod).max()
+                dataframe[f'ema_{timeperiod}'] = ta.EMA(dataframe, timeperiod=timeperiod)
 
         return dataframe
 
