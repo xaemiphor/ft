@@ -831,6 +831,52 @@
           ]
         },
         {
+          "pair": "BTC/USDT",
+          "stake_amount": 209.1018789,
+          "max_stake_amount": 209.1018789,
+          "amount": 0.00219,
+          "open_date": "2024-12-04 16:15:00+00:00",
+          "close_date": "2024-12-04 20:10:00+00:00",
+          "open_rate": 95480.31,
+          "close_rate": 97564.29,
+          "fee_open": 0.001,
+          "fee_close": 0.001,
+          "trade_duration": 235,
+          "profit_ratio": 0.019784669273392733,
+          "profit_abs": 4.14114853,
+          "exit_reason": "exit_signal",
+          "initial_stop_loss_abs": 85932.28,
+          "initial_stop_loss_ratio": -0.1,
+          "stop_loss_abs": 85932.28,
+          "stop_loss_ratio": -0.1,
+          "min_rate": 94625.93,
+          "max_rate": 97700.0,
+          "is_open": false,
+          "enter_tag": "",
+          "leverage": 1.0,
+          "is_short": false,
+          "open_timestamp": 1733328900000,
+          "close_timestamp": 1733343000000,
+          "orders": [
+            {
+              "amount": 0.00219,
+              "safe_price": 95480.31,
+              "ft_order_side": "buy",
+              "order_filled_timestamp": 1733328900000,
+              "ft_is_entry": true,
+              "ft_order_tag": ""
+            },
+            {
+              "amount": 0.00219,
+              "safe_price": 97564.29,
+              "ft_order_side": "sell",
+              "order_filled_timestamp": 1733343000000,
+              "ft_is_entry": false,
+              "ft_order_tag": "exit_signal"
+            }
+          ]
+        },
+        {
           "pair": "LINK/USDT",
           "stake_amount": 209.6676,
           "max_stake_amount": 209.6676,
@@ -924,9 +970,9 @@
         },
         {
           "pair": "AVAX/USDT",
-          "stake_amount": 208.8968,
-          "max_stake_amount": 208.8968,
-          "amount": 3.92,
+          "stake_amount": 209.4297,
+          "max_stake_amount": 209.4297,
+          "amount": 3.93,
           "open_date": "2024-12-04 21:15:00+00:00",
           "close_date": "2024-12-05 07:10:00+00:00",
           "open_rate": 53.29,
@@ -935,7 +981,7 @@
           "fee_close": 0.001,
           "trade_duration": 595,
           "profit_ratio": -0.022785808674343107,
-          "profit_abs": -4.7646424,
+          "profit_abs": -4.7767971,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 47.97,
           "initial_stop_loss_ratio": -0.1,
@@ -951,7 +997,7 @@
           "close_timestamp": 1733382600000,
           "orders": [
             {
-              "amount": 3.92,
+              "amount": 3.93,
               "safe_price": 53.29,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733346900000,
@@ -959,10 +1005,56 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 3.92,
+              "amount": 3.93,
               "safe_price": 52.18,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733382600000,
+              "ft_is_entry": false,
+              "ft_order_tag": "exit_signal"
+            }
+          ]
+        },
+        {
+          "pair": "SOL/USDT",
+          "stake_amount": 209.9328,
+          "max_stake_amount": 209.9328,
+          "amount": 0.924,
+          "open_date": "2024-12-04 23:15:00+00:00",
+          "close_date": "2024-12-05 12:05:00+00:00",
+          "open_rate": 227.2,
+          "close_rate": 242.77,
+          "fee_open": 0.001,
+          "fee_close": 0.001,
+          "trade_duration": 770,
+          "profit_ratio": 0.06639500464324408,
+          "profit_abs": 13.95242772,
+          "exit_reason": "exit_signal",
+          "initial_stop_loss_abs": 204.48,
+          "initial_stop_loss_ratio": -0.1,
+          "stop_loss_abs": 204.48,
+          "stop_loss_ratio": -0.1,
+          "min_rate": 223.27,
+          "max_rate": 243.0,
+          "is_open": false,
+          "enter_tag": "",
+          "leverage": 1.0,
+          "is_short": false,
+          "open_timestamp": 1733354100000,
+          "close_timestamp": 1733400300000,
+          "orders": [
+            {
+              "amount": 0.924,
+              "safe_price": 227.2,
+              "ft_order_side": "buy",
+              "order_filled_timestamp": 1733354100000,
+              "ft_is_entry": true,
+              "ft_order_tag": ""
+            },
+            {
+              "amount": 0.924,
+              "safe_price": 242.77,
+              "ft_order_side": "sell",
+              "order_filled_timestamp": 1733400300000,
               "ft_is_entry": false,
               "ft_order_tag": "exit_signal"
             }
@@ -1016,9 +1108,9 @@
         },
         {
           "pair": "ETH/USDT",
-          "stake_amount": 205.347648,
-          "max_stake_amount": 205.347648,
-          "amount": 0.0528,
+          "stake_amount": 209.236808,
+          "max_stake_amount": 209.236808,
+          "amount": 0.0538,
           "open_date": "2024-12-05 15:25:00+00:00",
           "close_date": "2024-12-06 00:40:00+00:00",
           "open_rate": 3889.16,
@@ -1027,7 +1119,7 @@
           "fee_close": 0.001,
           "trade_duration": 555,
           "profit_ratio": -0.015937122150289,
-          "profit_abs": -3.2759232,
+          "profit_abs": -3.3379672,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 3500.25,
           "initial_stop_loss_ratio": -0.1,
@@ -1043,7 +1135,7 @@
           "close_timestamp": 1733445600000,
           "orders": [
             {
-              "amount": 0.0528,
+              "amount": 0.0538,
               "safe_price": 3889.16,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733412300000,
@@ -1051,7 +1143,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.0528,
+              "amount": 0.0538,
               "safe_price": 3834.84,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733445600000,
@@ -1062,9 +1154,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 204.08138,
-          "max_stake_amount": 204.08138,
-          "amount": 0.002,
+          "stake_amount": 209.1834145,
+          "max_stake_amount": 209.1834145,
+          "amount": 0.00205,
           "open_date": "2024-12-05 15:30:00+00:00",
           "close_date": "2024-12-06 00:50:00+00:00",
           "open_rate": 102040.69,
@@ -1072,8 +1164,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 560,
-          "profit_ratio": -0.04661906988224069,
-          "profit_abs": -9.5235982,
+          "profit_ratio": -0.04661906985836209,
+          "profit_abs": -9.76168815,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 91836.63,
           "initial_stop_loss_ratio": -0.1,
@@ -1089,7 +1181,7 @@
           "close_timestamp": 1733446200000,
           "orders": [
             {
-              "amount": 0.002,
+              "amount": 0.00205,
               "safe_price": 102040.69,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733412600000,
@@ -1097,7 +1189,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.002,
+              "amount": 0.00205,
               "safe_price": 97478.41,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733446200000,
@@ -1108,9 +1200,9 @@
         },
         {
           "pair": "DOGE/USDT",
-          "stake_amount": 185.67625,
-          "max_stake_amount": 185.67625,
-          "amount": 445.0,
+          "stake_amount": 188.597,
+          "max_stake_amount": 188.597,
+          "amount": 452.0,
           "open_date": "2024-12-05 22:30:00+00:00",
           "close_date": "2024-12-06 01:00:00+00:00",
           "open_rate": 0.41725,
@@ -1118,8 +1210,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 150,
-          "profit_ratio": 0.04643708598172348,
-          "profit_abs": 8.63088625,
+          "profit_ratio": 0.04643708598172349,
+          "profit_abs": 8.766653,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.37553,
           "initial_stop_loss_ratio": -0.1,
@@ -1135,7 +1227,7 @@
           "close_timestamp": 1733446800000,
           "orders": [
             {
-              "amount": 445.0,
+              "amount": 452.0,
               "safe_price": 0.41725,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733437800000,
@@ -1143,7 +1235,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 445.0,
+              "amount": 452.0,
               "safe_price": 0.4375,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733446800000,
@@ -1154,9 +1246,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 189.7919266,
-          "max_stake_amount": 189.7919266,
-          "amount": 0.00194,
+          "stake_amount": 193.7051622,
+          "max_stake_amount": 193.7051622,
+          "amount": 0.00198,
           "open_date": "2024-12-06 13:00:00+00:00",
           "close_date": "2024-12-06 17:45:00+00:00",
           "open_rate": 97830.89,
@@ -1164,8 +1256,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 285,
-          "profit_ratio": 0.021391328500015596,
-          "profit_abs": 4.06396135,
+          "profit_ratio": 0.021391328512775996,
+          "profit_abs": 4.14775437,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 88047.81,
           "initial_stop_loss_ratio": -0.1,
@@ -1181,7 +1273,7 @@
           "close_timestamp": 1733507100000,
           "orders": [
             {
-              "amount": 0.00194,
+              "amount": 0.00198,
               "safe_price": 97830.89,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733490000000,
@@ -1189,7 +1281,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.00194,
+              "amount": 0.00198,
               "safe_price": 100123.67,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733507100000,
@@ -1200,9 +1292,9 @@
         },
         {
           "pair": "BONK/USDT",
-          "stake_amount": 205.73428668,
-          "max_stake_amount": 205.73428668,
-          "amount": 4839668.0,
+          "stake_amount": 209.31439386,
+          "max_stake_amount": 209.31439386,
+          "amount": 4923886.0,
           "open_date": "2024-12-05 15:30:00+00:00",
           "close_date": "2024-12-07 15:00:00+00:00",
           "open_rate": 0.00004251,
@@ -1210,8 +1302,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 2850,
-          "profit_ratio": 0.08228398278517074,
-          "profit_abs": 16.94556514,
+          "profit_ratio": 0.08228398277063419,
+          "profit_abs": 17.2404452,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.00003826,
           "initial_stop_loss_ratio": -0.1,
@@ -1227,7 +1319,7 @@
           "close_timestamp": 1733583600000,
           "orders": [
             {
-              "amount": 4839668.0,
+              "amount": 4923886.0,
               "safe_price": 0.00004251,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733412600000,
@@ -1235,7 +1327,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 4839668.0,
+              "amount": 4923886.0,
               "safe_price": 0.0000461,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733583600000,
@@ -1246,9 +1338,9 @@
         },
         {
           "pair": "DOGE/USDT",
-          "stake_amount": 200.36448,
-          "max_stake_amount": 200.36448,
-          "amount": 464.0,
+          "stake_amount": 204.25086,
+          "max_stake_amount": 204.25086,
+          "amount": 473.0,
           "open_date": "2024-12-06 09:05:00+00:00",
           "close_date": "2024-12-07 18:15:00+00:00",
           "open_rate": 0.43182,
@@ -1257,7 +1349,7 @@
           "fee_close": 0.001,
           "trade_duration": 1990,
           "profit_ratio": 0.06544143642934806,
-          "profit_abs": 13.12525152,
+          "profit_abs": 13.37983614,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.38864,
           "initial_stop_loss_ratio": -0.1,
@@ -1273,7 +1365,7 @@
           "close_timestamp": 1733595300000,
           "orders": [
             {
-              "amount": 464.0,
+              "amount": 473.0,
               "safe_price": 0.43182,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733475900000,
@@ -1281,7 +1373,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 464.0,
+              "amount": 473.0,
               "safe_price": 0.461,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733595300000,
@@ -1291,10 +1383,56 @@
           ]
         },
         {
+          "pair": "PEPE/USDT",
+          "stake_amount": 209.314424,
+          "max_stake_amount": 209.314424,
+          "amount": 9514292.0,
+          "open_date": "2024-12-05 15:45:00+00:00",
+          "close_date": "2024-12-08 16:20:00+00:00",
+          "open_rate": 0.000022,
+          "close_rate": 0.00002633,
+          "fee_open": 0.001,
+          "fee_close": 0.001,
+          "trade_duration": 4355,
+          "profit_ratio": 0.19442693671092762,
+          "profit_abs": 40.73705863,
+          "exit_reason": "exit_signal",
+          "initial_stop_loss_abs": 0.0000198,
+          "initial_stop_loss_ratio": -0.1,
+          "stop_loss_abs": 0.0000198,
+          "stop_loss_ratio": -0.1,
+          "min_rate": 0.0000206,
+          "max_rate": 0.00002704,
+          "is_open": false,
+          "enter_tag": "",
+          "leverage": 1.0,
+          "is_short": false,
+          "open_timestamp": 1733413500000,
+          "close_timestamp": 1733674800000,
+          "orders": [
+            {
+              "amount": 9514292.0,
+              "safe_price": 0.000022,
+              "ft_order_side": "buy",
+              "order_filled_timestamp": 1733413500000,
+              "ft_is_entry": true,
+              "ft_order_tag": ""
+            },
+            {
+              "amount": 9514292.0,
+              "safe_price": 0.00002633,
+              "ft_order_side": "sell",
+              "order_filled_timestamp": 1733674800000,
+              "ft_is_entry": false,
+              "ft_order_tag": "exit_signal"
+            }
+          ]
+        },
+        {
           "pair": "BTC/USDT",
-          "stake_amount": 193.4825,
-          "max_stake_amount": 193.4825,
-          "amount": 0.00193,
+          "stake_amount": 198.495,
+          "max_stake_amount": 198.495,
+          "amount": 0.00198,
           "open_date": "2024-12-06 21:50:00+00:00",
           "close_date": "2024-12-08 23:50:00+00:00",
           "open_rate": 100250.0,
@@ -1302,8 +1440,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 3000,
-          "profit_ratio": 0.004032518384152253,
-          "profit_abs": 0.78100196,
+          "profit_ratio": 0.004032518427440214,
+          "profit_abs": 0.80123518,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 90225.0,
           "initial_stop_loss_ratio": -0.1,
@@ -1319,7 +1457,7 @@
           "close_timestamp": 1733701800000,
           "orders": [
             {
-              "amount": 0.00193,
+              "amount": 0.00198,
               "safe_price": 100250.0,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733521800000,
@@ -1327,7 +1465,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.00193,
+              "amount": 0.00198,
               "safe_price": 100855.77,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733701800000,
@@ -1337,56 +1475,10 @@
           ]
         },
         {
-          "pair": "MATIC/USDT",
-          "stake_amount": 206.99685,
-          "max_stake_amount": 206.99685,
-          "amount": 288.9,
-          "open_date": "2024-12-04 08:35:00+00:00",
-          "close_date": "2024-12-09 08:55:00+00:00",
-          "open_rate": 0.7165,
-          "close_rate": 0.6449,
-          "fee_open": 0.001,
-          "fee_close": 0.001,
-          "trade_duration": 7220,
-          "profit_ratio": -0.10172855755549406,
-          "profit_abs": -21.07854846,
-          "exit_reason": "stop_loss",
-          "initial_stop_loss_abs": 0.6449,
-          "initial_stop_loss_ratio": -0.1,
-          "stop_loss_abs": 0.6449,
-          "stop_loss_ratio": -0.1,
-          "min_rate": 0.6414,
-          "max_rate": 0.7448,
-          "is_open": false,
-          "enter_tag": "",
-          "leverage": 1.0,
-          "is_short": false,
-          "open_timestamp": 1733301300000,
-          "close_timestamp": 1733734500000,
-          "orders": [
-            {
-              "amount": 288.9,
-              "safe_price": 0.7165,
-              "ft_order_side": "buy",
-              "order_filled_timestamp": 1733301300000,
-              "ft_is_entry": true,
-              "ft_order_tag": ""
-            },
-            {
-              "amount": 288.9,
-              "safe_price": 0.6449,
-              "ft_order_side": "sell",
-              "order_filled_timestamp": 1733734500000,
-              "ft_is_entry": false,
-              "ft_order_tag": "stop_loss"
-            }
-          ]
-        },
-        {
           "pair": "ADA/USDT",
-          "stake_amount": 207.562,
-          "max_stake_amount": 207.562,
-          "amount": 175.9,
+          "stake_amount": 219.362,
+          "max_stake_amount": 219.362,
+          "amount": 185.9,
           "open_date": "2024-12-09 00:25:00+00:00",
           "close_date": "2024-12-09 13:20:00+00:00",
           "open_rate": 1.18,
@@ -1394,8 +1486,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 775,
-          "profit_ratio": -0.04699266834860055,
-          "profit_abs": -9.76364612,
+          "profit_ratio": -0.046992668348600546,
+          "profit_abs": -10.31871412,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 1.062,
           "initial_stop_loss_ratio": -0.1,
@@ -1411,7 +1503,7 @@
           "close_timestamp": 1733750400000,
           "orders": [
             {
-              "amount": 175.9,
+              "amount": 185.9,
               "safe_price": 1.18,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733703900000,
@@ -1419,7 +1511,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 175.9,
+              "amount": 185.9,
               "safe_price": 1.1268,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733750400000,
@@ -1430,9 +1522,9 @@
         },
         {
           "pair": "AVAX/USDT",
-          "stake_amount": 200.4975,
-          "max_stake_amount": 200.4975,
-          "amount": 3.99,
+          "stake_amount": 204.015,
+          "max_stake_amount": 204.015,
+          "amount": 4.06,
           "open_date": "2024-12-06 12:50:00+00:00",
           "close_date": "2024-12-09 13:25:00+00:00",
           "open_rate": 50.25,
@@ -1441,7 +1533,7 @@
           "fee_close": 0.001,
           "trade_duration": 4355,
           "profit_ratio": -0.0006077504584967271,
-          "profit_abs": -0.1219743,
+          "profit_abs": -0.1241142,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 45.23,
           "initial_stop_loss_ratio": -0.1,
@@ -1457,7 +1549,7 @@
           "close_timestamp": 1733750700000,
           "orders": [
             {
-              "amount": 3.99,
+              "amount": 4.06,
               "safe_price": 50.25,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733489400000,
@@ -1465,7 +1557,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 3.99,
+              "amount": 4.06,
               "safe_price": 50.32,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733750700000,
@@ -1476,9 +1568,9 @@
         },
         {
           "pair": "PEPE/USDT",
-          "stake_amount": 207.50890812,
-          "max_stake_amount": 207.50890812,
-          "amount": 7914146.0,
+          "stake_amount": 219.24778566,
+          "max_stake_amount": 219.24778566,
+          "amount": 8361853.0,
           "open_date": "2024-12-08 21:20:00+00:00",
           "close_date": "2024-12-09 21:04:00+00:00",
           "open_rate": 0.00002622,
@@ -1486,8 +1578,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 1424,
-          "profit_ratio": -0.10172207653254281,
-          "profit_abs": -21.12934527,
+          "profit_ratio": -0.10172207656658182,
+          "profit_abs": -22.32464238,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 0.0000236,
           "initial_stop_loss_ratio": -0.1,
@@ -1503,7 +1595,7 @@
           "close_timestamp": 1733778240000,
           "orders": [
             {
-              "amount": 7914146.0,
+              "amount": 8361853.0,
               "safe_price": 0.00002622,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733692800000,
@@ -1511,7 +1603,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 7914146.0,
+              "amount": 8361853.0,
               "safe_price": 0.0000236,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733778240000,
@@ -1522,9 +1614,9 @@
         },
         {
           "pair": "ETH/USDT",
-          "stake_amount": 207.277326,
-          "max_stake_amount": 207.277326,
-          "amount": 0.0522,
+          "stake_amount": 219.189816,
+          "max_stake_amount": 219.189816,
+          "amount": 0.0552,
           "open_date": "2024-12-09 00:35:00+00:00",
           "close_date": "2024-12-09 21:04:00+00:00",
           "open_rate": 3970.83,
@@ -1532,8 +1624,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 1229,
-          "profit_ratio": -0.1017974478174365,
-          "profit_abs": -21.12140308,
+          "profit_ratio": -0.10179744781638878,
+          "profit_abs": -22.33527682,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 3573.75,
           "initial_stop_loss_ratio": -0.1,
@@ -1549,7 +1641,7 @@
           "close_timestamp": 1733778240000,
           "orders": [
             {
-              "amount": 0.0522,
+              "amount": 0.0552,
               "safe_price": 3970.83,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733704500000,
@@ -1557,7 +1649,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.0522,
+              "amount": 0.0552,
               "safe_price": 3573.75,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733778240000,
@@ -1568,9 +1660,9 @@
         },
         {
           "pair": "XRP/USDT",
-          "stake_amount": 200.853,
-          "max_stake_amount": 200.853,
-          "amount": 86.0,
+          "stake_amount": 210.195,
+          "max_stake_amount": 210.195,
+          "amount": 90.0,
           "open_date": "2024-12-09 20:40:00+00:00",
           "close_date": "2024-12-09 21:05:00+00:00",
           "open_rate": 2.3355,
@@ -1578,8 +1670,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 25,
-          "profit_ratio": -0.10177683588088211,
-          "profit_abs": -20.462625,
+          "profit_ratio": -0.10177683588088213,
+          "profit_abs": -21.414375,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 2.102,
           "initial_stop_loss_ratio": -0.1,
@@ -1595,7 +1687,7 @@
           "close_timestamp": 1733778300000,
           "orders": [
             {
-              "amount": 86.0,
+              "amount": 90.0,
               "safe_price": 2.3355,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733776800000,
@@ -1603,7 +1695,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 86.0,
+              "amount": 90.0,
               "safe_price": 2.102,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733778300000,
@@ -1613,10 +1705,56 @@
           ]
         },
         {
+          "pair": "BTC/USDT",
+          "stake_amount": 218.5094847,
+          "max_stake_amount": 218.5094847,
+          "amount": 0.00221,
+          "open_date": "2024-12-09 03:55:00+00:00",
+          "close_date": "2024-12-10 00:40:00+00:00",
+          "open_rate": 98873.07,
+          "close_rate": 97933.04,
+          "fee_open": 0.001,
+          "fee_close": 0.001,
+          "trade_duration": 1245,
+          "profit_ratio": -0.011486448313874506,
+          "profit_abs": -2.5124078,
+          "exit_reason": "exit_signal",
+          "initial_stop_loss_abs": 88985.77,
+          "initial_stop_loss_ratio": -0.1,
+          "stop_loss_abs": 88985.77,
+          "stop_loss_ratio": -0.1,
+          "min_rate": 94183.05,
+          "max_rate": 100363.54,
+          "is_open": false,
+          "enter_tag": "",
+          "leverage": 1.0,
+          "is_short": false,
+          "open_timestamp": 1733716500000,
+          "close_timestamp": 1733791200000,
+          "orders": [
+            {
+              "amount": 0.00221,
+              "safe_price": 98873.07,
+              "ft_order_side": "buy",
+              "order_filled_timestamp": 1733716500000,
+              "ft_is_entry": true,
+              "ft_order_tag": ""
+            },
+            {
+              "amount": 0.00221,
+              "safe_price": 97933.04,
+              "ft_order_side": "sell",
+              "order_filled_timestamp": 1733791200000,
+              "ft_is_entry": false,
+              "ft_order_tag": "exit_signal"
+            }
+          ]
+        },
+        {
           "pair": "ADA/USDT",
-          "stake_amount": 189.09,
-          "max_stake_amount": 189.09,
-          "amount": 191.0,
+          "stake_amount": 204.237,
+          "max_stake_amount": 204.237,
+          "amount": 206.3,
           "open_date": "2024-12-09 21:05:00+00:00",
           "close_date": "2024-12-10 00:40:00+00:00",
           "open_rate": 0.99,
@@ -1624,8 +1762,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 215,
-          "profit_ratio": 0.04336572518390701,
-          "profit_abs": 8.208225,
+          "profit_ratio": 0.043365725183907,
+          "profit_abs": 8.8657425,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.891,
           "initial_stop_loss_ratio": -0.1,
@@ -1641,7 +1779,7 @@
           "close_timestamp": 1733791200000,
           "orders": [
             {
-              "amount": 191.0,
+              "amount": 206.3,
               "safe_price": 0.99,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733778300000,
@@ -1649,7 +1787,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 191.0,
+              "amount": 206.3,
               "safe_price": 1.035,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733791200000,
@@ -1659,56 +1797,10 @@
           ]
         },
         {
-          "pair": "BTC/USDT",
-          "stake_amount": 189.0453832,
-          "max_stake_amount": 189.0453832,
-          "amount": 0.00199,
-          "open_date": "2024-12-09 21:05:00+00:00",
-          "close_date": "2024-12-10 00:40:00+00:00",
-          "open_rate": 94997.68,
-          "close_rate": 97933.04,
-          "fee_open": 0.001,
-          "fee_close": 0.001,
-          "trade_duration": 215,
-          "profit_ratio": 0.02883954210055677,
-          "profit_abs": 5.45743427,
-          "exit_reason": "exit_signal",
-          "initial_stop_loss_abs": 85497.92,
-          "initial_stop_loss_ratio": -0.1,
-          "stop_loss_abs": 85497.92,
-          "stop_loss_ratio": -0.1,
-          "min_rate": 94183.05,
-          "max_rate": 98055.81,
-          "is_open": false,
-          "enter_tag": "",
-          "leverage": 1.0,
-          "is_short": false,
-          "open_timestamp": 1733778300000,
-          "close_timestamp": 1733791200000,
-          "orders": [
-            {
-              "amount": 0.00199,
-              "safe_price": 94997.68,
-              "ft_order_side": "buy",
-              "order_filled_timestamp": 1733778300000,
-              "ft_is_entry": true,
-              "ft_order_tag": ""
-            },
-            {
-              "amount": 0.00199,
-              "safe_price": 97933.04,
-              "ft_order_side": "sell",
-              "order_filled_timestamp": 1733791200000,
-              "ft_is_entry": false,
-              "ft_order_tag": "exit_signal"
-            }
-          ]
-        },
-        {
           "pair": "LTC/USDT",
-          "stake_amount": 175.56665,
-          "max_stake_amount": 175.56665,
-          "amount": 1.615,
+          "stake_amount": 204.15738,
+          "max_stake_amount": 204.15738,
+          "amount": 1.878,
           "open_date": "2024-12-09 21:10:00+00:00",
           "close_date": "2024-12-10 00:40:00+00:00",
           "open_rate": 108.71,
@@ -1716,8 +1808,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 210,
-          "profit_ratio": 0.029858008792789402,
-          "profit_abs": 5.24731265,
+          "profit_ratio": 0.029858008792789405,
+          "profit_abs": 6.10182858,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 97.84,
           "initial_stop_loss_ratio": -0.1,
@@ -1733,7 +1825,7 @@
           "close_timestamp": 1733791200000,
           "orders": [
             {
-              "amount": 1.615,
+              "amount": 1.878,
               "safe_price": 108.71,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733778600000,
@@ -1741,7 +1833,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 1.615,
+              "amount": 1.878,
               "safe_price": 112.18,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733791200000,
@@ -1752,9 +1844,9 @@
         },
         {
           "pair": "DOGE/USDT",
-          "stake_amount": 201.17813,
-          "max_stake_amount": 201.17813,
-          "amount": 463.0,
+          "stake_amount": 217.255,
+          "max_stake_amount": 217.255,
+          "amount": 500.0,
           "open_date": "2024-12-09 15:45:00+00:00",
           "close_date": "2024-12-10 03:11:00+00:00",
           "open_rate": 0.43451,
@@ -1762,8 +1854,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 686,
-          "profit_ratio": -0.10179590495348476,
-          "profit_abs": -20.49958891,
+          "profit_ratio": -0.10179590495348477,
+          "profit_abs": -22.137785,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 0.39106,
           "initial_stop_loss_ratio": -0.1,
@@ -1779,7 +1871,7 @@
           "close_timestamp": 1733800260000,
           "orders": [
             {
-              "amount": 463.0,
+              "amount": 500.0,
               "safe_price": 0.43451,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733759100000,
@@ -1787,7 +1879,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 463.0,
+              "amount": 500.0,
               "safe_price": 0.39106,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733800260000,
@@ -1798,9 +1890,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 188.7596,
-          "max_stake_amount": 188.7596,
-          "amount": 8.98,
+          "stake_amount": 202.2124,
+          "max_stake_amount": 202.2124,
+          "amount": 9.62,
           "open_date": "2024-12-10 03:20:00+00:00",
           "close_date": "2024-12-10 05:05:00+00:00",
           "open_rate": 21.02,
@@ -1809,7 +1901,7 @@
           "fee_close": 0.001,
           "trade_duration": 105,
           "profit_ratio": 0.0753922575996791,
-          "profit_abs": 14.2452434,
+          "profit_abs": 15.2604946,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 18.92,
           "initial_stop_loss_ratio": -0.1,
@@ -1825,7 +1917,7 @@
           "close_timestamp": 1733807100000,
           "orders": [
             {
-              "amount": 8.98,
+              "amount": 9.62,
               "safe_price": 21.02,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733800800000,
@@ -1833,7 +1925,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 8.98,
+              "amount": 9.62,
               "safe_price": 22.65,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733807100000,
@@ -1844,9 +1936,9 @@
         },
         {
           "pair": "XRP/USDT",
-          "stake_amount": 191.1819,
-          "max_stake_amount": 191.1819,
-          "amount": 91.0,
+          "stake_amount": 205.8882,
+          "max_stake_amount": 205.8882,
+          "amount": 98.0,
           "open_date": "2024-12-10 03:10:00+00:00",
           "close_date": "2024-12-10 05:10:00+00:00",
           "open_rate": 2.1009,
@@ -1855,7 +1947,7 @@
           "fee_close": 0.001,
           "trade_duration": 120,
           "profit_ratio": 0.03899755820361275,
-          "profit_abs": 7.4630829,
+          "profit_abs": 8.0371662,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 1.8909,
           "initial_stop_loss_ratio": -0.1,
@@ -1871,7 +1963,7 @@
           "close_timestamp": 1733807400000,
           "orders": [
             {
-              "amount": 91.0,
+              "amount": 98.0,
               "safe_price": 2.1009,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733800200000,
@@ -1879,7 +1971,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 91.0,
+              "amount": 98.0,
               "safe_price": 2.1872,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733807400000,
@@ -1890,9 +1982,9 @@
         },
         {
           "pair": "XRP/USDT",
-          "stake_amount": 191.72,
-          "max_stake_amount": 191.72,
-          "amount": 100.0,
+          "stake_amount": 205.1404,
+          "max_stake_amount": 205.1404,
+          "amount": 107.0,
           "open_date": "2024-12-10 18:00:00+00:00",
           "close_date": "2024-12-10 20:05:00+00:00",
           "open_rate": 1.9172,
@@ -1900,8 +1992,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 125,
-          "profit_ratio": 0.12283033052905783,
-          "profit_abs": 23.57258,
+          "profit_ratio": 0.12283033052905784,
+          "profit_abs": 25.2226606,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 1.7255,
           "initial_stop_loss_ratio": -0.1,
@@ -1917,7 +2009,7 @@
           "close_timestamp": 1733861100000,
           "orders": [
             {
-              "amount": 100.0,
+              "amount": 107.0,
               "safe_price": 1.9172,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733853600000,
@@ -1925,7 +2017,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 100.0,
+              "amount": 107.0,
               "safe_price": 2.157,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733861100000,
@@ -1936,9 +2028,9 @@
         },
         {
           "pair": "ADA/USDT",
-          "stake_amount": 193.0809,
-          "max_stake_amount": 193.0809,
-          "amount": 196.5,
+          "stake_amount": 206.93556,
+          "max_stake_amount": 206.93556,
+          "amount": 210.6,
           "open_date": "2024-12-10 15:30:00+00:00",
           "close_date": "2024-12-10 20:35:00+00:00",
           "open_rate": 0.9826,
@@ -1947,7 +2039,7 @@
           "fee_close": 0.001,
           "trade_duration": 305,
           "profit_ratio": -0.012053181908667356,
-          "profit_abs": -2.32956645,
+          "profit_abs": -2.49672618,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.8844,
           "initial_stop_loss_ratio": -0.1,
@@ -1963,7 +2055,7 @@
           "close_timestamp": 1733862900000,
           "orders": [
             {
-              "amount": 196.5,
+              "amount": 210.6,
               "safe_price": 0.9826,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733844600000,
@@ -1971,7 +2063,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 196.5,
+              "amount": 210.6,
               "safe_price": 0.9727,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733862900000,
@@ -1982,9 +2074,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 192.9424,
-          "max_stake_amount": 192.9424,
-          "amount": 8.56,
+          "stake_amount": 206.9172,
+          "max_stake_amount": 206.9172,
+          "amount": 9.18,
           "open_date": "2024-12-10 12:35:00+00:00",
           "close_date": "2024-12-11 02:40:00+00:00",
           "open_rate": 22.54,
@@ -1992,8 +2084,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 845,
-          "profit_ratio": -0.02280815901046602,
-          "profit_abs": -4.4050616,
+          "profit_ratio": -0.022808159010466022,
+          "profit_abs": -4.7241198,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 20.29,
           "initial_stop_loss_ratio": -0.1,
@@ -2009,7 +2101,7 @@
           "close_timestamp": 1733884800000,
           "orders": [
             {
-              "amount": 8.56,
+              "amount": 9.18,
               "safe_price": 22.54,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733834100000,
@@ -2017,7 +2109,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 8.56,
+              "amount": 9.18,
               "safe_price": 22.07,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733884800000,
@@ -2028,22 +2120,22 @@
         },
         {
           "pair": "SOL/USDT",
-          "stake_amount": 190.64122,
-          "max_stake_amount": 190.64122,
-          "amount": 0.869,
-          "open_date": "2024-12-09 21:00:00+00:00",
+          "stake_amount": 206.79813,
+          "max_stake_amount": 206.79813,
+          "amount": 0.957,
+          "open_date": "2024-12-10 11:40:00+00:00",
           "close_date": "2024-12-11 13:40:00+00:00",
-          "open_rate": 219.38,
+          "open_rate": 216.09,
           "close_rate": 226.22,
           "fee_open": 0.001,
           "fee_close": 0.001,
-          "trade_duration": 2440,
-          "profit_ratio": 0.02911847929625302,
-          "profit_abs": 5.5567336,
+          "trade_duration": 1560,
+          "profit_ratio": 0.044786949826516674,
+          "profit_abs": 9.27111933,
           "exit_reason": "exit_signal",
-          "initial_stop_loss_abs": 197.45,
+          "initial_stop_loss_abs": 194.49,
           "initial_stop_loss_ratio": -0.1,
-          "stop_loss_abs": 197.45,
+          "stop_loss_abs": 194.49,
           "stop_loss_ratio": -0.1,
           "min_rate": 204.0,
           "max_rate": 227.18,
@@ -2051,19 +2143,19 @@
           "enter_tag": "",
           "leverage": 1.0,
           "is_short": false,
-          "open_timestamp": 1733778000000,
+          "open_timestamp": 1733830800000,
           "close_timestamp": 1733924400000,
           "orders": [
             {
-              "amount": 0.869,
-              "safe_price": 219.38,
+              "amount": 0.957,
+              "safe_price": 216.09,
               "ft_order_side": "buy",
-              "order_filled_timestamp": 1733778000000,
+              "order_filled_timestamp": 1733830800000,
               "ft_is_entry": true,
               "ft_order_tag": ""
             },
             {
-              "amount": 0.869,
+              "amount": 0.957,
               "safe_price": 226.22,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733924400000,
@@ -2074,9 +2166,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 192.4793046,
-          "max_stake_amount": 192.4793046,
-          "amount": 0.00198,
+          "stake_amount": 206.0889524,
+          "max_stake_amount": 206.0889524,
+          "amount": 0.00212,
           "open_date": "2024-12-10 12:30:00+00:00",
           "close_date": "2024-12-11 14:55:00+00:00",
           "open_rate": 97211.77,
@@ -2084,8 +2176,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 1585,
-          "profit_ratio": 0.018525908556321725,
-          "profit_abs": 3.56941985,
+          "profit_ratio": 0.018525908596472126,
+          "profit_abs": 3.82180308,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 87490.6,
           "initial_stop_loss_ratio": -0.1,
@@ -2101,7 +2193,7 @@
           "close_timestamp": 1733928900000,
           "orders": [
             {
-              "amount": 0.00198,
+              "amount": 0.00212,
               "safe_price": 97211.77,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733833800000,
@@ -2109,7 +2201,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.00198,
+              "amount": 0.00212,
               "safe_price": 99210.93,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733928900000,
@@ -2120,9 +2212,9 @@
         },
         {
           "pair": "ATOM/USDT",
-          "stake_amount": 197.23905,
-          "max_stake_amount": 197.23905,
-          "amount": 25.11,
+          "stake_amount": 211.37805,
+          "max_stake_amount": 211.37805,
+          "amount": 26.91,
           "open_date": "2024-12-11 00:30:00+00:00",
           "close_date": "2024-12-12 05:40:00+00:00",
           "open_rate": 7.855,
@@ -2130,8 +2222,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 1750,
-          "profit_ratio": 0.1812125493856875,
-          "profit_abs": 35.77793328,
+          "profit_ratio": 0.18121254938568748,
+          "profit_abs": 38.34265968,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 7.07,
           "initial_stop_loss_ratio": -0.1,
@@ -2147,7 +2239,7 @@
           "close_timestamp": 1733982000000,
           "orders": [
             {
-              "amount": 25.11,
+              "amount": 26.91,
               "safe_price": 7.855,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733877000000,
@@ -2155,7 +2247,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 25.11,
+              "amount": 26.91,
               "safe_price": 9.297,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1733982000000,
@@ -2166,9 +2258,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 205.2096588,
-          "max_stake_amount": 205.2096588,
-          "amount": 0.00204,
+          "stake_amount": 220.2986043,
+          "max_stake_amount": 220.2986043,
+          "amount": 0.00219,
           "open_date": "2024-12-12 10:10:00+00:00",
           "close_date": "2024-12-12 16:10:00+00:00",
           "open_rate": 100592.97,
@@ -2176,8 +2268,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 360,
-          "profit_ratio": 0.015198694784969699,
-          "profit_abs": 3.12203789,
+          "profit_ratio": 0.015198694786970326,
+          "profit_abs": 3.3515995,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 90533.68,
           "initial_stop_loss_ratio": -0.1,
@@ -2193,7 +2285,7 @@
           "close_timestamp": 1734019800000,
           "orders": [
             {
-              "amount": 0.00204,
+              "amount": 0.00219,
               "safe_price": 100592.97,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733998200000,
@@ -2201,7 +2293,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.00204,
+              "amount": 0.00219,
               "safe_price": 102326.3,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734019800000,
@@ -2212,9 +2304,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 205.1071,
-          "max_stake_amount": 205.1071,
-          "amount": 7.37,
+          "stake_amount": 220.6919,
+          "max_stake_amount": 220.6919,
+          "amount": 7.93,
           "open_date": "2024-12-12 10:05:00+00:00",
           "close_date": "2024-12-12 20:50:00+00:00",
           "open_rate": 27.83,
@@ -2223,7 +2315,7 @@
           "fee_close": 0.001,
           "trade_duration": 645,
           "profit_ratio": 0.019159783802255956,
-          "profit_abs": 3.9337375,
+          "profit_abs": 4.2326375,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 25.05,
           "initial_stop_loss_ratio": -0.1,
@@ -2239,7 +2331,7 @@
           "close_timestamp": 1734036600000,
           "orders": [
             {
-              "amount": 7.37,
+              "amount": 7.93,
               "safe_price": 27.83,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733997900000,
@@ -2247,7 +2339,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 7.37,
+              "amount": 7.93,
               "safe_price": 28.42,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734036600000,
@@ -2258,9 +2350,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 205.1986224,
-          "max_stake_amount": 205.1986224,
-          "amount": 0.00204,
+          "stake_amount": 221.292632,
+          "max_stake_amount": 221.292632,
+          "amount": 0.0022,
           "open_date": "2024-12-12 19:20:00+00:00",
           "close_date": "2024-12-12 22:45:00+00:00",
           "open_rate": 100587.56,
@@ -2268,8 +2360,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 205,
-          "profit_ratio": -0.004256781668655755,
-          "profit_abs": -0.87435922,
+          "profit_ratio": -0.004256781651837444,
+          "profit_abs": -0.94293641,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 90528.81,
           "initial_stop_loss_ratio": -0.1,
@@ -2285,7 +2377,7 @@
           "close_timestamp": 1734043500000,
           "orders": [
             {
-              "amount": 0.00204,
+              "amount": 0.0022,
               "safe_price": 100587.56,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734031200000,
@@ -2293,7 +2385,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.00204,
+              "amount": 0.0022,
               "safe_price": 100359.9,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734043500000,
@@ -2304,9 +2396,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 205.6327844,
-          "max_stake_amount": 205.6327844,
-          "amount": 0.00206,
+          "stake_amount": 221.6042628,
+          "max_stake_amount": 221.6042628,
+          "amount": 0.00222,
           "open_date": "2024-12-13 01:25:00+00:00",
           "close_date": "2024-12-15 12:45:00+00:00",
           "open_rate": 99821.74,
@@ -2314,8 +2406,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 3560,
-          "profit_ratio": 0.02976774192016269,
-          "profit_abs": 6.12734488,
+          "profit_ratio": 0.029767741911409212,
+          "profit_abs": 6.60325516,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 89839.57,
           "initial_stop_loss_ratio": -0.1,
@@ -2331,7 +2423,7 @@
           "close_timestamp": 1734266700000,
           "orders": [
             {
-              "amount": 0.00206,
+              "amount": 0.00222,
               "safe_price": 99821.74,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734053100000,
@@ -2339,7 +2431,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.00206,
+              "amount": 0.00222,
               "safe_price": 102999.0,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734266700000,
@@ -2350,9 +2442,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 206.5284,
-          "max_stake_amount": 206.5284,
-          "amount": 7.02,
+          "stake_amount": 221.8268,
+          "max_stake_amount": 221.8268,
+          "amount": 7.54,
           "open_date": "2024-12-13 04:40:00+00:00",
           "close_date": "2024-12-15 15:40:00+00:00",
           "open_rate": 29.42,
@@ -2360,8 +2452,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 3540,
-          "profit_ratio": -0.00708638743988846,
-          "profit_abs": -1.4650038,
+          "profit_ratio": -0.007086387439888459,
+          "profit_abs": -1.5735226,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 26.48,
           "initial_stop_loss_ratio": -0.1,
@@ -2377,7 +2469,7 @@
           "close_timestamp": 1734277200000,
           "orders": [
             {
-              "amount": 7.02,
+              "amount": 7.54,
               "safe_price": 29.42,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734064800000,
@@ -2385,7 +2477,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 7.02,
+              "amount": 7.54,
               "safe_price": 29.27,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734277200000,
@@ -2396,9 +2488,9 @@
         },
         {
           "pair": "DOGE/USDT",
-          "stake_amount": 205.8481,
-          "max_stake_amount": 205.8481,
-          "amount": 505.0,
+          "stake_amount": 221.33766,
+          "max_stake_amount": 221.33766,
+          "amount": 543.0,
           "open_date": "2024-12-12 19:35:00+00:00",
           "close_date": "2024-12-16 00:50:00+00:00",
           "open_rate": 0.40762,
@@ -2406,8 +2498,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 4635,
-          "profit_ratio": 0.011223161804585678,
-          "profit_abs": 2.3125768,
+          "profit_ratio": 0.011223161804585682,
+          "profit_abs": 2.48659248,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.36686,
           "initial_stop_loss_ratio": -0.1,
@@ -2423,7 +2515,7 @@
           "close_timestamp": 1734310200000,
           "orders": [
             {
-              "amount": 505.0,
+              "amount": 543.0,
               "safe_price": 0.40762,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734032100000,
@@ -2431,7 +2523,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 505.0,
+              "amount": 543.0,
               "safe_price": 0.41302,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734310200000,
@@ -2442,9 +2534,9 @@
         },
         {
           "pair": "ATOM/USDT",
-          "stake_amount": 205.27221,
-          "max_stake_amount": 205.27221,
-          "amount": 23.01,
+          "stake_amount": 220.61633,
+          "max_stake_amount": 220.61633,
+          "amount": 24.73,
           "open_date": "2024-12-12 10:10:00+00:00",
           "close_date": "2024-12-18 20:02:00+00:00",
           "open_rate": 8.921,
@@ -2452,8 +2544,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 9232,
-          "profit_ratio": -0.1017870146891557,
-          "profit_abs": -20.9149395,
+          "profit_ratio": -0.10178701468915571,
+          "profit_abs": -22.4783335,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 8.029,
           "initial_stop_loss_ratio": -0.1,
@@ -2469,7 +2561,7 @@
           "close_timestamp": 1734552120000,
           "orders": [
             {
-              "amount": 23.01,
+              "amount": 24.73,
               "safe_price": 8.921,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733998200000,
@@ -2477,7 +2569,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 23.01,
+              "amount": 24.73,
               "safe_price": 8.029,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734552120000,
@@ -2487,56 +2579,10 @@
           ]
         },
         {
-          "pair": "MATIC/USDT",
-          "stake_amount": 207.90951,
-          "max_stake_amount": 207.90951,
-          "amount": 348.9,
-          "open_date": "2024-12-16 07:05:00+00:00",
-          "close_date": "2024-12-18 20:03:00+00:00",
-          "open_rate": 0.5959,
-          "close_rate": 0.5364,
-          "fee_open": 0.001,
-          "fee_close": 0.001,
-          "trade_duration": 3658,
-          "profit_ratio": -0.1016474715081864,
-          "profit_abs": -21.15460947,
-          "exit_reason": "stop_loss",
-          "initial_stop_loss_abs": 0.5364,
-          "initial_stop_loss_ratio": -0.1,
-          "stop_loss_abs": 0.5364,
-          "stop_loss_ratio": -0.1,
-          "min_rate": 0.5352,
-          "max_rate": 0.606,
-          "is_open": false,
-          "enter_tag": "",
-          "leverage": 1.0,
-          "is_short": false,
-          "open_timestamp": 1734332700000,
-          "close_timestamp": 1734552180000,
-          "orders": [
-            {
-              "amount": 348.9,
-              "safe_price": 0.5959,
-              "ft_order_side": "buy",
-              "order_filled_timestamp": 1734332700000,
-              "ft_is_entry": true,
-              "ft_order_tag": ""
-            },
-            {
-              "amount": 348.9,
-              "safe_price": 0.5364,
-              "ft_order_side": "sell",
-              "order_filled_timestamp": 1734552180000,
-              "ft_is_entry": false,
-              "ft_order_tag": "stop_loss"
-            }
-          ]
-        },
-        {
           "pair": "AVAX/USDT",
-          "stake_amount": 207.648,
-          "max_stake_amount": 207.648,
-          "amount": 4.2,
+          "stake_amount": 223.4688,
+          "max_stake_amount": 223.4688,
+          "amount": 4.52,
           "open_date": "2024-12-16 08:15:00+00:00",
           "close_date": "2024-12-18 20:07:00+00:00",
           "open_rate": 49.44,
@@ -2544,8 +2590,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 3592,
-          "profit_ratio": -0.10171745729998158,
-          "profit_abs": -21.142548,
+          "profit_ratio": -0.10171745729998156,
+          "profit_abs": -22.7534088,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 44.5,
           "initial_stop_loss_ratio": -0.1,
@@ -2561,7 +2607,7 @@
           "close_timestamp": 1734552420000,
           "orders": [
             {
-              "amount": 4.2,
+              "amount": 4.52,
               "safe_price": 49.44,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734336900000,
@@ -2569,7 +2615,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 4.2,
+              "amount": 4.52,
               "safe_price": 44.5,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734552420000,
@@ -2579,10 +2625,56 @@
           ]
         },
         {
+          "pair": "XRP/USDT",
+          "stake_amount": 222.998,
+          "max_stake_amount": 222.998,
+          "amount": 86.0,
+          "open_date": "2024-12-17 15:15:00+00:00",
+          "close_date": "2024-12-18 20:07:00+00:00",
+          "open_rate": 2.593,
+          "close_rate": 2.3337,
+          "fee_open": 0.001,
+          "fee_close": 0.001,
+          "trade_duration": 1732,
+          "profit_ratio": -0.10179820179820179,
+          "profit_abs": -22.7234962,
+          "exit_reason": "stop_loss",
+          "initial_stop_loss_abs": 2.3337,
+          "initial_stop_loss_ratio": -0.1,
+          "stop_loss_abs": 2.3337,
+          "stop_loss_ratio": -0.1,
+          "min_rate": 2.3,
+          "max_rate": 2.6558,
+          "is_open": false,
+          "enter_tag": "",
+          "leverage": 1.0,
+          "is_short": false,
+          "open_timestamp": 1734448500000,
+          "close_timestamp": 1734552420000,
+          "orders": [
+            {
+              "amount": 86.0,
+              "safe_price": 2.593,
+              "ft_order_side": "buy",
+              "order_filled_timestamp": 1734448500000,
+              "ft_is_entry": true,
+              "ft_order_tag": ""
+            },
+            {
+              "amount": 86.0,
+              "safe_price": 2.3337,
+              "ft_order_side": "sell",
+              "order_filled_timestamp": 1734552420000,
+              "ft_is_entry": false,
+              "ft_order_tag": "stop_loss"
+            }
+          ]
+        },
+        {
           "pair": "XLM/USDT",
-          "stake_amount": 207.6282,
-          "max_stake_amount": 207.6282,
-          "amount": 467.0,
+          "stake_amount": 223.1892,
+          "max_stake_amount": 223.1892,
+          "amount": 502.0,
           "open_date": "2024-12-17 14:05:00+00:00",
           "close_date": "2024-12-18 20:08:00+00:00",
           "open_rate": 0.4446,
@@ -2591,7 +2683,7 @@
           "fee_close": 0.001,
           "trade_duration": 1803,
           "profit_ratio": -0.10166351866756725,
-          "profit_abs": -21.1293216,
+          "profit_abs": -22.7128896,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 0.4002,
           "initial_stop_loss_ratio": -0.1,
@@ -2607,7 +2699,7 @@
           "close_timestamp": 1734552480000,
           "orders": [
             {
-              "amount": 467.0,
+              "amount": 502.0,
               "safe_price": 0.4446,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734444300000,
@@ -2615,7 +2707,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 467.0,
+              "amount": 502.0,
               "safe_price": 0.4002,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734552480000,
@@ -2626,9 +2718,9 @@
         },
         {
           "pair": "ADA/USDT",
-          "stake_amount": 191.15306,
-          "max_stake_amount": 191.15306,
-          "amount": 196.7,
+          "stake_amount": 205.5357,
+          "max_stake_amount": 205.5357,
+          "amount": 211.5,
           "open_date": "2024-12-19 08:10:00+00:00",
           "close_date": "2024-12-19 18:21:00+00:00",
           "open_rate": 0.9718,
@@ -2636,8 +2728,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 611,
-          "profit_ratio": -0.10171604481133192,
-          "profit_abs": -19.46277655,
+          "profit_ratio": -0.1017160448113319,
+          "profit_abs": -20.92718475,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 0.8747,
           "initial_stop_loss_ratio": -0.1,
@@ -2653,7 +2745,7 @@
           "close_timestamp": 1734632460000,
           "orders": [
             {
-              "amount": 196.7,
+              "amount": 211.5,
               "safe_price": 0.9718,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734595800000,
@@ -2661,7 +2753,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 196.7,
+              "amount": 211.5,
               "safe_price": 0.8747,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734632460000,
@@ -2672,9 +2764,9 @@
         },
         {
           "pair": "LTC/USDT",
-          "stake_amount": 197.2725,
-          "max_stake_amount": 197.2725,
-          "amount": 1.814,
+          "stake_amount": 211.41,
+          "max_stake_amount": 211.41,
+          "amount": 1.944,
           "open_date": "2024-12-11 00:30:00+00:00",
           "close_date": "2024-12-19 18:23:00+00:00",
           "open_rate": 108.75,
@@ -2682,8 +2774,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 12593,
-          "profit_ratio": -0.10211939784353577,
-          "profit_abs": -20.16549426,
+          "profit_ratio": -0.10211939784353578,
+          "profit_abs": -21.61065096,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 97.88,
           "initial_stop_loss_ratio": -0.1,
@@ -2699,7 +2791,7 @@
           "close_timestamp": 1734632580000,
           "orders": [
             {
-              "amount": 1.814,
+              "amount": 1.944,
               "safe_price": 108.75,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1733877000000,
@@ -2707,7 +2799,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 1.814,
+              "amount": 1.944,
               "safe_price": 97.84,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734632580000,
@@ -2718,9 +2810,9 @@
         },
         {
           "pair": "XRP/USDT",
-          "stake_amount": 189.8957,
-          "max_stake_amount": 189.8957,
-          "amount": 83.0,
+          "stake_amount": 203.6231,
+          "max_stake_amount": 203.6231,
+          "amount": 89.0,
           "open_date": "2024-12-19 02:00:00+00:00",
           "close_date": "2024-12-20 00:40:00+00:00",
           "open_rate": 2.2879,
@@ -2729,7 +2821,7 @@
           "fee_close": 0.001,
           "trade_duration": 1360,
           "profit_ratio": 0.010739293487665356,
-          "profit_abs": 2.041385,
+          "profit_abs": 2.188955,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 2.0592,
           "initial_stop_loss_ratio": -0.1,
@@ -2745,7 +2837,7 @@
           "close_timestamp": 1734655200000,
           "orders": [
             {
-              "amount": 83.0,
+              "amount": 89.0,
               "safe_price": 2.2879,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734573600000,
@@ -2753,7 +2845,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 83.0,
+              "amount": 89.0,
               "safe_price": 2.3171,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734655200000,
@@ -2764,9 +2856,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 186.9804,
-          "max_stake_amount": 186.9804,
-          "amount": 7.96,
+          "stake_amount": 202.2489,
+          "max_stake_amount": 202.2489,
+          "amount": 8.61,
           "open_date": "2024-12-19 17:40:00+00:00",
           "close_date": "2024-12-20 00:45:00+00:00",
           "open_rate": 23.49,
@@ -2775,7 +2867,7 @@
           "fee_close": 0.001,
           "trade_duration": 425,
           "profit_ratio": -0.012194701849874263,
-          "profit_abs": -2.2824504,
+          "profit_abs": -2.4688314,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 21.15,
           "initial_stop_loss_ratio": -0.1,
@@ -2791,7 +2883,7 @@
           "close_timestamp": 1734655500000,
           "orders": [
             {
-              "amount": 7.96,
+              "amount": 8.61,
               "safe_price": 23.49,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734630000000,
@@ -2799,7 +2891,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 7.96,
+              "amount": 8.61,
               "safe_price": 23.25,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734655500000,
@@ -2810,9 +2902,9 @@
         },
         {
           "pair": "ETH/USDT",
-          "stake_amount": 165.92488,
-          "max_stake_amount": 165.92488,
-          "amount": 0.0488,
+          "stake_amount": 177.82523,
+          "max_stake_amount": 177.82523,
+          "amount": 0.0523,
           "open_date": "2024-12-20 00:20:00+00:00",
           "close_date": "2024-12-20 02:45:00+00:00",
           "open_rate": 3400.1,
@@ -2820,8 +2912,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 145,
-          "profit_ratio": 0.013758224976096581,
-          "profit_abs": 2.28511466,
+          "profit_ratio": 0.013758224974484895,
+          "profit_abs": 2.44900608,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 3060.09,
           "initial_stop_loss_ratio": -0.1,
@@ -2837,7 +2929,7 @@
           "close_timestamp": 1734662700000,
           "orders": [
             {
-              "amount": 0.0488,
+              "amount": 0.0523,
               "safe_price": 3400.1,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734654000000,
@@ -2845,7 +2937,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.0488,
+              "amount": 0.0523,
               "safe_price": 3453.78,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734662700000,
@@ -2856,9 +2948,9 @@
         },
         {
           "pair": "AVAX/USDT",
-          "stake_amount": 183.2402,
-          "max_stake_amount": 183.2402,
-          "amount": 4.73,
+          "stake_amount": 196.7992,
+          "max_stake_amount": 196.7992,
+          "amount": 5.08,
           "open_date": "2024-12-20 00:05:00+00:00",
           "close_date": "2024-12-20 10:24:00+00:00",
           "open_rate": 38.74,
@@ -2866,8 +2958,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 619,
-          "profit_ratio": -0.10169515564456195,
-          "profit_abs": -18.6532753,
+          "profit_ratio": -0.10169515564456194,
+          "profit_abs": -20.0335388,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 34.87,
           "initial_stop_loss_ratio": -0.1,
@@ -2883,7 +2975,7 @@
           "close_timestamp": 1734690240000,
           "orders": [
             {
-              "amount": 4.73,
+              "amount": 5.08,
               "safe_price": 38.74,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734653100000,
@@ -2891,7 +2983,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 4.73,
+              "amount": 5.08,
               "safe_price": 34.87,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734690240000,
@@ -2902,9 +2994,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 190.8455,
-          "max_stake_amount": 190.8455,
-          "amount": 0.0019,
+          "stake_amount": 204.9078,
+          "max_stake_amount": 204.9078,
+          "amount": 0.00204,
           "open_date": "2024-12-19 01:55:00+00:00",
           "close_date": "2024-12-20 13:50:00+00:00",
           "open_rate": 100445.0,
@@ -2912,8 +3004,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 2155,
-          "profit_ratio": -0.04897081482329759,
-          "profit_abs": -9.3552055,
+          "profit_ratio": -0.048970814815599645,
+          "profit_abs": -10.04453643,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 90400.5,
           "initial_stop_loss_ratio": -0.1,
@@ -2929,7 +3021,7 @@
           "close_timestamp": 1734702600000,
           "orders": [
             {
-              "amount": 0.0019,
+              "amount": 0.00204,
               "safe_price": 100445.0,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734573300000,
@@ -2937,7 +3029,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.0019,
+              "amount": 0.00204,
               "safe_price": 95717.37,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734702600000,
@@ -2948,9 +3040,9 @@
         },
         {
           "pair": "BTC/USDT",
-          "stake_amount": 178.188465,
-          "max_stake_amount": 178.188465,
-          "amount": 0.00186,
+          "stake_amount": 191.6005,
+          "max_stake_amount": 191.6005,
+          "amount": 0.002,
           "open_date": "2024-12-20 21:15:00+00:00",
           "close_date": "2024-12-21 20:20:00+00:00",
           "open_rate": 95800.25,
@@ -2958,8 +3050,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 1385,
-          "profit_ratio": 0.020833161399920308,
-          "profit_abs": 3.71594128,
+          "profit_ratio": 0.020833161374130736,
+          "profit_abs": 3.99563578,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 86220.23,
           "initial_stop_loss_ratio": -0.1,
@@ -2975,7 +3067,7 @@
           "close_timestamp": 1734812400000,
           "orders": [
             {
-              "amount": 0.00186,
+              "amount": 0.002,
               "safe_price": 95800.25,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734729300000,
@@ -2983,7 +3075,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.00186,
+              "amount": 0.002,
               "safe_price": 97991.86,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734812400000,
@@ -2994,9 +3086,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 161.986,
-          "max_stake_amount": 161.986,
-          "amount": 7.96,
+          "stake_amount": 174.603,
+          "max_stake_amount": 174.603,
+          "amount": 8.58,
           "open_date": "2024-12-20 11:40:00+00:00",
           "close_date": "2024-12-22 00:30:00+00:00",
           "open_rate": 20.35,
@@ -3004,8 +3096,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 2210,
-          "profit_ratio": 0.0897102897102897,
-          "profit_abs": 14.5463428,
+          "profit_ratio": 0.08971028971028971,
+          "profit_abs": 15.6793494,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 18.32,
           "initial_stop_loss_ratio": -0.1,
@@ -3021,7 +3113,7 @@
           "close_timestamp": 1734827400000,
           "orders": [
             {
-              "amount": 7.96,
+              "amount": 8.58,
               "safe_price": 20.35,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734694800000,
@@ -3029,7 +3121,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 7.96,
+              "amount": 8.58,
               "safe_price": 22.22,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734827400000,
@@ -3040,9 +3132,9 @@
         },
         {
           "pair": "ADA/USDT",
-          "stake_amount": 183.76,
-          "max_stake_amount": 183.76,
-          "amount": 229.7,
+          "stake_amount": 197.52,
+          "max_stake_amount": 197.52,
+          "amount": 246.9,
           "open_date": "2024-12-20 10:15:00+00:00",
           "close_date": "2024-12-22 08:10:00+00:00",
           "open_rate": 0.8,
@@ -3050,8 +3142,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 2755,
-          "profit_ratio": 0.126370004995005,
-          "profit_abs": 23.24497387,
+          "profit_ratio": 0.12637000499500498,
+          "profit_abs": 24.98556399,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.7201,
           "initial_stop_loss_ratio": -0.1,
@@ -3067,7 +3159,7 @@
           "close_timestamp": 1734855000000,
           "orders": [
             {
-              "amount": 229.7,
+              "amount": 246.9,
               "safe_price": 0.8,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734689700000,
@@ -3075,7 +3167,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 229.7,
+              "amount": 246.9,
               "safe_price": 0.9029,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734855000000,
@@ -3086,9 +3178,9 @@
         },
         {
           "pair": "ADA/USDT",
-          "stake_amount": 186.44724,
-          "max_stake_amount": 186.44724,
-          "amount": 214.9,
+          "stake_amount": 200.4156,
+          "max_stake_amount": 200.4156,
+          "amount": 231.0,
           "open_date": "2024-12-22 20:05:00+00:00",
           "close_date": "2024-12-23 03:20:00+00:00",
           "open_rate": 0.8676,
@@ -3097,7 +3189,7 @@
           "fee_close": 0.001,
           "trade_duration": 435,
           "profit_ratio": 0.034236510377589215,
-          "profit_abs": 6.38968617,
+          "profit_abs": 6.8683923,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.7809,
           "initial_stop_loss_ratio": -0.1,
@@ -3113,7 +3205,7 @@
           "close_timestamp": 1734924000000,
           "orders": [
             {
-              "amount": 214.9,
+              "amount": 231.0,
               "safe_price": 0.8676,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734897900000,
@@ -3121,7 +3213,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 214.9,
+              "amount": 231.0,
               "safe_price": 0.8991,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734924000000,
@@ -3132,9 +3224,9 @@
         },
         {
           "pair": "XLM/USDT",
-          "stake_amount": 186.1155,
-          "max_stake_amount": 186.1155,
-          "amount": 531.0,
+          "stake_amount": 200.1355,
+          "max_stake_amount": 200.1355,
+          "amount": 571.0,
           "open_date": "2024-12-23 00:35:00+00:00",
           "close_date": "2024-12-23 03:20:00+00:00",
           "open_rate": 0.3505,
@@ -3143,7 +3235,7 @@
           "fee_close": 0.001,
           "trade_duration": 165,
           "profit_ratio": 0.02704513745883218,
-          "profit_abs": 5.0385528,
+          "profit_abs": 5.4181048,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.3155,
           "initial_stop_loss_ratio": -0.1,
@@ -3159,7 +3251,7 @@
           "close_timestamp": 1734924000000,
           "orders": [
             {
-              "amount": 531.0,
+              "amount": 571.0,
               "safe_price": 0.3505,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734914100000,
@@ -3167,7 +3259,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 531.0,
+              "amount": 571.0,
               "safe_price": 0.3607,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734924000000,
@@ -3178,9 +3270,9 @@
         },
         {
           "pair": "ETH/USDT",
-          "stake_amount": 183.66765,
-          "max_stake_amount": 183.66765,
-          "amount": 0.0575,
+          "stake_amount": 197.402796,
+          "max_stake_amount": 197.402796,
+          "amount": 0.0618,
           "open_date": "2024-12-20 10:15:00+00:00",
           "close_date": "2024-12-23 20:40:00+00:00",
           "open_rate": 3194.22,
@@ -3188,8 +3280,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 4945,
-          "profit_ratio": 0.05688131020038953,
-          "profit_abs": 10.45770383,
+          "profit_ratio": 0.05688131018331509,
+          "profit_abs": 11.2397582,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 2874.8,
           "initial_stop_loss_ratio": -0.1,
@@ -3205,7 +3297,7 @@
           "close_timestamp": 1734986400000,
           "orders": [
             {
-              "amount": 0.0575,
+              "amount": 0.0618,
               "safe_price": 3194.22,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734689700000,
@@ -3213,7 +3305,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.0575,
+              "amount": 0.0618,
               "safe_price": 3382.67,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1734986400000,
@@ -3224,9 +3316,9 @@
         },
         {
           "pair": "DOGE/USDT",
-          "stake_amount": 180.05532,
-          "max_stake_amount": 180.05532,
-          "amount": 642.0,
+          "stake_amount": 193.5174,
+          "max_stake_amount": 193.5174,
+          "amount": 690.0,
           "open_date": "2024-12-20 10:25:00+00:00",
           "close_date": "2024-12-24 15:40:00+00:00",
           "open_rate": 0.28046,
@@ -3234,8 +3326,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 6075,
-          "profit_ratio": 0.19919658178233376,
-          "profit_abs": 35.90227068,
+          "profit_ratio": 0.19919658178233374,
+          "profit_abs": 38.5865526,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 0.25242,
           "initial_stop_loss_ratio": -0.1,
@@ -3251,7 +3343,7 @@
           "close_timestamp": 1735054800000,
           "orders": [
             {
-              "amount": 642.0,
+              "amount": 690.0,
               "safe_price": 0.28046,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734690300000,
@@ -3259,7 +3351,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 642.0,
+              "amount": 690.0,
               "safe_price": 0.337,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735054800000,
@@ -3270,9 +3362,9 @@
         },
         {
           "pair": "ETH/USDT",
-          "stake_amount": 197.678976,
-          "max_stake_amount": 197.678976,
-          "amount": 0.0583,
+          "stake_amount": 212.598144,
+          "max_stake_amount": 212.598144,
+          "amount": 0.0627,
           "open_date": "2024-12-29 00:35:00+00:00",
           "close_date": "2024-12-30 01:30:00+00:00",
           "open_rate": 3390.72,
@@ -3280,8 +3372,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 1495,
-          "profit_ratio": 0.008462605506461097,
-          "profit_abs": 1.67455207,
+          "profit_ratio": 0.00846260546745044,
+          "profit_abs": 1.80093335,
           "exit_reason": "exit_signal",
           "initial_stop_loss_abs": 3051.65,
           "initial_stop_loss_ratio": -0.1,
@@ -3297,7 +3389,7 @@
           "close_timestamp": 1735522200000,
           "orders": [
             {
-              "amount": 0.0583,
+              "amount": 0.0627,
               "safe_price": 3390.72,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1735432500000,
@@ -3305,7 +3397,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 0.0583,
+              "amount": 0.0627,
               "safe_price": 3426.26,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735522200000,
@@ -3316,9 +3408,9 @@
         },
         {
           "pair": "XLM/USDT",
-          "stake_amount": 190.6287,
-          "max_stake_amount": 190.6287,
-          "amount": 519.0,
+          "stake_amount": 204.9534,
+          "max_stake_amount": 204.9534,
+          "amount": 558.0,
           "open_date": "2024-12-24 00:25:00+00:00",
           "close_date": "2024-12-30 13:43:00+00:00",
           "open_rate": 0.3673,
@@ -3326,8 +3418,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 9438,
-          "profit_ratio": -0.10171668788603173,
-          "profit_abs": -19.4095101,
+          "profit_ratio": -0.10171668788603175,
+          "profit_abs": -20.8680282,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 0.3306,
           "initial_stop_loss_ratio": -0.1,
@@ -3343,7 +3435,7 @@
           "close_timestamp": 1735566180000,
           "orders": [
             {
-              "amount": 519.0,
+              "amount": 558.0,
               "safe_price": 0.3673,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734999900000,
@@ -3351,7 +3443,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 519.0,
+              "amount": 558.0,
               "safe_price": 0.3306,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735566180000,
@@ -3362,9 +3454,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 188.6976,
-          "max_stake_amount": 188.6976,
-          "amount": 8.32,
+          "stake_amount": 202.7592,
+          "max_stake_amount": 202.7592,
+          "amount": 8.94,
           "open_date": "2024-12-23 05:20:00+00:00",
           "close_date": "2024-12-30 13:51:00+00:00",
           "open_rate": 22.68,
@@ -3372,8 +3464,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 10591,
-          "profit_ratio": -0.10144617287474429,
-          "profit_abs": -19.161792,
+          "profit_ratio": -0.1014461728747443,
+          "profit_abs": -20.589714,
           "exit_reason": "stop_loss",
           "initial_stop_loss_abs": 20.42,
           "initial_stop_loss_ratio": -0.1,
@@ -3389,7 +3481,7 @@
           "close_timestamp": 1735566660000,
           "orders": [
             {
-              "amount": 8.32,
+              "amount": 8.94,
               "safe_price": 22.68,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734931200000,
@@ -3397,7 +3489,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 8.32,
+              "amount": 8.94,
               "safe_price": 20.42,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735566660000,
@@ -3408,9 +3500,9 @@
         },
         {
           "pair": "ADA/USDT",
-          "stake_amount": 188.69223,
-          "max_stake_amount": 188.69223,
-          "amount": 210.9,
+          "stake_amount": 202.82849,
+          "max_stake_amount": 202.82849,
+          "amount": 226.7,
           "open_date": "2024-12-23 05:20:00+00:00",
           "close_date": "2025-01-01 11:43:00+00:00",
           "open_rate": 0.8947,
@@ -3418,8 +3510,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 13343,
-          "profit_ratio": -0.04940504895797172,
-          "profit_abs": -9.33167121,
+          "profit_ratio": -0.04940504895797173,
+          "profit_abs": -10.03077223,
           "exit_reason": "force_exit",
           "initial_stop_loss_abs": 0.8053,
           "initial_stop_loss_ratio": -0.1,
@@ -3435,7 +3527,7 @@
           "close_timestamp": 1735731780000,
           "orders": [
             {
-              "amount": 210.9,
+              "amount": 226.7,
               "safe_price": 0.8947,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734931200000,
@@ -3443,7 +3535,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 210.9,
+              "amount": 226.7,
               "safe_price": 0.8522,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735731780000,
@@ -3454,9 +3546,9 @@
         },
         {
           "pair": "ALGO/USDT",
-          "stake_amount": 190.275,
-          "max_stake_amount": 190.275,
-          "amount": 590.0,
+          "stake_amount": 204.7875,
+          "max_stake_amount": 204.7875,
+          "amount": 635.0,
           "open_date": "2024-12-31 00:40:00+00:00",
           "close_date": "2025-01-01 11:45:00+00:00",
           "open_rate": 0.3225,
@@ -3464,8 +3556,8 @@
           "fee_open": 0.001,
           "fee_close": 0.001,
           "trade_duration": 2105,
-          "profit_ratio": 0.040088283809214045,
-          "profit_abs": 7.635426,
+          "profit_ratio": 0.04008828380921404,
+          "profit_abs": 8.217789,
           "exit_reason": "force_exit",
           "initial_stop_loss_abs": 0.2903,
           "initial_stop_loss_ratio": -0.1,
@@ -3481,7 +3573,7 @@
           "close_timestamp": 1735731900000,
           "orders": [
             {
-              "amount": 590.0,
+              "amount": 635.0,
               "safe_price": 0.3225,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1735605600000,
@@ -3489,7 +3581,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 590.0,
+              "amount": 635.0,
               "safe_price": 0.3361,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735731900000,
@@ -3500,9 +3592,9 @@
         },
         {
           "pair": "LINK/USDT",
-          "stake_amount": 190.4595,
-          "max_stake_amount": 190.4595,
-          "amount": 9.35,
+          "stake_amount": 204.7185,
+          "max_stake_amount": 204.7185,
+          "amount": 10.05,
           "open_date": "2024-12-31 00:55:00+00:00",
           "close_date": "2025-01-01 11:45:00+00:00",
           "open_rate": 20.37,
@@ -3511,7 +3603,7 @@
           "fee_close": 0.001,
           "trade_duration": 2090,
           "profit_ratio": -0.017675991166418267,
-          "profit_abs": -3.369927,
+          "profit_abs": -3.622221,
           "exit_reason": "force_exit",
           "initial_stop_loss_abs": 18.34,
           "initial_stop_loss_ratio": -0.1,
@@ -3527,7 +3619,7 @@
           "close_timestamp": 1735731900000,
           "orders": [
             {
-              "amount": 9.35,
+              "amount": 10.05,
               "safe_price": 20.37,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1735606500000,
@@ -3535,7 +3627,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 9.35,
+              "amount": 10.05,
               "safe_price": 20.05,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735731900000,
@@ -3546,9 +3638,9 @@
         },
         {
           "pair": "LTC/USDT",
-          "stake_amount": 186.4443,
-          "max_stake_amount": 186.4443,
-          "amount": 1.889,
+          "stake_amount": 200.361,
+          "max_stake_amount": 200.361,
+          "amount": 2.03,
           "open_date": "2024-12-23 00:30:00+00:00",
           "close_date": "2025-01-01 11:43:00+00:00",
           "open_rate": 98.7,
@@ -3557,7 +3649,7 @@
           "fee_close": 0.001,
           "trade_duration": 13633,
           "profit_ratio": 0.048660458082950483,
-          "profit_abs": 9.08153751,
+          "profit_abs": 9.7594077,
           "exit_reason": "force_exit",
           "initial_stop_loss_abs": 88.83,
           "initial_stop_loss_ratio": -0.1,
@@ -3573,7 +3665,7 @@
           "close_timestamp": 1735731780000,
           "orders": [
             {
-              "amount": 1.889,
+              "amount": 2.03,
               "safe_price": 98.7,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1734913800000,
@@ -3581,7 +3673,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 1.889,
+              "amount": 2.03,
               "safe_price": 103.71,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735731780000,
@@ -3592,9 +3684,9 @@
         },
         {
           "pair": "WIF/USDT",
-          "stake_amount": 190.5803,
-          "max_stake_amount": 190.5803,
-          "amount": 108.1,
+          "stake_amount": 204.87823,
+          "max_stake_amount": 204.87823,
+          "amount": 116.21,
           "open_date": "2024-12-31 02:10:00+00:00",
           "close_date": "2025-01-01 11:50:00+00:00",
           "open_rate": 1.763,
@@ -3603,7 +3695,7 @@
           "fee_close": 0.001,
           "trade_duration": 2020,
           "profit_ratio": -0.005394492064940165,
-          "profit_abs": -1.029112,
+          "profit_abs": -1.1063192,
           "exit_reason": "force_exit",
           "initial_stop_loss_abs": 1.587,
           "initial_stop_loss_ratio": -0.1,
@@ -3619,7 +3711,7 @@
           "close_timestamp": 1735732200000,
           "orders": [
             {
-              "amount": 108.1,
+              "amount": 116.21,
               "safe_price": 1.763,
               "ft_order_side": "buy",
               "order_filled_timestamp": 1735611000000,
@@ -3627,7 +3719,7 @@
               "ft_order_tag": ""
             },
             {
-              "amount": 108.1,
+              "amount": 116.21,
               "safe_price": 1.757,
               "ft_order_side": "sell",
               "order_filled_timestamp": 1735732200000,
@@ -3645,9 +3737,9 @@
         "profit_mean_pct": 3.58,
         "profit_sum": 0.25051509880490097,
         "profit_sum_pct": 25.05,
-        "profit_total_abs": 44.967540080000006,
-        "profit_total": 0.04496754008000001,
-        "profit_total_pct": 4.5,
+        "profit_total_abs": 46.577992959999996,
+        "profit_total": 0.046577992959999995,
+        "profit_total_pct": 4.66,
         "duration_avg": "1 day, 12:06:00",
         "wins": 6,
         "draws": 0,
@@ -3661,9 +3753,9 @@
         "profit_mean_pct": -6.95,
         "profit_sum": -0.27801690843692484,
         "profit_sum_pct": -27.8,
-        "profit_total_abs": -56.5037767,
-        "profit_total": -0.0565037767,
-        "profit_total_pct": -5.65,
+        "profit_total_abs": -59.166310800000005,
+        "profit_total": -0.059166310800000003,
+        "profit_total_pct": -5.92,
         "duration_avg": "2 days, 11:18:00",
         "wins": 1,
         "draws": 0,
@@ -3678,9 +3770,9 @@
           "profit_mean_pct": 3.58,
           "profit_sum": 0.25051509880490097,
           "profit_sum_pct": 25.05,
-          "profit_total_abs": 44.967540080000006,
-          "profit_total": 0.04496754008000001,
-          "profit_total_pct": 4.5,
+          "profit_total_abs": 46.577992959999996,
+          "profit_total": 0.046577992959999995,
+          "profit_total_pct": 4.66,
           "duration_avg": "1 day, 12:06:00",
           "wins": 6,
           "draws": 0,
@@ -3690,13 +3782,13 @@
         {
           "key": "ALGO/USDT",
           "trades": 2,
-          "profit_mean": 0.10504100979081918,
+          "profit_mean": 0.10504100979081916,
           "profit_mean_pct": 10.5,
-          "profit_sum": 0.21008201958163836,
+          "profit_sum": 0.21008201958163833,
           "profit_sum_pct": 21.01,
-          "profit_total_abs": 41.8478648,
-          "profit_total": 0.0418478648,
-          "profit_total_pct": 4.18,
+          "profit_total_abs": 42.4302278,
+          "profit_total": 0.0424302278,
+          "profit_total_pct": 4.24,
           "duration_avg": "1 day, 15:32:00",
           "wins": 2,
           "draws": 0,
@@ -3704,15 +3796,47 @@
           "winrate": 1.0
         },
         {
+          "key": "SOL/USDT",
+          "trades": 3,
+          "profit_mean": 0.033858725211070896,
+          "profit_mean_pct": 3.39,
+          "profit_sum": 0.10157617563321268,
+          "profit_sum_pct": 10.16,
+          "profit_total_abs": 21.287707049999998,
+          "profit_total": 0.021287707049999997,
+          "profit_total_pct": 2.13,
+          "duration_avg": "20:37:00",
+          "wins": 2,
+          "draws": 0,
+          "losses": 1,
+          "winrate": 0.6666666666666666
+        },
+        {
+          "key": "PEPE/USDT",
+          "trades": 2,
+          "profit_mean": 0.0463524300721729,
+          "profit_mean_pct": 4.64,
+          "profit_sum": 0.0927048601443458,
+          "profit_sum_pct": 9.27,
+          "profit_total_abs": 18.41241625,
+          "profit_total": 0.01841241625,
+          "profit_total_pct": 1.84,
+          "duration_avg": "2 days, 0:10:00",
+          "wins": 1,
+          "draws": 0,
+          "losses": 1,
+          "winrate": 0.5
+        },
+        {
           "key": "BONK/USDT",
           "trades": 1,
-          "profit_mean": 0.08228398278517074,
+          "profit_mean": 0.08228398277063419,
           "profit_mean_pct": 8.23,
-          "profit_sum": 0.08228398278517074,
+          "profit_sum": 0.08228398277063419,
           "profit_sum_pct": 8.23,
-          "profit_total_abs": 16.94556514,
-          "profit_total": 0.01694556514,
-          "profit_total_pct": 1.69,
+          "profit_total_abs": 17.2404452,
+          "profit_total": 0.0172404452,
+          "profit_total_pct": 1.72,
           "duration_avg": "1 day, 23:30:00",
           "wins": 1,
           "draws": 0,
@@ -3722,13 +3846,13 @@
         {
           "key": "ATOM/USDT",
           "trades": 2,
-          "profit_mean": 0.039712767348265905,
+          "profit_mean": 0.039712767348265884,
           "profit_mean_pct": 3.97,
-          "profit_sum": 0.07942553469653181,
+          "profit_sum": 0.07942553469653177,
           "profit_sum_pct": 7.94,
-          "profit_total_abs": 14.86299378,
-          "profit_total": 0.01486299378,
-          "profit_total_pct": 1.49,
+          "profit_total_abs": 15.864326179999996,
+          "profit_total": 0.015864326179999996,
+          "profit_total_pct": 1.59,
           "duration_avg": "3 days, 19:31:00",
           "wins": 1,
           "draws": 0,
@@ -3738,12 +3862,12 @@
         {
           "key": "ADA/USDT",
           "trades": 10,
-          "profit_mean": 0.0071839563502564385,
+          "profit_mean": 0.00718395635025644,
           "profit_mean_pct": 0.72,
-          "profit_sum": 0.07183956350256439,
+          "profit_sum": 0.0718395635025644,
           "profit_sum_pct": 7.18,
-          "profit_total_abs": 12.70952158,
-          "profit_total": 0.01270952158,
+          "profit_total_abs": 12.700598380000002,
+          "profit_total": 0.012700598380000002,
           "profit_total_pct": 1.27,
           "duration_avg": "1 day, 8:51:00",
           "wins": 6,
@@ -3753,35 +3877,19 @@
         },
         {
           "key": "BTC/USDT",
-          "trades": 13,
-          "profit_mean": 0.004054681131704482,
-          "profit_mean_pct": 0.41,
-          "profit_sum": 0.05271085471215826,
-          "profit_sum_pct": 5.27,
-          "profit_total_abs": 9.908362689999997,
-          "profit_total": 0.009908362689999997,
-          "profit_total_pct": 0.99,
-          "duration_avg": "18:29:00",
+          "trades": 14,
+          "profit_mean": 0.002297823834512208,
+          "profit_mean_pct": 0.23,
+          "profit_sum": 0.032169533683170916,
+          "profit_sum_pct": 3.22,
+          "profit_total_abs": 6.425246940000001,
+          "profit_total": 0.006425246940000001,
+          "profit_total_pct": 0.64,
+          "duration_avg": "18:40:00",
           "wins": 10,
           "draws": 0,
-          "losses": 3,
-          "winrate": 0.7692307692307693
-        },
-        {
-          "key": "SOL/USDT",
-          "trades": 2,
-          "profit_mean": 0.009756350229852478,
-          "profit_mean_pct": 0.98,
-          "profit_sum": 0.019512700459704956,
-          "profit_sum_pct": 1.95,
-          "profit_total_abs": 3.6208936000000005,
-          "profit_total": 0.0036208936000000007,
-          "profit_total_pct": 0.36,
-          "duration_avg": "1 day, 7:50:00",
-          "wins": 1,
-          "draws": 0,
-          "losses": 1,
-          "winrate": 0.5
+          "losses": 4,
+          "winrate": 0.7142857142857143
         },
         {
           "key": "AAVE/USDT",
@@ -3998,9 +4106,9 @@
           "profit_mean_pct": -0.54,
           "profit_sum": -0.005394492064940165,
           "profit_sum_pct": -0.54,
-          "profit_total_abs": -1.029112,
-          "profit_total": -0.001029112,
-          "profit_total_pct": -0.1,
+          "profit_total_abs": -1.1063192,
+          "profit_total": -0.0011063192,
+          "profit_total_pct": -0.11,
           "duration_avg": "1 day, 9:40:00",
           "wins": 0,
           "draws": 0,
@@ -4010,13 +4118,13 @@
         {
           "key": "LINK/USDT",
           "trades": 10,
-          "profit_mean": 0.00020589663721127423,
+          "profit_mean": 0.00020589663721127562,
           "profit_mean_pct": 0.02,
-          "profit_sum": 0.0020589663721127423,
+          "profit_sum": 0.002058966372112756,
           "profit_sum_pct": 0.21,
-          "profit_total_abs": -2.4728893000000016,
-          "profit_total": -0.0024728893000000017,
-          "profit_total_pct": -0.25,
+          "profit_total_abs": -2.3199055000000013,
+          "profit_total": -0.002319905500000001,
+          "profit_total_pct": -0.23,
           "duration_avg": "1 day, 11:21:00",
           "wins": 4,
           "draws": 0,
@@ -4040,31 +4148,15 @@
           "winrate": 0.5
         },
         {
-          "key": "XRP/USDT",
-          "trades": 7,
-          "profit_mean": -0.0028380470640057822,
-          "profit_mean_pct": -0.28,
-          "profit_sum": -0.019866329448040475,
-          "profit_sum_pct": -1.99,
-          "profit_total_abs": -5.706616600000002,
-          "profit_total": -0.005706616600000002,
-          "profit_total_pct": -0.57,
-          "duration_avg": "8:00:00",
-          "wins": 4,
-          "draws": 0,
-          "losses": 3,
-          "winrate": 0.5714285714285714
-        },
-        {
           "key": "LTC/USDT",
           "trades": 3,
-          "profit_mean": -0.007866976989265292,
+          "profit_mean": -0.007866976989265298,
           "profit_mean_pct": -0.79,
-          "profit_sum": -0.023600930967795877,
+          "profit_sum": -0.02360093096779589,
           "profit_sum_pct": -2.36,
-          "profit_total_abs": -5.836644099999999,
-          "profit_total": -0.005836644099999999,
-          "profit_total_pct": -0.58,
+          "profit_total_abs": -5.749414680000001,
+          "profit_total": -0.005749414680000001,
+          "profit_total_pct": -0.57,
           "duration_avg": "6 days, 2:52:00",
           "wins": 2,
           "draws": 0,
@@ -4074,13 +4166,13 @@
         {
           "key": "ETH/USDT",
           "trades": 6,
-          "profit_mean": -0.010076639150852336,
+          "profit_mean": -0.01007663916029384,
           "profit_mean_pct": -1.01,
-          "profit_sum": -0.060459834905114015,
+          "profit_sum": -0.06045983496176305,
           "profit_sum_pct": -6.05,
-          "profit_total_abs": -14.374970849999997,
-          "profit_total": -0.014374970849999997,
-          "profit_total_pct": -1.44,
+          "profit_total_abs": -14.578561520000003,
+          "profit_total": -0.014578561520000003,
+          "profit_total_pct": -1.46,
           "duration_avg": "1 day, 8:28:00",
           "wins": 3,
           "draws": 0,
@@ -4088,20 +4180,20 @@
           "winrate": 0.5
         },
         {
-          "key": "PEPE/USDT",
-          "trades": 1,
-          "profit_mean": -0.10172207653254281,
-          "profit_mean_pct": -10.17,
-          "profit_sum": -0.10172207653254281,
-          "profit_sum_pct": -10.17,
-          "profit_total_abs": -21.12934527,
-          "profit_total": -0.021129345270000002,
-          "profit_total_pct": -2.11,
-          "duration_avg": "23:44:00",
-          "wins": 0,
+          "key": "XRP/USDT",
+          "trades": 8,
+          "profit_mean": -0.015208066405780284,
+          "profit_mean_pct": -1.52,
+          "profit_sum": -0.12166453124624227,
+          "profit_sum_pct": -12.17,
+          "profit_total_abs": -27.010128900000005,
+          "profit_total": -0.027010128900000006,
+          "profit_total_pct": -2.7,
+          "duration_avg": "10:37:00",
+          "wins": 4,
           "draws": 0,
-          "losses": 1,
-          "winrate": 0.0
+          "losses": 4,
+          "winrate": 0.5
         },
         {
           "key": "AVAX/USDT",
@@ -4110,30 +4202,14 @@
           "profit_mean_pct": -2.3,
           "profit_sum": -0.13781740358086525,
           "profit_sum_pct": -13.78,
-          "profit_total_abs": -26.6153694,
-          "profit_total": -0.026615369399999998,
-          "profit_total_pct": -2.66,
+          "profit_total_abs": -29.620788299999994,
+          "profit_total": -0.029620788299999992,
+          "profit_total_pct": -2.96,
           "duration_avg": "1 day, 4:54:00",
           "wins": 2,
           "draws": 0,
           "losses": 4,
           "winrate": 0.3333333333333333
-        },
-        {
-          "key": "MATIC/USDT",
-          "trades": 2,
-          "profit_mean": -0.10168801453184023,
-          "profit_mean_pct": -10.17,
-          "profit_sum": -0.20337602906368046,
-          "profit_sum_pct": -20.34,
-          "profit_total_abs": -42.233157930000004,
-          "profit_total": -0.04223315793,
-          "profit_total_pct": -4.22,
-          "duration_avg": "3 days, 18:39:00",
-          "wins": 0,
-          "draws": 0,
-          "losses": 2,
-          "winrate": 0.0
         },
         {
           "key": "XLM/USDT",
@@ -4142,9 +4218,9 @@
           "profit_mean_pct": -6.95,
           "profit_sum": -0.27801690843692484,
           "profit_sum_pct": -27.8,
-          "profit_total_abs": -56.5037767,
-          "profit_total": -0.0565037767,
-          "profit_total_pct": -5.65,
+          "profit_total_abs": -59.166310800000005,
+          "profit_total": -0.059166310800000003,
+          "profit_total_pct": -5.92,
           "duration_avg": "2 days, 11:18:00",
           "wins": 1,
           "draws": 0,
@@ -4153,82 +4229,82 @@
         },
         {
           "key": "TOTAL",
-          "trades": 79,
-          "profit_mean": -0.0009752135889656847,
-          "profit_mean_pct": -0.1,
-          "profit_sum": -0.07704187352828909,
-          "profit_sum_pct": -7.7,
-          "profit_total_abs": -34.40079786999999,
-          "profit_total": -0.03440079786999999,
-          "profit_total_pct": -3.44,
-          "duration_avg": "1 day, 12:48:00",
-          "wins": 44,
+          "trades": 81,
+          "profit_mean": 0.0034627783270050985,
+          "profit_mean_pct": 0.35,
+          "profit_sum": 0.28048504448741296,
+          "profit_sum_pct": 28.05,
+          "profit_total_abs": 38.025874470000005,
+          "profit_total": 0.038025874470000005,
+          "profit_total_pct": 3.8,
+          "duration_avg": "1 day, 11:09:00",
+          "wins": 46,
           "draws": 0,
           "losses": 35,
-          "winrate": 0.5569620253164557
+          "winrate": 0.5679012345679012
         }
       ],
       "results_per_enter_tag": [
         {
           "key": "",
-          "trades": 79,
-          "profit_mean": -0.0009752135889656847,
-          "profit_mean_pct": -0.1,
-          "profit_sum": -0.07704187352828909,
-          "profit_sum_pct": -7.7,
-          "profit_total_abs": -34.40079786999999,
-          "profit_total": -0.03440079786999999,
-          "profit_total_pct": -3.44,
-          "duration_avg": "1 day, 12:48:00",
-          "wins": 44,
+          "trades": 81,
+          "profit_mean": 0.0034627783270050985,
+          "profit_mean_pct": 0.35,
+          "profit_sum": 0.28048504448741296,
+          "profit_sum_pct": 28.05,
+          "profit_total_abs": 38.025874470000005,
+          "profit_total": 0.038025874470000005,
+          "profit_total_pct": 3.8,
+          "duration_avg": "1 day, 11:09:00",
+          "wins": 46,
           "draws": 0,
           "losses": 35,
-          "winrate": 0.5569620253164557
+          "winrate": 0.5679012345679012
         },
         {
           "key": "TOTAL",
-          "trades": 79,
-          "profit_mean": -0.0009752135889656847,
-          "profit_mean_pct": -0.1,
-          "profit_sum": -0.07704187352828909,
-          "profit_sum_pct": -7.7,
-          "profit_total_abs": -34.40079786999999,
-          "profit_total": -0.03440079786999999,
-          "profit_total_pct": -3.44,
-          "duration_avg": "1 day, 12:48:00",
-          "wins": 44,
+          "trades": 81,
+          "profit_mean": 0.0034627783270050985,
+          "profit_mean_pct": 0.35,
+          "profit_sum": 0.28048504448741296,
+          "profit_sum_pct": 28.05,
+          "profit_total_abs": 38.025874470000005,
+          "profit_total": 0.038025874470000005,
+          "profit_total_pct": 3.8,
+          "duration_avg": "1 day, 11:09:00",
+          "wins": 46,
           "draws": 0,
           "losses": 35,
-          "winrate": 0.5569620253164557
+          "winrate": 0.5679012345679012
         }
       ],
       "exit_reason_summary": [
         {
           "key": "exit_signal",
-          "trades": 57,
-          "profit_mean": 0.028705648475790803,
-          "profit_mean_pct": 2.87,
-          "profit_sum": 1.6362219631200758,
-          "profit_sum_pct": 163.62,
-          "profit_total_abs": 310.1852308,
-          "profit_total": 0.3101852308,
-          "profit_total_pct": 31.02,
-          "duration_avg": "21:36:00",
-          "wins": 42,
+          "trades": 60,
+          "profit_mean": 0.031536184231721505,
+          "profit_mean_pct": 3.15,
+          "profit_sum": 1.89217105390329,
+          "profit_sum_pct": 189.22,
+          "profit_total_abs": 379.80381867999995,
+          "profit_total": 0.37980381867999996,
+          "profit_total_pct": 37.98,
+          "duration_avg": "22:03:00",
+          "wins": 44,
           "draws": 0,
-          "losses": 15,
-          "winrate": 0.7368421052631579
+          "losses": 16,
+          "winrate": 0.7333333333333333
         },
         {
           "key": "force_exit",
           "trades": 5,
-          "profit_mean": 0.0032546419405668748,
+          "profit_mean": 0.003254641940566872,
           "profit_mean_pct": 0.33,
-          "profit_sum": 0.016273209702834374,
+          "profit_sum": 0.01627320970283436,
           "profit_sum_pct": 1.63,
-          "profit_total_abs": 2.986253300000001,
-          "profit_total": 0.002986253300000001,
-          "profit_total_pct": 0.3,
+          "profit_total_abs": 3.2178842700000008,
+          "profit_total": 0.003217884270000001,
+          "profit_total_pct": 0.32,
           "duration_avg": "4 days, 14:38:00",
           "wins": 2,
           "draws": 0,
@@ -4237,35 +4313,35 @@
         },
         {
           "key": "stop_loss",
-          "trades": 17,
-          "profit_mean": -0.10173747331477642,
+          "trades": 16,
+          "profit_mean": -0.10174745119491949,
           "profit_mean_pct": -10.17,
-          "profit_sum": -1.7295370463511992,
-          "profit_sum_pct": -172.95,
-          "profit_total_abs": -347.57228196999995,
-          "profit_total": -0.34757228196999995,
-          "profit_total_pct": -34.76,
-          "duration_avg": "2 days, 18:03:00",
+          "profit_sum": -1.6279592191187118,
+          "profit_sum_pct": -162.8,
+          "profit_total_abs": -344.99582848,
+          "profit_total": -0.34499582848,
+          "profit_total_pct": -34.5,
+          "duration_avg": "2 days, 12:39:00",
           "wins": 0,
           "draws": 0,
-          "losses": 17,
+          "losses": 16,
           "winrate": 0.0
         },
         {
           "key": "TOTAL",
-          "trades": 79,
-          "profit_mean": -0.0009752135889656847,
-          "profit_mean_pct": -0.1,
-          "profit_sum": -0.07704187352828909,
-          "profit_sum_pct": -7.7,
-          "profit_total_abs": -34.40079786999999,
-          "profit_total": -0.03440079786999999,
-          "profit_total_pct": -3.44,
-          "duration_avg": "1 day, 12:48:00",
-          "wins": 44,
+          "trades": 81,
+          "profit_mean": 0.0034627783270050985,
+          "profit_mean_pct": 0.35,
+          "profit_sum": 0.28048504448741296,
+          "profit_sum_pct": 28.05,
+          "profit_total_abs": 38.025874470000005,
+          "profit_total": 0.038025874470000005,
+          "profit_total_pct": 3.8,
+          "duration_avg": "1 day, 11:09:00",
+          "wins": 46,
           "draws": 0,
           "losses": 35,
-          "winrate": 0.5569620253164557
+          "winrate": 0.5679012345679012
         }
       ],
       "mix_tag_stats": [
@@ -4274,19 +4350,19 @@
             "",
             "exit_signal"
           ],
-          "trades": 57,
-          "profit_mean": 0.028705648475790803,
-          "profit_mean_pct": 2.87,
-          "profit_sum": 1.6362219631200758,
-          "profit_sum_pct": 163.62,
-          "profit_total_abs": 310.1852308,
-          "profit_total": 0.3101852308,
-          "profit_total_pct": 31.02,
-          "duration_avg": "21:36:00",
-          "wins": 42,
+          "trades": 60,
+          "profit_mean": 0.031536184231721505,
+          "profit_mean_pct": 3.15,
+          "profit_sum": 1.89217105390329,
+          "profit_sum_pct": 189.22,
+          "profit_total_abs": 379.80381867999995,
+          "profit_total": 0.37980381867999996,
+          "profit_total_pct": 37.98,
+          "duration_avg": "22:03:00",
+          "wins": 44,
           "draws": 0,
-          "losses": 15,
-          "winrate": 0.7368421052631579
+          "losses": 16,
+          "winrate": 0.7333333333333333
         },
         {
           "key": [
@@ -4294,13 +4370,13 @@
             "force_exit"
           ],
           "trades": 5,
-          "profit_mean": 0.0032546419405668748,
+          "profit_mean": 0.003254641940566872,
           "profit_mean_pct": 0.33,
-          "profit_sum": 0.016273209702834374,
+          "profit_sum": 0.01627320970283436,
           "profit_sum_pct": 1.63,
-          "profit_total_abs": 2.986253300000001,
-          "profit_total": 0.002986253300000001,
-          "profit_total_pct": 0.3,
+          "profit_total_abs": 3.2178842700000008,
+          "profit_total": 0.003217884270000001,
+          "profit_total_pct": 0.32,
           "duration_avg": "4 days, 14:38:00",
           "wins": 2,
           "draws": 0,
@@ -4312,35 +4388,35 @@
             "",
             "stop_loss"
           ],
-          "trades": 17,
-          "profit_mean": -0.10173747331477642,
+          "trades": 16,
+          "profit_mean": -0.10174745119491949,
           "profit_mean_pct": -10.17,
-          "profit_sum": -1.7295370463511992,
-          "profit_sum_pct": -172.95,
-          "profit_total_abs": -347.57228196999995,
-          "profit_total": -0.34757228196999995,
-          "profit_total_pct": -34.76,
-          "duration_avg": "2 days, 18:03:00",
+          "profit_sum": -1.6279592191187118,
+          "profit_sum_pct": -162.8,
+          "profit_total_abs": -344.99582848,
+          "profit_total": -0.34499582848,
+          "profit_total_pct": -34.5,
+          "duration_avg": "2 days, 12:39:00",
           "wins": 0,
           "draws": 0,
-          "losses": 17,
+          "losses": 16,
           "winrate": 0.0
         },
         {
           "key": "TOTAL",
-          "trades": 79,
-          "profit_mean": -0.0009752135889656847,
-          "profit_mean_pct": -0.1,
-          "profit_sum": -0.07704187352828909,
-          "profit_sum_pct": -7.7,
-          "profit_total_abs": -34.40079786999999,
-          "profit_total": -0.03440079786999999,
-          "profit_total_pct": -3.44,
-          "duration_avg": "1 day, 12:48:00",
-          "wins": 44,
+          "trades": 81,
+          "profit_mean": 0.0034627783270050985,
+          "profit_mean_pct": 0.35,
+          "profit_sum": 0.28048504448741296,
+          "profit_sum_pct": 28.05,
+          "profit_total_abs": 38.025874470000005,
+          "profit_total": 0.038025874470000005,
+          "profit_total_pct": 3.8,
+          "duration_avg": "1 day, 11:09:00",
+          "wins": 46,
           "draws": 0,
           "losses": 35,
-          "winrate": 0.5569620253164557
+          "winrate": 0.5679012345679012
         }
       ],
       "left_open_trades": [
@@ -4351,9 +4427,9 @@
           "profit_mean_pct": 4.87,
           "profit_sum": 0.048660458082950483,
           "profit_sum_pct": 4.87,
-          "profit_total_abs": 9.08153751,
-          "profit_total": 0.009081537510000001,
-          "profit_total_pct": 0.91,
+          "profit_total_abs": 9.7594077,
+          "profit_total": 0.0097594077,
+          "profit_total_pct": 0.98,
           "duration_avg": "9 days, 11:13:00",
           "wins": 1,
           "draws": 0,
@@ -4363,13 +4439,13 @@
         {
           "key": "ALGO/USDT",
           "trades": 1,
-          "profit_mean": 0.040088283809214045,
+          "profit_mean": 0.04008828380921404,
           "profit_mean_pct": 4.01,
-          "profit_sum": 0.040088283809214045,
+          "profit_sum": 0.04008828380921404,
           "profit_sum_pct": 4.01,
-          "profit_total_abs": 7.635426,
-          "profit_total": 0.007635426,
-          "profit_total_pct": 0.76,
+          "profit_total_abs": 8.217789,
+          "profit_total": 0.008217789,
+          "profit_total_pct": 0.82,
           "duration_avg": "1 day, 11:05:00",
           "wins": 1,
           "draws": 0,
@@ -4383,9 +4459,9 @@
           "profit_mean_pct": -0.54,
           "profit_sum": -0.005394492064940165,
           "profit_sum_pct": -0.54,
-          "profit_total_abs": -1.029112,
-          "profit_total": -0.001029112,
-          "profit_total_pct": -0.1,
+          "profit_total_abs": -1.1063192,
+          "profit_total": -0.0011063192,
+          "profit_total_pct": -0.11,
           "duration_avg": "1 day, 9:40:00",
           "wins": 0,
           "draws": 0,
@@ -4399,9 +4475,9 @@
           "profit_mean_pct": -1.77,
           "profit_sum": -0.017675991166418267,
           "profit_sum_pct": -1.77,
-          "profit_total_abs": -3.369927,
-          "profit_total": -0.003369927,
-          "profit_total_pct": -0.34,
+          "profit_total_abs": -3.622221,
+          "profit_total": -0.003622221,
+          "profit_total_pct": -0.36,
           "duration_avg": "1 day, 10:50:00",
           "wins": 0,
           "draws": 0,
@@ -4411,13 +4487,13 @@
         {
           "key": "ADA/USDT",
           "trades": 1,
-          "profit_mean": -0.04940504895797172,
+          "profit_mean": -0.04940504895797173,
           "profit_mean_pct": -4.94,
-          "profit_sum": -0.04940504895797172,
+          "profit_sum": -0.04940504895797173,
           "profit_sum_pct": -4.94,
-          "profit_total_abs": -9.33167121,
-          "profit_total": -0.00933167121,
-          "profit_total_pct": -0.93,
+          "profit_total_abs": -10.03077223,
+          "profit_total": -0.01003077223,
+          "profit_total_pct": -1.0,
           "duration_avg": "9 days, 6:23:00",
           "wins": 0,
           "draws": 0,
@@ -4427,13 +4503,13 @@
         {
           "key": "TOTAL",
           "trades": 5,
-          "profit_mean": 0.0032546419405668748,
+          "profit_mean": 0.003254641940566872,
           "profit_mean_pct": 0.33,
-          "profit_sum": 0.016273209702834374,
+          "profit_sum": 0.01627320970283436,
           "profit_sum_pct": 1.63,
-          "profit_total_abs": 2.986253300000001,
-          "profit_total": 0.002986253300000001,
-          "profit_total_pct": 0.3,
+          "profit_total_abs": 3.2178842700000008,
+          "profit_total": 0.003217884270000001,
+          "profit_total_pct": 0.32,
           "duration_avg": "4 days, 14:38:00",
           "wins": 2,
           "draws": 0,
@@ -4441,33 +4517,33 @@
           "winrate": 0.4
         }
       ],
-      "total_trades": 79,
-      "trade_count_long": 79,
+      "total_trades": 81,
+      "trade_count_long": 81,
       "trade_count_short": 0,
-      "total_volume": 15521.323589059997,
-      "avg_stake_amount": 196.47245049443035,
-      "profit_mean": -0.0009752135889656847,
-      "profit_median": 0.004032518384152253,
-      "profit_total": -0.03440079786999999,
-      "profit_total_long": -0.03440079786999999,
+      "total_volume": 16684.19876858,
+      "avg_stake_amount": 205.97776257506175,
+      "profit_mean": 0.0034627783270050985,
+      "profit_median": 0.007148824785982592,
+      "profit_total": 0.038025874470000005,
+      "profit_total_long": 0.038025874470000005,
       "profit_total_short": 0.0,
-      "profit_total_abs": -34.40079786999999,
-      "profit_total_long_abs": -34.40079786999999,
+      "profit_total_abs": 38.025874470000005,
+      "profit_total_long_abs": 38.025874470000005,
       "profit_total_short_abs": 0.0,
-      "cagr": -0.3377899961172621,
-      "expectancy": -0.4354531375949371,
-      "expectancy_ratio": -0.035318848725323315,
-      "sortino": -2.5467881547391547,
-      "sharpe": -1.5441272306864955,
-      "calmar": -14.102886497152136,
-      "profit_factor": 0.9202803128771273,
+      "cagr": 0.5518088997007535,
+      "expectancy": 0.4694552403703671,
+      "expectancy_ratio": 0.03778137454846675,
+      "sortino": 2.6516686973559285,
+      "sharpe": 1.575900127245292,
+      "calmar": 16.419036246889295,
+      "profit_factor": 1.0874368953835947,
       "backtest_start": "2024-12-01 03:20:00",
       "backtest_start_ts": 1733023200000,
       "backtest_end": "2025-01-01 11:50:00",
       "backtest_end_ts": 1735732200000,
       "backtest_days": 31,
-      "trades_per_day": 2.55,
-      "market_change": -0.18827746992477615,
+      "trades_per_day": 2.61,
+      "market_change": -0.18602939505005747,
       "pairlist": [
         "AAVE/USDT",
         "ADA/USDT",
@@ -4487,7 +4563,6 @@
         "ICP/USDT",
         "LINK/USDT",
         "LTC/USDT",
-        "MATIC/USDT",
         "NEAR/USDT",
         "PEPE/USDT",
         "RENDER/USDT",
@@ -4505,8 +4580,8 @@
       "stake_currency_decimals": 3,
       "starting_balance": 1000.0,
       "dry_run_wallet": 1000.0,
-      "final_balance": 965.59920213,
-      "rejected_signals": 70,
+      "final_balance": 1038.02587447,
+      "rejected_signals": 64,
       "timedout_entry_orders": 0,
       "timedout_exit_orders": 0,
       "canceled_trade_entries": 0,
@@ -4564,25 +4639,25 @@
           {
             "date": "04/12/2024",
             "date_ts": 1733270400000,
-            "profit_abs": 12.58075672,
-            "wins": 5,
+            "profit_abs": 16.72190525,
+            "wins": 6,
             "draws": 0,
             "loses": 2,
-            "winrate": 0.7142857142857143
+            "winrate": 0.75
           },
           {
             "date": "05/12/2024",
             "date_ts": 1733356800000,
-            "profit_abs": -38.20158206,
-            "wins": 1,
+            "profit_abs": -24.26130904,
+            "wins": 2,
             "draws": 0,
             "loses": 3,
-            "winrate": 0.25
+            "winrate": 0.4
           },
           {
             "date": "06/12/2024",
             "date_ts": 1733443200000,
-            "profit_abs": -0.1046738,
+            "profit_abs": -0.18524798,
             "wins": 2,
             "draws": 0,
             "loses": 2,
@@ -4591,7 +4666,7 @@
           {
             "date": "07/12/2024",
             "date_ts": 1733529600000,
-            "profit_abs": 30.07081666,
+            "profit_abs": 30.62028134,
             "wins": 2,
             "draws": 0,
             "loses": 0,
@@ -4600,8 +4675,8 @@
           {
             "date": "08/12/2024",
             "date_ts": 1733616000000,
-            "profit_abs": 0.78100196,
-            "wins": 1,
+            "profit_abs": 41.53829381,
+            "wins": 2,
             "draws": 0,
             "loses": 0,
             "winrate": 1.0
@@ -4609,25 +4684,25 @@
           {
             "date": "09/12/2024",
             "date_ts": 1733702400000,
-            "profit_abs": -93.67754223,
+            "profit_abs": -76.51712252,
             "wins": 0,
             "draws": 0,
-            "loses": 6,
+            "loses": 5,
             "winrate": 0.0
           },
           {
             "date": "10/12/2024",
             "date_ts": 1733788800000,
-            "profit_abs": 41.36472286,
-            "wins": 6,
+            "profit_abs": 36.3409735,
+            "wins": 5,
             "draws": 0,
-            "loses": 2,
-            "winrate": 0.75
+            "loses": 3,
+            "winrate": 0.625
           },
           {
             "date": "11/12/2024",
             "date_ts": 1733875200000,
-            "profit_abs": 4.72109185,
+            "profit_abs": 8.36880261,
             "wins": 2,
             "draws": 0,
             "loses": 1,
@@ -4636,7 +4711,7 @@
           {
             "date": "12/12/2024",
             "date_ts": 1733961600000,
-            "profit_abs": 41.95934945,
+            "profit_abs": 44.98396027,
             "wins": 3,
             "draws": 0,
             "loses": 1,
@@ -4663,7 +4738,7 @@
           {
             "date": "15/12/2024",
             "date_ts": 1734220800000,
-            "profit_abs": 4.66234108,
+            "profit_abs": 5.02973256,
             "wins": 1,
             "draws": 0,
             "loses": 1,
@@ -4672,7 +4747,7 @@
           {
             "date": "16/12/2024",
             "date_ts": 1734307200000,
-            "profit_abs": 2.3125768,
+            "profit_abs": 2.48659248,
             "wins": 1,
             "draws": 0,
             "loses": 0,
@@ -4690,7 +4765,7 @@
           {
             "date": "18/12/2024",
             "date_ts": 1734480000000,
-            "profit_abs": -84.34141857,
+            "profit_abs": -90.6681281,
             "wins": 0,
             "draws": 0,
             "loses": 4,
@@ -4699,7 +4774,7 @@
           {
             "date": "19/12/2024",
             "date_ts": 1734566400000,
-            "profit_abs": -39.62827081,
+            "profit_abs": -42.53783571,
             "wins": 0,
             "draws": 0,
             "loses": 2,
@@ -4708,7 +4783,7 @@
           {
             "date": "20/12/2024",
             "date_ts": 1734652800000,
-            "profit_abs": -25.96443154,
+            "profit_abs": -27.90894555,
             "wins": 2,
             "draws": 0,
             "loses": 3,
@@ -4717,7 +4792,7 @@
           {
             "date": "21/12/2024",
             "date_ts": 1734739200000,
-            "profit_abs": 3.71594128,
+            "profit_abs": 3.99563578,
             "wins": 1,
             "draws": 0,
             "loses": 0,
@@ -4726,7 +4801,7 @@
           {
             "date": "22/12/2024",
             "date_ts": 1734825600000,
-            "profit_abs": 37.79131667,
+            "profit_abs": 40.66491339,
             "wins": 2,
             "draws": 0,
             "loses": 0,
@@ -4735,7 +4810,7 @@
           {
             "date": "23/12/2024",
             "date_ts": 1734912000000,
-            "profit_abs": 21.8859428,
+            "profit_abs": 23.5262553,
             "wins": 3,
             "draws": 0,
             "loses": 0,
@@ -4744,7 +4819,7 @@
           {
             "date": "24/12/2024",
             "date_ts": 1734998400000,
-            "profit_abs": 35.90227068,
+            "profit_abs": 38.5865526,
             "wins": 1,
             "draws": 0,
             "loses": 0,
@@ -4798,7 +4873,7 @@
           {
             "date": "30/12/2024",
             "date_ts": 1735516800000,
-            "profit_abs": -36.89675003,
+            "profit_abs": -39.65680885,
             "wins": 1,
             "draws": 0,
             "loses": 2,
@@ -4816,7 +4891,7 @@
           {
             "date": "01/01/2025",
             "date_ts": 1735689600000,
-            "profit_abs": 2.9862533,
+            "profit_abs": 3.21788427,
             "wins": 2,
             "draws": 0,
             "loses": 3,
@@ -4836,25 +4911,25 @@
           {
             "date": "09/12/2024",
             "date_ts": 1733702400000,
-            "profit_abs": -68.37516189,
-            "wins": 14,
+            "profit_abs": 8.09286172,
+            "wins": 17,
             "draws": 0,
-            "loses": 15,
-            "winrate": 0.4827586206896552
+            "loses": 14,
+            "winrate": 0.5483870967741935
           },
           {
             "date": "16/12/2024",
             "date_ts": 1734307200000,
-            "profit_abs": 95.02008204,
-            "wins": 13,
+            "profit_abs": 97.21006142,
+            "wins": 12,
             "draws": 0,
-            "loses": 5,
-            "winrate": 0.7222222222222222
+            "loses": 6,
+            "winrate": 0.6666666666666666
           },
           {
             "date": "23/12/2024",
             "date_ts": 1734912000000,
-            "profit_abs": -86.54092017,
+            "profit_abs": -92.92810489,
             "wins": 8,
             "draws": 0,
             "loses": 9,
@@ -4863,7 +4938,7 @@
           {
             "date": "30/12/2024",
             "date_ts": 1735516800000,
-            "profit_abs": -0.99447935,
+            "profit_abs": -1.07025625,
             "wins": 2,
             "draws": 0,
             "loses": 2,
@@ -4872,7 +4947,7 @@
           {
             "date": "06/01/2025",
             "date_ts": 1736121600000,
-            "profit_abs": 2.9862533,
+            "profit_abs": 3.21788427,
             "wins": 2,
             "draws": 0,
             "loses": 3,
@@ -4883,16 +4958,16 @@
           {
             "date": "31/12/2024",
             "date_ts": 1735603200000,
-            "profit_abs": -37.38705117,
-            "wins": 42,
+            "profit_abs": 34.8079902,
+            "wins": 44,
             "draws": 0,
             "loses": 32,
-            "winrate": 0.5675675675675675
+            "winrate": 0.5789473684210527
           },
           {
             "date": "31/01/2025",
             "date_ts": 1738281600000,
-            "profit_abs": 2.9862533,
+            "profit_abs": 3.21788427,
             "wins": 2,
             "draws": 0,
             "loses": 3,
@@ -4900,10 +4975,10 @@
           }
         ]
       },
-      "backtest_best_day": 0.22543433554745076,
-      "backtest_worst_day": -0.4546253365934528,
-      "backtest_best_day_abs": 41.95934945,
-      "backtest_worst_day_abs": -93.67754223,
+      "backtest_best_day": 0.2160802947052947,
+      "backtest_worst_day": -0.4069661924549063,
+      "backtest_best_day_abs": 44.98396027,
+      "backtest_worst_day_abs": -90.6681281,
       "winning_days": 16,
       "draw_days": 9,
       "losing_days": 7,
@@ -4922,39 +4997,39 @@
         ],
         [
           "2024-12-04",
-          12.58075672
+          16.72190525
         ],
         [
           "2024-12-05",
-          -38.20158206
+          -24.26130904
         ],
         [
           "2024-12-06",
-          -0.1046738
+          -0.18524798
         ],
         [
           "2024-12-07",
-          30.07081666
+          30.62028134
         ],
         [
           "2024-12-08",
-          0.78100196
+          41.53829381
         ],
         [
           "2024-12-09",
-          -93.67754223
+          -76.51712252
         ],
         [
           "2024-12-10",
-          41.36472286
+          36.3409735
         ],
         [
           "2024-12-11",
-          4.72109185
+          8.36880261
         ],
         [
           "2024-12-12",
-          41.95934945
+          44.98396027
         ],
         [
           "2024-12-13",
@@ -4966,11 +5041,11 @@
         ],
         [
           "2024-12-15",
-          4.66234108
+          5.02973256
         ],
         [
           "2024-12-16",
-          2.3125768
+          2.48659248
         ],
         [
           "2024-12-17",
@@ -4978,31 +5053,31 @@
         ],
         [
           "2024-12-18",
-          -84.34141857
+          -90.6681281
         ],
         [
           "2024-12-19",
-          -39.62827081
+          -42.53783571
         ],
         [
           "2024-12-20",
-          -25.96443154
+          -27.90894555
         ],
         [
           "2024-12-21",
-          3.71594128
+          3.99563578
         ],
         [
           "2024-12-22",
-          37.79131667
+          40.66491339
         ],
         [
           "2024-12-23",
-          21.8859428
+          23.5262553
         ],
         [
           "2024-12-24",
-          35.90227068
+          38.5865526
         ],
         [
           "2024-12-25",
@@ -5026,7 +5101,7 @@
         ],
         [
           "2024-12-30",
-          -36.89675003
+          -39.65680885
         ],
         [
           "2024-12-31",
@@ -5034,52 +5109,52 @@
         ],
         [
           "2025-01-01",
-          2.9862533
+          3.21788427
         ]
       ],
-      "wins": 44,
+      "wins": 46,
       "losses": 35,
       "draws": 0,
-      "winrate": 0.5569620253164557,
-      "holding_avg": "1 day, 12:48:00",
-      "holding_avg_s": 132480.0,
-      "winner_holding_avg": "1 day, 2:27:00",
-      "winner_holding_avg_s": 95220.0,
-      "loser_holding_avg": "2 days, 1:49:00",
-      "loser_holding_avg_s": 179340.0,
+      "winrate": 0.5679012345679012,
+      "holding_avg": "1 day, 11:09:00",
+      "holding_avg_s": 126540.0,
+      "winner_holding_avg": "1 day, 2:51:00",
+      "winner_holding_avg_s": 96660.0,
+      "loser_holding_avg": "1 day, 22:03:00",
+      "loser_holding_avg_s": 165780.0,
       "max_consecutive_wins": 8,
       "max_consecutive_losses": 6,
-      "max_drawdown_account": 0.15032985660290543,
-      "max_relative_drawdown": 0.15032985660290543,
-      "max_drawdown_abs": 159.27248565000002,
-      "drawdown_start": "2024-12-04 14:40:00",
-      "drawdown_start_ts": 1733323200000.0,
+      "max_drawdown_account": 0.14273033560516496,
+      "max_relative_drawdown": 0.14273033560516496,
+      "max_drawdown_abs": 161.11490936,
+      "drawdown_start": "2024-12-16 00:50:00",
+      "drawdown_start_ts": 1734310200000.0,
       "drawdown_end": "2024-12-20 13:50:00",
       "drawdown_end_ts": 1734702600000.0,
-      "max_drawdown_low": -99.78577256999999,
-      "max_drawdown_high": 59.486713080000015,
-      "csum_min": 900.21422743,
-      "csum_max": 1059.48671308
+      "max_drawdown_low": -32.30855801999998,
+      "max_drawdown_high": 128.80635134000002,
+      "csum_min": 967.69144198,
+      "csum_max": 1128.80635134
     }
   },
   "strategy_comparison": [
     {
       "key": "SimpleBBOuter",
-      "trades": 79,
-      "profit_mean": -0.0009752135889656847,
-      "profit_mean_pct": -0.1,
-      "profit_sum": -0.07704187352828909,
-      "profit_sum_pct": -7.7,
-      "profit_total_abs": -34.40079786999999,
-      "profit_total": -0.03440079786999999,
-      "profit_total_pct": -3.44,
-      "duration_avg": "1 day, 12:48:00",
-      "wins": 44,
+      "trades": 81,
+      "profit_mean": 0.0034627783270050985,
+      "profit_mean_pct": 0.35,
+      "profit_sum": 0.28048504448741296,
+      "profit_sum_pct": 28.05,
+      "profit_total_abs": 38.025874470000005,
+      "profit_total": 0.038025874470000005,
+      "profit_total_pct": 3.8,
+      "duration_avg": "1 day, 11:09:00",
+      "wins": 46,
       "draws": 0,
       "losses": 35,
-      "winrate": 0.5569620253164557,
-      "max_drawdown_account": 0.15032985660290543,
-      "max_drawdown_abs": "159.272"
+      "winrate": 0.5679012345679012,
+      "max_drawdown_account": 0.14273033560516496,
+      "max_drawdown_abs": "161.115"
     }
   ]
 }

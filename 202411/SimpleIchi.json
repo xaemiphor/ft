@@ -3550,22 +3550,6 @@
           "winrate": 0.0
         },
         {
-          "key": "MATIC/USDT",
-          "trades": 0,
-          "profit_mean": 0.0,
-          "profit_mean_pct": 0.0,
-          "profit_sum": 0.0,
-          "profit_sum_pct": 0.0,
-          "profit_total_abs": 0.0,
-          "profit_total": 0.0,
-          "profit_total_pct": 0.0,
-          "duration_avg": "0:00",
-          "wins": 0,
-          "draws": 0,
-          "losses": 0,
-          "winrate": 0.0
-        },
-        {
           "key": "RENDER/USDT",
           "trades": 0,
           "profit_mean": 0.0,
@@ -3929,7 +3913,7 @@
       "backtest_end_ts": 1733058600000,
       "backtest_days": 30,
       "trades_per_day": 2.27,
-      "market_change": 1.0448703331951543,
+      "market_change": 1.0520865933614998,
       "pairlist": [
         "AAVE/USDT",
         "ADA/USDT",
@@ -3949,7 +3933,6 @@
         "ICP/USDT",
         "LINK/USDT",
         "LTC/USDT",
-        "MATIC/USDT",
         "NEAR/USDT",
         "RENDER/USDT",
         "SAND/USDT",
@@ -3966,7 +3949,7 @@
       "starting_balance": 1000.0,
       "dry_run_wallet": 1000.0,
       "final_balance": 2138.77782762,
-      "rejected_signals": 604,
+      "rejected_signals": 603,
       "timedout_entry_orders": 0,
       "timedout_exit_orders": 0,
       "canceled_trade_entries": 0,
