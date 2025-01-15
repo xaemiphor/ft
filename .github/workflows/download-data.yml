@@ -17,8 +17,8 @@ on:
     paths:
       - .github/workflows/download-data.yml
       - backtest_config/*
-  schedule:
-    - cron: '0 0 * * *'
+  #schedule:
+  #  - cron: '0 0 * * *'
 
 permissions:
   contents: write
